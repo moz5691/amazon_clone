@@ -27,3 +27,6 @@ Following is the folder structure.
 └── layout.hbs
 
 \*\* in db/mongoose.js, change between mlab and local db.
+
+
+//////
