@@ -13,6 +13,14 @@ const InventorySchema = new Schema({
     type: Number,
     required: true
   },
+  itemDescription: {
+    type: String,
+    required: true
+  },
+  itemSeller: {
+    type: String,
+    required: true
+  },
   itemCount: {
     type: Number,
     required: true

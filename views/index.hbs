@@ -3,12 +3,21 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h2 class="text-info">Hey... this is our place to grow...</h2>
+      <h2 class="text-info">Items to go...</h2>
     </div>
-    <div class="col-sm-12">
 
-      <h2 class="text-primary">{{title}}</h2>
+    {{#each inventory}}
+    <div class="col-sm-12">
+      <p class="text-primary">Name: {{this.itemName}}</p>
+      <p class="text-primary">Department: {{this.itemDepartment}}</p>
+      <p class="text-primary">Price: {{this.itemPrice}}</p>
+      <p class="text-primary">Description: {{this.itemDescription}}</p>
+      <p class="text-primary">Seller: {{this.itemSeller}}</p>
+      <p class="text-primary">Count: {{this.itemCount}}</p>
+      <hr class="col-xs-12">
     </div>
+
+    {{/each}}
   </div>
   <div class="col-sm-12">
 
