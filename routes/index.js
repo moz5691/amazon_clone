@@ -39,11 +39,18 @@ router.post('/inventory', (req, res) => {
     itemPrice: req.body.itemPrice,
     itemDescription: req.body.itemDescription,
     itemSeller: req.body.itemSeller,
-    itemCount: req.body.itemCount
+    itemCount: req.body.itemCount,
+    itemImgPath: req.body.itemImgPath
   };
   new Inventory(newInventory)
     .save()
     .then(inventory => res.redirect('/inventory'));
+});
+
+router.delete('/inventory/:id', (req, res) => {
+  Inventory.remove({ _id: req.params.id }).then(() => {
+    res.redirect('/inventory');
+  });
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)

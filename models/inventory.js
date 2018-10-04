@@ -24,6 +24,10 @@ const InventorySchema = new Schema({
   itemCount: {
     type: Number,
     required: true
+  },
+  itemImgPath: {
+    type: String,
+    required: false
   }
 });
 
