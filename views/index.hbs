@@ -1,6 +1,4 @@
-{{> navbar}}
-
-<div class="container">
+{{!-- <div class="container">
   <div class="row">
     <div class="col-sm-12">
       <h2 class="text-info">Items to go...</h2>
@@ -8,6 +6,7 @@
 
     {{#each inventory}}
     <div class="col-sm-12">
+      <img src="{{this.itemImgPath}}" alt="">
       <p class="text-primary">Name: {{this.itemName}}</p>
       <p class="text-primary">Department: {{this.itemDepartment}}</p>
       <p class="text-primary">Price: {{this.itemPrice}}</p>
@@ -25,4 +24,44 @@
   </div>
 
 
+</div> --}}
+{{!-- <br>
+{{#each inventory}}
+<!-- MEDIA OBJECT -->
+<div class="media">
+  <img class="mr-10 align-self-start" src={{this.itemImgPath}}>
+  <div class="media-body ml-10">
+    <h5>Name: {{this.itemName}}</h5>
+    <p>Department: {{this.itemDepartment}}</p>
+    <p>Description: {{this.itemDescription}}</p>
+    <p>Seller: {{this.itemSeller}}</p>
+    <p>Price: ${{this.itemPrice}}</p>
+    <p>In stock: {{this.itemDepartment}}</p>
+    <button id="buyBtn" class="btn btn-outline-primary ml-5" type="button">Buy</button>
+  </div>
+
 </div>
+<hr />
+{{/each}} --}}
+
+{{#each inventory}}
+<div class="row mt-5">
+  <div class="col-sm-4 col-md-6 col-lg-5 col-xl-5 align-items-center" style="border:1px solid white">
+    <img class="align-self-center" src={{this.itemImgPath}}>
+  </div>
+  <div class="col-sm-4 col-md-3 col-lg-5 col-xl-5" style="border:1px solid white">
+    <ul class="list-group">
+      <li class="list-unstyled">Name: {{this.itemName}}</li>
+      <li class="list-unstyled">Department: {{this.itemDepartment}}</li>
+      <li class="list-unstyled">Description: {{this.itemDescription}}</li>
+      <li class="list-unstyled">Seller: {{this.itemSeller}}</li>
+      <li class="list-unstyled">Price: ${{this.itemPrice}}</li>
+      <li class="list-unstyled">In stock: {{this.itemCount}}</li>
+    </ul>
+  </div>
+  <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
+    <button id="buyBtn" class="btn btn-outline-primary ml-5" type="button">Buy</button>
+  </div>
+  <hr />
+</div>
+{{/each}}
