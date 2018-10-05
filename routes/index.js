@@ -20,6 +20,12 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
+// get login page************************Maryam
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
+
 // update inventory count
 router.put('/inventory/:id', (req, res, next) => {
   Inventory.findOne({
