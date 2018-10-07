@@ -6,8 +6,8 @@ const incFunc = function(e){
     console.log('in incFunc');
     e.preventDefault();
     state.cartQty += 1;
-    console.log(`in incFunc ${state.Qty}`);
-    $('.cartQty').text= `${state.cartQty}`;
+    console.log(`in incFunc ${state.cartQty}`);
+    $('#cartQty').text(`${state.cartQty}`);
 }
 
 
@@ -20,5 +20,6 @@ const purchaseFunc = function(e){
     $(document).on('click','.incQtyBtn',incFunc);
 }
 
-
+console.log('in pruchase.js');
+$(document).on('click','#incQtyBtn',incFunc);
 $(document).on('click','#buyBtn',purchaseFunc);
