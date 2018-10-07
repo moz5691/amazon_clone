@@ -4,7 +4,7 @@
     <img class="align-self-center" src={{this.itemImgPath}}>
   </div>
   <div class="col-sm-4 col-md-3 col-lg-5 col-xl-5" style="border:1px solid white">
-    <ul class="list-group">
+    <ul class="list-group" data-id="{{this._id}}">  <!--add data-id here-->
       <li class="list-unstyled">Name: {{this.itemName}}</li>
       <li class="list-unstyled">Department: {{this.itemDepartment}}</li>
       <li class="list-unstyled">Description: {{this.itemDescription}}</li>
@@ -14,7 +14,7 @@
     </ul>
   </div>
   <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
-    <button id="buyBtn" class="btn btn-outline-primary ml-5" type="button">Buy</button>
+    <button id="buyBtn" class="btn btn-outline-primary ml-5" type="button" data-id="{{this._id}}">Buy</button> <!--add data-id here-->
   </div>
   <hr />
 </div>

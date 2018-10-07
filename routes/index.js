@@ -25,6 +25,12 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+///////////////purchase page:  Ming////////////////////
+router.get('/purchase',function(req,res, next){
+  res.render('purchase');
+});
+//////////////////////////////////////////////////////
+
 
 // update inventory count
 router.put('/inventory/:id', (req, res, next) => {
