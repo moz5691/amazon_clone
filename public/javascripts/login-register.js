@@ -41,35 +41,21 @@ const checkEmail = function(input) {
 const addNewUser = function () {
 	event.preventDefault();
 	$("body").css("cursor", "progress");
-	$('.loader').show();
-	$('#warningContainer').hide(500);
-	let continueProsses = false;
-	if(checkInput($('#username').val())){
-		if(checkPass($('#password').val())){
-			if(checkEmail($('#email').val()))
-				 continueProsses = true; 
-			else{ 
-				$("body").css("cursor", "default");
-				$('#warning-message').html('<strong>Error! </strong>email is not valid');
-				$('#warningContainer').show(1000);
-			}
-		}
-		else {
-			$("body").css("cursor", "default");
-			$('#warning-message').html('<strong>Error! </strong>your password must contain at least (1 lowercase, 1 uppercase alphabetical character,1 numeric,and ! @ # $ - _) minimum 8 char or longer!!!');
-			$('#warningContainer').show(1000);
-		}
-	}
-	else {
+	$('#warning-message').empty();
+	$('#warning-message').hide();
+	let continueProsses = true;
+	if(!(checkInput($('#username').val()))||!(checkPass($('#password').val()))||!(checkEmail($('#email').val()))){
+		continueProsses = false;
 		$("body").css("cursor", "default");
-		$('#warning-message').html('<strong>Error! </strong>your username must start with letters, 5-30 char use: (uppercase, lowecase, numbers, !,@,#,$,-,_)');
-		$('#warningContainer').show(1000);
+		$('#warning-message').append('<strong>Error! </strong>input are not valid');
+		$('#warning-message').show();
 	}
+	
 	if(continueProsses === true){
 		if($('#password').val() !== $('#confirm-password').val()){
 			$("body").css("cursor", "default");
-			$('#warning-message').html('<strong>Error! </strong>password and confirm password are not same!!!');
-			$('#warningContainer').show(1000);
+			$('#warning-message').append('<strong>Error! </strong>password and confirm password are not same!!!');
+			$('#warning-message').show();
 		}
 		else{
 			myUser = {
@@ -77,12 +63,17 @@ const addNewUser = function () {
 				password: $('#password').val(),
 				email: $('#email').val()
 			}
-
-			$.ajax({ url: "/api/newUser", method: "POST", data: myUser}).then((result) => {
+			$.ajax({ url: "/users/newUser", method: "POST", data: myUser}).then((result) => {
 				$("body").css("cursor", "default");
-				alert(result);
-				console.log(result);
-				});
+				if(result.err){
+					$('#warning-message').text(result.err);
+					$('#warning-message').show();
+				}
+				else{
+					
+					console.log(result);
+				}
+			});
 		}
 	}
 	
@@ -90,6 +81,58 @@ const addNewUser = function () {
 
 $("#register-submit").on("click", addNewUser);
 
+/******************************login************************ */
+const loginUser = function () {
+	event.preventDefault();
+	
+	$("body").css("cursor", "progress");
+	$('#warning-message').empty();
+	$('#warning-message').hide();
+	let continueProsses = true;
+	if(!(checkPass($('#passwordlogin').val()))||!(checkEmail($('#emaillogin').val()))){
+		continueProsses = false;
+		$("body").css("cursor", "default");
+		$('#warning-message').append('<strong>Error! </strong>input are not valid');
+		$('#warning-message').show();
+	}
+	
+	if(continueProsses === true){
+		loginSelected = {
+			emaillogin: $('#emaillogin').val(),
+			passwordlogin: $('#passwordlogin').val(),
+		}
+		$.ajax({ url: "/users/loginUser", method: "POST", data: loginSelected}).then((result) => {
+			$("body").css("cursor", "default");
+			if(result.err){
+				$('#warning-message').text(result.err);
+				$('#warning-message').show();
+			}
+			else{		
+				localStorage.setItem("userToken", result.token);
+				alert('how go new page?');	
+				// userOK = {
+				// 	token: localStorage.getItem("userToken"),
+				// 	email: result.user.email,
+				// 	username: result.user.username,
+				// }
+				// $.ajax({ url: `/users/inventory/:${result.user.username}`, method: "Post", data: userOK});
+			}
+		});
+	}
+	
+}
+
+
+
+
+
+
+$("#login-submit").on("click", loginUser);
+
 $(".close").click(function(){
 	$(".alert").alert();
+});
+
+$(document).ready(function(){
+	$('#warning-message').hide();
 });
