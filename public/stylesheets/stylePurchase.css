@@ -1,0 +1,65 @@
+.purchaseContainer {
+    display: grid;
+    height: 90%;
+    grid-template-columns: 40% 40% 20%;
+    grid-template-rows: 1fr;
+    margin: 10px;
+    grid-gap: 10px;
+}
+.productImg {
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+}
+.productImg img {
+    width: 90%;
+    height: auto;
+
+}
+.productInfoBox {
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+    padding-right: 20px;
+}
+.purchaseSection {
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+
+}
+.purchaseBox{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 40px 1fr;
+    
+}
+.purBoxFit{
+    display: grid;
+    grid-row: span 2;
+    grid-column: span 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr; 
+    border: solid #B2BABB 2px;
+    border-radius: 5px;
+    padding:10px;
+}
+#incQtyBtn{
+    height: 28px;
+    width: 98%;
+    font-size: 16px;
+}
+.purchaseHeader {
+    font-size: 28px;
+    margin-bottom:10px;
+}
+.purchaseH6 {
+    font-size: 14px;
+}
+.purchaseH4 {
+    font-size: 20px;
+}
+.purList {
+    font-size: 14px;
+    margin-left: 15px;
+}
