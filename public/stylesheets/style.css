@@ -1,3 +1,22 @@
+/********initial css grid setup: Ming**********/
+body {
+  height: 98vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr;
+}
+nav {
+  display: grid;
+  grid-row: span 1;
+  grid-column: span 1;
+}
+.container {
+  display: grid;
+  grid-row: span 1;
+  grid-column: span 1;
+}
+
+/******************************************/
 .navbar-brand {
   padding: 0px;
 }
