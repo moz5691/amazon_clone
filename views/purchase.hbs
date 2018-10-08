@@ -1,44 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--link stylesheet-->
     <link rel="stylesheet" href="/stylesheets/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/stylePurchase.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
     <!--link script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-
     <title>Amazon Purchase</title>
 </head>
 
 <body>
-
     <div class='purchaseContainer'>
         <div class='productImg'>
-            <img src='/images/simpsons.png' />
-            <!--<img src={{this.itemImgPath}}/>-->
+            {{!-- <img src='/images/simpsons.png' /> --}}
+            <img src='{{product.itemImgPath}}'/>
         </div>
         <div class='productInfoBox'>
             <div class='productInfo'>
-                <header class='purchaseHeader'>Ming Test Item{{this.itemName}}
-                    <h6 class='purchaseH6'>by Ming test Seller{{this.itemSeller}}</h6>
+                <header class='purchaseHeader'>{{product.itemName}}
+                    <h6 class='purchaseH6'>by {{product.itemSeller}}</h6>
                 </header>
                 <hr/>
                 <div>
                     <h6>Price:
-                        <span style='font-size:20px; color:#D63D28;'>$ 26.99{{this.itemPrice}}</span>
+                        <span style='font-size:20px; color:#D63D28;'>$ {{product.itemPrice}}</span>
                     </h6>
                 </div>
                 <div>
@@ -48,7 +35,7 @@
                 <div>
                     <h4 class='purchaseH4'>About the product</h4>
                     <ul class='purList' style="list-style-type:disc">
-                        <li>Ming Test product information{{this.itemDescription}}</li>
+                        <li>{{product.itemDescription}}</li>
                         <li>Test 2</li>
                     </ul>
                 </div>
@@ -58,7 +45,7 @@
             <div class='purchaseBox'>
                 <div class='purBoxFit'>
                     <span class='purchaseQty'>Qty
-                        <select>
+                        <select id='purSelect'>
                             <option value='1'>1</option>
                             <option value='2'>2</option>
                             <option value='3'>3</option>
@@ -66,15 +53,15 @@
                             <option value='5'>5</option>
                             <option value='6'>6</option>
                         </select>
-                        <a href=''>cart:</a> <span id='cartQty'>0</span>
+                        <a href=''>cart:</a><span id='cartQty'>0</span>
+                        {{!-- <button id='cartBtn' type="button">cart:</button> <span id='cartQty'>0</span> --}}
                     </span>
                     <button id='incQtyBtn' type='button' data-id='{{this._id}}'>Add to Cart</button>
                 </div>
             </div>
         </div>
-        <script src='javascripts/purchase.js'></script>
+        {{!-- <script src='javascripts/purchase.js'></script> --}}
     </div>
-
 </body>
 
 </html> 

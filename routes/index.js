@@ -26,8 +26,23 @@ router.get('/login', function(req, res, next) {
 });
 
 ///////////////purchase page:  Ming////////////////////
-router.get('/purchase',function(req,res, next){
+/*router.get('/purchase', function(req, res) {
   res.render('purchase');
+});*/
+
+
+router.get('/purchase/:id',function(req,res){
+  console.log('GET function');
+  console.log(req.params.id);
+  Inventory.findOne({_id: req.params.id}).then(product => {
+    res.render('purchase', { product: product });
+    //window.location='/purchase';
+  }).catch(
+    function(err){
+      res.json(err);
+    }
+  );
+  //res.send('purchase');
 });
 //////////////////////////////////////////////////////
 
@@ -64,6 +79,7 @@ router.delete('/inventory/:id', (req, res) => {
     res.redirect('/inventory');
   });
 });
+
 
 //The 404 Route (ALWAYS Keep this as the last route)
 router.get('*', function(req, res) {
