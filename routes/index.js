@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 });
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'This is Amazon clone site, welcome!!!' });
 });
 
@@ -21,24 +21,45 @@ router.get('/inventory', (req, res, next) => {
 });
 
 // get login page************************Maryam
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login');
 });
 
+router.post('/inventory/search', function(req, res, next){
+  // const searchQuery = req.body.searchQuery;
+  const searchQuery = 'Simpsons';
+  Inventory.find({ itemName: searchQuery }, function (err, inventory) {
+    if (err) {
+      return res.status(200).send(err);
+    }
+    else {
+      // res.json(inventory);
+      res.render('index', {inventory: inventory});
+    }
+  });
+});
 ///////////////purchase page:  Ming////////////////////
 /*router.get('/purchase', function(req, res) {
   res.render('purchase');
 });*/
 
-
-router.get('/purchase/:id',function(req,res){
+// {
+//   "itemName" : "Simpsons",
+//   "itemDepartment": "Movie",
+//   "itemPrice" : 25,
+//   "itemDescription" : "Funny comic",
+//   "itemSeller": "Fox",
+//   "itemCount" : 200,
+//   "itemImgPath" : "/images/simpsons.png"
+// }
+router.get('/purchase/:id', function (req, res) {
   console.log('GET function');
   console.log(req.params.id);
-  Inventory.findOne({_id: req.params.id}).then(product => {
+  Inventory.findOne({ _id: req.params.id }).then(product => {
     res.render('purchase', { product: product });
     //window.location='/purchase';
   }).catch(
-    function(err){
+    function (err) {
       res.json(err);
     }
   );
@@ -82,7 +103,7 @@ router.delete('/inventory/:id', (req, res) => {
 
 
 //The 404 Route (ALWAYS Keep this as the last route)
-router.get('*', function(req, res) {
+router.get('*', function (req, res) {
   res.send('what??? do not have such a route, 404');
 });
 
