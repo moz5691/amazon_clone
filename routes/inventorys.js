@@ -28,7 +28,8 @@ router.use(function(req, res, next){
 /**************(Maryam)*********** POST inventory page rendering */
 router.get('/:user', (req, res, next) => {
     Inventory.find({}).then(inventory => { 
-      console.log(inventory.length + '///////////////////////');
+      console.log(inventory.length + '///////////////////////' + req.params.user);
+      console.log(inventory);
        res.render('inventory', {inventory: inventory});
      });
  });
