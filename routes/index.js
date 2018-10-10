@@ -20,10 +20,21 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
-// get login page************************Maryam
-router.get('/login', function(req, res, next) {
-  res.render('login');
+/**************(Maryam)*********** get logout*/
+router.get('/logout', (req, res, next) => {
+  res.clearCookie('auth');
+  res.redirect('/');
 });
+
+// /**************(Chan)************* GET login page rendering */
+// router.get('/login', (req, res, next) => {
+//   res.render('login');
+// });
+
+// /**************(Maryam)*********** GET register page rendering */
+// router.get('/register', (req, res , next) => {
+//   res.render('register');
+// });
 
 ///////////////purchase page:  Ming////////////////////
 /*router.get('/purchase', function(req, res) {
@@ -81,9 +92,9 @@ router.delete('/inventory/:id', (req, res) => {
 });
 
 
-//The 404 Route (ALWAYS Keep this as the last route)
-router.get('*', function(req, res) {
-  res.send('what??? do not have such a route, 404');
-});
+// //The 404 Route (ALWAYS Keep this as the last route)
+// router.get('*', function(req, res) {
+//   res.send('what??? do not have such a route, 404');
+// });
 
 module.exports = router;
