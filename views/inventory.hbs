@@ -1,0 +1,26 @@
+<div class=" row w-100">
+    {{#each inventory}}
+    <div class=" mt-5 col-3">
+        <div class=" bg-white text-dark p-4 col-12 align-items-center" style="border:1px solid white">
+            <h3 class="list-unstyled col-sm">{{this.itemName}}</h3>
+            <img class="align-self-center col" id="perchaseimg" src={{this.itemImgPath}}>
+
+            <div class="col-sm-4 col-md-3 col-lg-5 col-xl-5" style="border:1px solid white">
+                <ul class="list-group">
+                    <li class="list-unstyled">Department: {{this.itemDepartment}}</li>
+                    <li class="list-unstyled">Description: {{this.itemDescription}}</li>
+                    <li class="list-unstyled">Seller: {{this.itemSeller}}</li>
+                    <li class="list-unstyled">Price: ${{this.itemPrice}}</li>
+                    <li class="list-unstyled">In stock: {{this.itemCount}}</li>
+                </ul>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
+                <button id="buyBtn" class="btn btn-outline-primary ml-5" type="button">learn more</button>
+            </div>
+        </div>
+
+
+        <hr />
+    </div>
+    {{/each}}
+</div>
