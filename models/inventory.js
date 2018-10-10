@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const InventorySchema = new Schema({
-  seller: {
-    type: String,
-    required: true
-  },
   itemName: {
     type: String,
     required: true
