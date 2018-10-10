@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 });
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'This is Amazon clone site, welcome!!!' });
 });
 
@@ -21,7 +21,7 @@ router.get('/inventory', (req, res, next) => {
 });
 
 // get login page************************Maryam
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login');
 });
 
@@ -31,14 +31,14 @@ router.get('/login', function(req, res, next) {
 });*/
 
 
-router.get('/purchase/:id',function(req,res){
+router.get('/purchase/:id', function (req, res) {
   console.log('GET function');
   console.log(req.params.id);
-  Inventory.findOne({_id: req.params.id}).then(product => {
+  Inventory.findOne({ _id: req.params.id }).then(product => {
     res.render('purchase', { product: product });
     //window.location='/purchase';
   }).catch(
-    function(err){
+    function (err) {
       res.json(err);
     }
   );
@@ -81,7 +81,7 @@ router.delete('/inventory/:id', (req, res) => {
 });
 
 //-----search by itemName-----Tri-------//
-router.post('/inventory/search', function(req, res, next){
+router.post('/inventory/search', function (req, res, next) {
   const searchQuery = req.body.searchQuery;
   // const searchQuery = 'Simpsons';
   Inventory.find({ itemName: searchQuery }, function (err, inventory) {
@@ -90,13 +90,39 @@ router.post('/inventory/search', function(req, res, next){
     }
     else {
       // res.json(inventory);
-      res.render('index', {inventory: inventory});
+      res.render('index', { inventory: inventory });
     }
   });
 });
 
+//-----pagination feature----Tri-----//
+router.get('/inventory/:page', function (req, res, next) {
+  const perPage = 5
+  const page = req.params.page || 1
+
+  Inventory
+    .find({})
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .exec(function (err, products) {
+      Inventory.count().exec(function (err, count) {
+        if (err) {
+          return err
+        }
+        else {
+          // res.json(products);
+          res.render('index', {
+            inventory: products,
+            current: page,
+            pages: Math.ceil(count / perPage)
+          })
+        };
+      });
+    })
+});
+
 //The 404 Route (ALWAYS Keep this as the last route)
-router.get('*', function(req, res) {
+router.get('*', function (req, res) {
   res.send('what??? do not have such a route, 404');
 });
 
