@@ -91,6 +91,20 @@ router.delete('/inventory/:id', (req, res) => {
   });
 });
 
+//-----search by itemName-----Tri-------//
+router.post('/inventory/search', function(req, res, next){
+  const searchQuery = req.body.searchQuery;
+  // const searchQuery = 'Simpsons';
+  Inventory.find({ itemName: searchQuery }, function (err, inventory) {
+    if (err) {
+      return res.status(200).send(err);
+    }
+    else {
+      // res.json(inventory);
+      res.render('index', {inventory: inventory});
+    }
+  });
+});
 
 // //The 404 Route (ALWAYS Keep this as the last route)
 // router.get('*', function(req, res) {
