@@ -97,7 +97,7 @@ router.post('/inventory/search', function (req, res, next) {
 
 //-----pagination feature----Tri-----//
 router.get('/inventory/:page', function (req, res, next) {
-  const perPage = 5
+  const perPage = 10
   const page = req.params.page || 1
 
   Inventory

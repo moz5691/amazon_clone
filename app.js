@@ -54,3 +54,7 @@ app.listen(app.get('port'), function() {
 // });
 
 // module.exports = app;
+
+// $('.page-item').on('click', function(){
+//   console.log('x')
+// });
