@@ -4,19 +4,14 @@
 <head>
     <base href="/">
     <!--link stylesheet-->
-    <link rel="stylesheet" href="/stylesheets/reset.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/stylePurchase.css">
     <!--link script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Amazon Purchase</title>
 </head>
 
 <body>
     <div class='purchaseContainer'>
         <div class='productImg'>
-            {{!-- <img src='/images/simpsons.png' /> --}}
             <img src='{{product.itemImgPath}}'/>
         </div>
         <div class='productInfoBox'>
@@ -26,9 +21,9 @@
                 </header>
                 <hr/>
                 <div>
-                    <h6>Price:
+                    <h5 class='purchaseH5'>Price:
                         <span style='font-size:20px; color:#D63D28;'>$ {{product.itemPrice}}</span>
-                    </h6>
+                    </h5>
                 </div>
                 <div>
                     <h4 class='purchaseH4' style='color:green;'>In Stock</h4>
