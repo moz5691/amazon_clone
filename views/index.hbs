@@ -27,7 +27,7 @@
 {{/each}}
 
 <div class='pagination-tri'>
-{{!-- {{#if pages > 0}} --}}
+{{#if pages}}
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item"><a class="page-link" href="/inventory/prev">Previous</a></li>
@@ -37,5 +37,5 @@
     <li class="page-item"><a class="page-link" href="/inventory/next">Next</a></li>
   </ul>
 </nav>
-{{!-- {{/if}} --}}
+{{/if}}
 </div>
