@@ -134,9 +134,9 @@ router.get('/inventory/:page', function (req, res, next) {
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
-router.get('*', function (req, res) {
-  res.send('what??? do not have such a route, 404');
-});
+// router.get('*', function (req, res) {
+//   res.send('what??? do not have such a route, 404');
+// });
 
 
 module.exports = router;

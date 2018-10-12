@@ -38,6 +38,8 @@
     </div>
 </div>
 
-<div class="alert  mt-5 h-25" role="alert">
-    {{msg}}
+{{#if msg}}
+<div class=" container-fluid alert alert-danger col-lg-4  ml-50">
+    <p><strong>Erorr: </strong>{{msg}}</p>
 </div>
+{{/if}}

@@ -80,7 +80,7 @@ router.post('/loginUser', function(req, res) {
       else{
         let token = jwt.sign({username: User.username, email: User.email}, secret,{expiresIn: '24h'});
         res.cookie('auth', token);
-        res.redirect(`/inventory/:${selectedUser.username}`);    
+        res.redirect(`/inventories/:${selectedUser.username}`);    
       }
     }
   });
@@ -91,11 +91,10 @@ router.post('/loginUser', function(req, res) {
 
 /***************check token after router redirect */
 router.use(function(req, res, next){
-  console.log('token******************');
   let token = req.headers.authorization || req.cookies.auth || req.body.token || req.body.query || req.headers['x-access-token'];
   if(token){
    jwt.verify(token, secret, function(err, decoded){
-      if(err) res.json({err:'token invalid'});
+      if(err) res.redirect('/users/login?msg=failauthenticatetoken');
       else{
         req.decoded = decoded;
         next();
