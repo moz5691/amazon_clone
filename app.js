@@ -34,7 +34,7 @@ app.use('/inventory', inventoryRouter);
 
 // Chan: will use app.js as start.
 app.set('port', process.env.PORT || 3000);
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log('server running on port', +app.get('port'));
 });
 
@@ -56,3 +56,8 @@ app.listen(app.get('port'), function() {
 // });
 
 // module.exports = app;
+
+// $('.page-item').on('click', function () {
+//   $('.disabled').removeClass('disabled');
+//   // $(this).addClass('disabled');
+// });

@@ -109,7 +109,7 @@ router.post('/inventory/search', function (req, res, next) {
 
 //-----pagination feature----Tri-----//
 router.get('/inventory/:page', function (req, res, next) {
-  const perPage = 5
+  const perPage = 10
   const page = req.params.page || 1
 
   Inventory
@@ -122,13 +122,20 @@ router.get('/inventory/:page', function (req, res, next) {
           return err
         }
         else {
-          // res.json(products);
-          res.render('index', {
-            inventory: products,
-            current: page,
-            pages: Math.ceil(count / perPage)
-          })
-        };
+          const pages = Math.ceil(count / perPage);
+          if (pages > 0) {
+            res.render('index', {
+              inventory: products,
+              current: page,
+              pages: Math.ceil(count / perPage)
+            })
+          } else {
+            res.render('index', {
+              inventory: products,
+              current: page,
+            });
+          }
+        }
       });
     })
 });
