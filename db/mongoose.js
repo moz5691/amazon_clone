@@ -3,7 +3,8 @@ mongoose.Promise = global.Promise;
 
 mongoose
   .connect(
-      'mongodb://amazon:amazon123@ds121183.mlab.com:21183/amazon'
+      'mongodb://amazon:amazon123@ds121183.mlab.com:21183/amazon',
+      {useNewUrlParser: true}
     // 'mongodb://localhost/amazon'
   )
   .then(() => console.log('Mongodb connected...'))
