@@ -28,6 +28,14 @@ const InventorySchema = new Schema({
   itemImgPath: {
     type: String,
     required: false
+  },
+  itemInCart:{
+    type:Boolean,
+    required: true
+  },
+  itemSold:{
+    type: Number,
+    required:true
   }
 });
 

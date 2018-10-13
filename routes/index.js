@@ -37,28 +37,60 @@ router.get('/login', function (req, res, next) {
 // });
 
 ///////////////purchase page:  Ming////////////////////
-/*router.get('/purchase', function(req, res) {
-  res.render('purchase');
-});*/
-
-
 router.get('/purchase/:id', function (req, res) {
   console.log('GET function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id }).then(product => {
     res.render('purchase', { product: product });
-    //window.location='/purchase';
   }).catch(
     function (err) {
       res.json(err);
     }
   );
-  //res.send('purchase');
 });
 //////////////////////////////////////////////////////
 
+//////////////cart page: Ming/////////////////////////
+// router.put('/initialCart',function(req,res){
+//   Inventory.update({},{itemInCart:false}).then(
+//   res.json(Inventory)
+//   );
+// });
 
-// update inventory count
+router.get('/shoppingCart', function (req, res) {
+  console.log('GET function: shoppingCart');
+  Inventory.find({}).then(inventory => {
+    res.render('cart', { inventory: inventory });
+  });
+});
+
+router.put('/cartUpdate/:id', function (req, res) {
+  console.log('PUT function');
+  console.log(req.params.id);
+  Inventory.findOne({ _id: req.params.id }).then(
+    function () {
+      Inventory.updateOne({ _id: req.params.id }, req.body)
+        .then(
+          function (data) {
+            res.json(data);
+          }
+        ).catch(
+          function (err) {
+            res.json(err);
+          }
+        )
+    }
+  ).catch(
+    function (err) {
+      res.json(err);
+    }
+  );
+});
+
+//////////////////////////////////////////////////////
+
+
+// update inventory
 router.put('/inventory/:id', (req, res, next) => {
   Inventory.findOne({
     _id: req.params.id
@@ -78,7 +110,9 @@ router.post('/inventory', (req, res) => {
     itemDescription: req.body.itemDescription,
     itemSeller: req.body.itemSeller,
     itemCount: req.body.itemCount,
-    itemImgPath: req.body.itemImgPath
+    itemImgPath: req.body.itemImgPath,
+    itemInCart: req.body.itemInCart,
+    itemSold: req.body.itemSold
   };
   new Inventory(newInventory)
     .save()
