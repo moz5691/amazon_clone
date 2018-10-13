@@ -17,6 +17,7 @@
     <a href='/purchase/{{this._id}}'>
       <button id="buyBtn" class="btn btn-outline-primary ml-5 {{this.show}}" type="button">Buy</button>
     </a>
+    <a href="/review/{{this.id}}" id="reviewBtn" class="btn btn-outline-primary ml-5">Review</a>
     <!--add data-id and <a>here-->
   </div>
   <hr />
@@ -24,16 +25,15 @@
 {{/each}}
 
 <div class='pagination-tri'>
-{{#if pages}}
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" href="/inventory/prev">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="/inventory/1">1</a></li>
-    <li class="page-item"><a class="page-link" href="/inventory/2">2</a></li>
-    <li class="page-item"><a class="page-link" href="/inventory/3">3</a></li>
-    <li class="page-item"><a class="page-link" href="/inventory/next">Next</a></li>
-  </ul>
-</nav>
-{{/if}}
+  {{#if pages}}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="/inventory/prev">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="/inventory/1">1</a></li>
+      <li class="page-item"><a class="page-link" href="/inventory/2">2</a></li>
+      <li class="page-item"><a class="page-link" href="/inventory/3">3</a></li>
+      <li class="page-item"><a class="page-link" href="/inventory/next">Next</a></li>
+    </ul>
+  </nav>
+  {{/if}}
 </div>
-

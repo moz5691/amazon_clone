@@ -31,17 +31,6 @@ router.get('/logout', (req, res, next) => {
   res.redirect('login');
 });
 
-<<<<<<< HEAD
-router.get('/purchase/:id', function(req, res) {
-  console.log('GET function');
-  console.log(req.params.id);
-  Inventory.findOne({ _id: req.params.id })
-    .then(product => {
-      res.render('purchase', { product: product });
-      //window.location='/purchase';
-    })
-    .catch(function(err) {
-=======
 // /**************(Chan)************* GET login page rendering */
 // router.get('/login', (req, res, next) => {
 //   res.render('login');
@@ -53,17 +42,16 @@ router.get('/purchase/:id', function(req, res) {
 // });
 
 ///////////////purchase page:  Ming////////////////////
-router.get('/purchase/:id', function (req, res) {
+router.get('/purchase/:id', function(req, res) {
   console.log('GET function');
   console.log(req.params.id);
-  Inventory.findOne({ _id: req.params.id }).then(product => {
-    res.render('purchase', { product: product });
-  }).catch(
-    function (err) {
->>>>>>> 6dfb1062dce4ac12fa474f2d1436f9dde96228c0
+  Inventory.findOne({ _id: req.params.id })
+    .then(product => {
+      res.render('purchase', { product: product });
+    })
+    .catch(function(err) {
       res.json(err);
-    }
-  );
+    });
 });
 //////////////////////////////////////////////////////
 
@@ -74,39 +62,32 @@ router.get('/purchase/:id', function (req, res) {
 //   );
 // });
 
-router.get('/shoppingCart', function (req, res) {
+router.get('/shoppingCart', function(req, res) {
   console.log('GET function: shoppingCart');
   Inventory.find({}).then(inventory => {
     res.render('cart', { inventory: inventory });
   });
 });
 
-router.put('/cartUpdate/:id', function (req, res) {
+router.put('/cartUpdate/:id', function(req, res) {
   console.log('PUT function');
   console.log(req.params.id);
-  Inventory.findOne({ _id: req.params.id }).then(
-    function () {
+  Inventory.findOne({ _id: req.params.id })
+    .then(function() {
       Inventory.updateOne({ _id: req.params.id }, req.body)
-        .then(
-          function (data) {
-            res.json(data);
-          }
-        ).catch(
-          function (err) {
-            res.json(err);
-          }
-        )
-    }
-  ).catch(
-    function (err) {
+        .then(function(data) {
+          res.json(data);
+        })
+        .catch(function(err) {
+          res.json(err);
+        });
+    })
+    .catch(function(err) {
       res.json(err);
-    }
-  );
+    });
 });
 
 //////////////////////////////////////////////////////
-
-
 
 // update inventory count
 router.put('/inventory/:id', (req, res, next) => {
@@ -196,6 +177,45 @@ router.post('/inventory/search/department/', function(req, res) {
   ) {
     res.render('index', { inventory: data });
   });
+});
+
+/**
+ * User review part.   [chan]
+ */
+
+router.get('/review/:id', (req, res) => {
+  Inventory.findOne({
+    _id: req.params.id
+  }).then(inventory => {
+    console.log(inventory);
+    res.render('review/user_review', { inventory: inventory });
+  });
+});
+
+router.put('/review/update/:id', (req, res) => {
+  console.log('user review update');
+  console.log(req.body);
+  // console.log(seller);
+  const review = {
+    //   reviewer: req.user.email,
+    reviewer: null,
+    rate: req.body.userRate,
+    content: req.body.userReview,
+    date: Date.now()
+  };
+  Inventory.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { itemReview: review } },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(doc);
+        res.redirect('/inventory');
+      }
+    }
+  );
 });
 
 module.exports = router;
