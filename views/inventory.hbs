@@ -13,21 +13,23 @@
                 <th>update</th>
             </tr>
             {{#each inventory}}
-            <td><img src="{{inventory.itemImgPath}}" /></td>
-            <td>{{inventory._id}}</td>
-            <td>{{Seller}}</td>
-            <td>{{inventory.itemDepartment}}</td>
-            <td>{{inventory.itemName}}</td>
-            <td style="overflow: hidden">{{inventory.itemDescription}}</td>
-            <td>{{inventory.itemPrice}}</td>
-            <td>{{inventory.itemCount}}</td>
-            <td>
-                <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
-                    <form action="/inventories/update/{{this._id}}" method="POST">
-                        <button type="submit" id="buyBtn" class="btn btn-outline-primary ml-5" type="button">edit</button>
-                    </form>
-                </div>
-            </td>
+            <tr>
+                <td><img src="{{inventory.itemImgPath}}" /></td>
+                <td>{{inventory._id}}</td>
+                <td>{{Seller}}</td>
+                <td>{{inventory.itemDepartment}}</td>
+                <td>{{inventory.itemName}}</td>
+                <td style="overflow: hidden">{{inventory.itemDescription}}</td>
+                <td>{{inventory.itemPrice}}</td>
+                <td>{{inventory.itemCount}}</td>
+                <td>
+                    <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
+                        <form action="/inventories/update/{{this._id}}" method="POST">
+                            <button type="submit" id="buyBtn" class="btn btn-outline-primary ml-5" type="button">edit</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
             {{/each}}
         </table>
     </div>
