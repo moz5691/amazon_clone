@@ -179,11 +179,24 @@ router.get('/inventory/:page', function (req, res, next) {
 
 // -----search by department----//
 router.post('/inventory/search/department/', function (req, res) {
-  Inventory
-    .find({ itemDepartment: req.body.departmentSelect })
-    .then(function (data) {
-      res.render('index', { inventory: data });
-    });
+  const deptSelect = req.body.departmentSelect;
+  const searchQuery = req.body.searchQuery;
+  if (deptSelect === 'All') {
+    Inventory
+      // .find({ itemTag: searchQuery })
+      .find({})
+      .then(function (data) {
+        // res.render('index', { inventory: data });
+        res.json(data);
+      });
+  }
+  else {
+    Inventory
+      .find({ itemDepartment: deptSelect })
+      .then(function (data) {
+        res.render('index', { inventory: data });
+      });
+  }
 });
 
 module.exports = router;
