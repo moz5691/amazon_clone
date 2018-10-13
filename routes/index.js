@@ -31,6 +31,7 @@ router.get('/logout', (req, res, next) => {
   res.redirect('login');
 });
 
+<<<<<<< HEAD
 router.get('/purchase/:id', function(req, res) {
   console.log('GET function');
   console.log(req.params.id);
@@ -40,10 +41,72 @@ router.get('/purchase/:id', function(req, res) {
       //window.location='/purchase';
     })
     .catch(function(err) {
+=======
+// /**************(Chan)************* GET login page rendering */
+// router.get('/login', (req, res, next) => {
+//   res.render('login');
+// });
+
+// /**************(Maryam)*********** GET register page rendering */
+// router.get('/register', (req, res , next) => {
+//   res.render('register');
+// });
+
+///////////////purchase page:  Ming////////////////////
+router.get('/purchase/:id', function (req, res) {
+  console.log('GET function');
+  console.log(req.params.id);
+  Inventory.findOne({ _id: req.params.id }).then(product => {
+    res.render('purchase', { product: product });
+  }).catch(
+    function (err) {
+>>>>>>> 6dfb1062dce4ac12fa474f2d1436f9dde96228c0
       res.json(err);
-    });
+    }
+  );
 });
 //////////////////////////////////////////////////////
+
+//////////////cart page: Ming/////////////////////////
+// router.put('/initialCart',function(req,res){
+//   Inventory.update({},{itemInCart:false}).then(
+//   res.json(Inventory)
+//   );
+// });
+
+router.get('/shoppingCart', function (req, res) {
+  console.log('GET function: shoppingCart');
+  Inventory.find({}).then(inventory => {
+    res.render('cart', { inventory: inventory });
+  });
+});
+
+router.put('/cartUpdate/:id', function (req, res) {
+  console.log('PUT function');
+  console.log(req.params.id);
+  Inventory.findOne({ _id: req.params.id }).then(
+    function () {
+      Inventory.updateOne({ _id: req.params.id }, req.body)
+        .then(
+          function (data) {
+            res.json(data);
+          }
+        ).catch(
+          function (err) {
+            res.json(err);
+          }
+        )
+    }
+  ).catch(
+    function (err) {
+      res.json(err);
+    }
+  );
+});
+
+//////////////////////////////////////////////////////
+
+
 
 // update inventory count
 router.put('/inventory/:id', (req, res, next) => {
@@ -65,7 +128,9 @@ router.post('/inventory', (req, res) => {
     itemDescription: req.body.itemDescription,
     itemSeller: req.body.itemSeller,
     itemCount: req.body.itemCount,
-    itemImgPath: req.body.itemImgPath
+    itemImgPath: req.body.itemImgPath,
+    itemInCart: req.body.itemInCart,
+    itemSold: req.body.itemSold
   };
   new Inventory(newInventory)
     .save()
