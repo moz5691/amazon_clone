@@ -80,3 +80,11 @@
 }
 /**/
 .inventory-seller-table tr:nth-child(even){background-color: #f2f2f2}
+.inventory-seller-table th, .inventory-seller-table td {
+  text-align: left;
+  padding: 8px;
+}
+
+.inventory-seller-table td{
+  overflow: hidden;  text-overflow: ellipsis; max-height: 100px;
+}

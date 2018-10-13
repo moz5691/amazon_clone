@@ -2,28 +2,26 @@
     <div style="overflow-x:auto;">
         <table class="inventory-seller-table" style="border-collapse: collapse; border-spacing: 0; width: 100%; border: 1px solid #ddd;">
             <tr>
-                <th>image</th>
-                <th>item Id</th>
-                <th>Seller</th>
-                <th>department</th>
-                <th>name</th>
-                <th style="overflow: hidden">About</th>
-                <th>Price</th>
-                <th>count</th>
-                <th>update</th>
+                <th><strong>image</strong></th>
+                <th><strong>item Id</strong></th>
+                <th><strong>department</strong></th>
+                <th><strong>name</strong></th>
+                <th><strong>About</strong></th>
+                <th><strong>Price</strong></th>
+                <th><strong>count</strong></th>
+                <th><strong>update</strong></th>
             </tr>
             {{#each inventory}}
             <tr>
-                <td><img src="{{inventory.itemImgPath}}" /></td>
-                <td>{{inventory._id}}</td>
-                <td>{{Seller}}</td>
-                <td>{{inventory.itemDepartment}}</td>
-                <td>{{inventory.itemName}}</td>
-                <td style="overflow: hidden">{{inventory.itemDescription}}</td>
-                <td>{{inventory.itemPrice}}</td>
-                <td>{{inventory.itemCount}}</td>
+                <td><img style="max-width: 150px;" src="{{this.itemImgPath}}" /></td>
+                <td>{{this._id}}</td>
+                <td>{{this.itemDepartment}}</td>
+                <td>{{this.itemName}}</td>
+                <td>{{this.itemDescription}}</td>
+                <td>{{this.itemPrice}}</td>
+                <td>{{this.itemCount}}</td>
                 <td>
-                    <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
+                    <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2">
                         <form action="/inventories/update/{{this._id}}" method="POST">
                             <button type="submit" id="buyBtn" class="btn btn-outline-primary ml-5" type="button">edit</button>
                         </form>
