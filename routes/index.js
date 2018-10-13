@@ -20,10 +20,8 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
-
 router.get('/login', function (req, res, next) {
   res.render('login');
-
 });
 
 /* Log out page, redirect to login page, clear cookie */
@@ -33,37 +31,19 @@ router.get('/logout', (req, res, next) => {
   res.redirect('login');
 });
 
-// /**************(Chan)************* GET login page rendering */
-// router.get('/login', (req, res, next) => {
-//   res.render('login');
-// });
-
-// /**************(Maryam)*********** GET register page rendering */
-// router.get('/register', (req, res , next) => {
-//   res.render('register');
-// });
-
-///////////////purchase page:  Ming////////////////////
-/*router.get('/purchase', function(req, res) {
-  res.render('purchase');
-});*/
-
-
 router.get('/purchase/:id', function (req, res) {
   console.log('GET function');
   console.log(req.params.id);
-  Inventory.findOne({ _id: req.params.id }).then(product => {
-    res.render('purchase', { product: product });
-    //window.location='/purchase';
-  }).catch(
-    function (err) {
+  Inventory.findOne({ _id: req.params.id })
+    .then(product => {
+      res.render('purchase', { product: product });
+      //window.location='/purchase';
+    })
+    .catch(function (err) {
       res.json(err);
-    }
-  );
-  //res.send('purchase');
+    });
 });
 //////////////////////////////////////////////////////
-
 
 // update inventory count
 router.put('/inventory/:id', (req, res, next) => {
@@ -105,45 +85,52 @@ router.post('/inventory/search', function (req, res, next) {
   Inventory.find({ itemName: searchQuery }, function (err, inventory) {
     if (err) {
       return res.status(200).send(err);
-    }
-    else {
+    } else {
       // res.json(inventory);
       res.render('index', { inventory: inventory });
     }
   });
 });
 
-
+/* [pending] */
 //-----pagination feature----Tri-----//
 router.get('/inventory/:page', function (req, res, next) {
-  const perPage = 5
-  const page = req.params.page || 1
+  const perPage = 10;
+  const page = req.params.page || 1;
 
-  Inventory
-    .find({})
-    .skip((perPage * page) - perPage)
+  Inventory.find({})
+    .skip(perPage * page - perPage)
     .limit(perPage)
     .exec(function (err, products) {
       Inventory.count().exec(function (err, count) {
         if (err) {
-          return err
+          return err;
+        } else {
+          const pages = Math.ceil(count / perPage);
+          if (pages > 0) {
+            res.render('index', {
+              inventory: products,
+              current: page,
+              pages: Math.ceil(count / perPage)
+            });
+          } else {
+            res.render('index', {
+              inventory: products,
+              current: page
+            });
+          }
         }
-        else {
-          // res.json(products);
-          res.render('index', {
-            inventory: products,
-            current: page,
-            pages: Math.ceil(count / perPage)
-          })
-        };
       });
-    })
+    });
 });
 
-//The 404 Route (ALWAYS Keep this as the last route)
-// router.get('*', function (req, res) {
-//   res.send('what??? do not have such a route, 404');
-// });
-
+// -----search by department----//
+router.post('/inventory/search/department/', function (req, res) {
+  Inventory
+    .find({ itemDepartment: req.body.departmentSelect })
+    .then(function (data) {
+      res.render('index', { inventory: data });
+    });
+});
 
 module.exports = router;
