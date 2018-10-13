@@ -189,4 +189,41 @@ router.post('/inventory/search/department/', function(req, res) {
   }
 });
 
+/**
+ * user review part --chan , need to find user id.
+ */
+router.get('/review/:id', (req, res) => {
+  Inventory.findOne({
+    _id: req.params.id
+  }).then(inventory => {
+    console.log(inventory);
+    res.render('review/user_review', { inventory: inventory });
+  });
+});
+
+router.put('/review/update/:id', (req, res) => {
+  console.log('user review update');
+  console.log(req.body);
+  console.log(req.user);
+  const review = {
+    reviewer: null, //req.user.email,
+    rate: req.body.userRate,
+    content: req.body.userReview,
+    date: Date.now()
+  };
+  Inventory.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { itemReview: review } },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(doc);
+        res.redirect('/inventory');
+      }
+    }
+  );
+});
+
 module.exports = router;
