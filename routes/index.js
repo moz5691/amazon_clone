@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 });
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'This is Amazon clone site, welcome!!!' });
 });
 
@@ -20,7 +20,7 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login');
 });
 
@@ -132,10 +132,10 @@ router.delete('/inventory/:id', (req, res) => {
 });
 
 //-----search by itemName-----Tri-------//
-router.post('/inventory/search', function(req, res, next) {
+router.post('/inventory/search', function (req, res, next) {
   const searchQuery = req.body.searchQuery;
   // const searchQuery = 'Simpsons';
-  Inventory.find({ itemName: searchQuery }, function(err, inventory) {
+  Inventory.find({ itemName: searchQuery }, function (err, inventory) {
     if (err) {
       return res.status(200).send(err);
     } else {
@@ -147,15 +147,15 @@ router.post('/inventory/search', function(req, res, next) {
 
 /* [pending] */
 //-----pagination feature----Tri-----//
-router.get('/inventory/:page', function(req, res, next) {
+router.get('/inventory/:page', function (req, res, next) {
   const perPage = 10;
   const page = req.params.page || 1;
 
   Inventory.find({})
     .skip(perPage * page - perPage)
     .limit(perPage)
-    .exec(function(err, products) {
-      Inventory.count().exec(function(err, count) {
+    .exec(function (err, products) {
+      Inventory.count().exec(function (err, count) {
         if (err) {
           return err;
         } else {
@@ -174,6 +174,15 @@ router.get('/inventory/:page', function(req, res, next) {
           }
         }
       });
+    });
+});
+
+// -----search by department----//
+router.post('/inventory/search/department/', function (req, res) {
+  Inventory
+    .find({ itemDepartment: req.body.departmentSelect })
+    .then(function (data) {
+      res.render('index', { inventory: data });
     });
 });
 
