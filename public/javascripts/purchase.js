@@ -1,44 +1,36 @@
-const state = {
-    cartQty:0
-}
+// const Inventory = require('./../models/inventory');
 
 const incFunc = function(e){
     console.log('in incFunc');
     e.preventDefault();
+    const productID=$(this).attr('data-id');
+
     const incStep = parseFloat($('#purSelect').val());
-    state.cartQty += incStep;
-    console.log(`in incFunc ${state.cartQty}`);
-    alert('you just add an item to the cart!');
-    $('#cartQty').text(`${state.cartQty}`);
+    // let qty = parseFloat($('#cartQty').text());
+    let tempCart = parseFloat(sessionStorage.getItem(`${productID}`)) || 0;
+    tempCart += incStep;
+    sessionStorage.setItem(`${productID}`,tempCart);
+    $('#cartQty').text(`${sessionStorage.getItem(`${productID}`)}`);
+    console.log($('#cartQty').text());
+    let inCart = false;
+    if ($('#cartQty').text()!=='0'){
+        inCart=true;
+    }
+    const updateEntry={
+    itemInCart:inCart
+    }
+    $.ajax({url:`/cartUpdate/${productID}`,method:'PUT',data:updateEntry }).then(
+        function(data){
+            if(data){
+                console.log('itemInCart successfully change');
+            }else{
+                console.log("There's some problem in put methord ")
+            }
+        }
+    );
+
 }
 
-
-// const purchaseFunc = function(e){
-//     console.log('get in purchase');
-//     e.preventDefault();
-//     const id = $(this).attr('data-id');
-//     console.log(id);
-//     $.ajax({url:`/purchase/:${id}`, method: 'GET', data: {id:id}})
-//     .then(
-//         function(){
-//             console.log('get into purchase page');
-//         }
-//     ).catch(
-//         function(){
-//             alert("There's a problem happened in purchaseFunc!");
-//         }
-//     );
-    
-// }
 
 console.log('in pruchase.js');
 $(document).on('click','#incQtyBtn',incFunc);
-//$(document).on('click','#buyBtn',purchaseFunc);
-
-/*
-const cartFunc = function(e){
-    e.preventDefault();
-}
-
-$(document).on('click','#cartBtn',cartFunc)
-*/
