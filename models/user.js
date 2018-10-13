@@ -5,19 +5,19 @@ const UserSchema = new Schema({
   username: {
     type: String,
     unique: true,
-    match: [/^[a-z][a-z0-9]{5,30}$/, "Please enter a valid username"],///^[a-zA-Z][a-zA-Z0-9.\-_$@!]{5,30}$/
+   // match: [/^[a-z0-9]{5,30}$/, "Please enter a valid username"],///^[a-zA-Z][a-zA-Z0-9.\-_$@!]{5,30}$/
     required: true
   },
   email:{
     type: String,
     unique: true,
     lowercase: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
+    //match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     required: "email is not valid"
   },
   password: {
     type: String,
-    match: [/^[a-z][a-z0-9]{5,30}$/, "Please enter a valid password"],//[/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, "Please enter a valid password"],
+   // match: [/^[a-z0-9]{5,30}$/, "Please enter a valid password"],//[/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, "Please enter a valid password"],
     required: "password is Required"
   }
 });
