@@ -13,11 +13,14 @@ router.use((req, res, next) => {
     res.locals.msg = 'this email is already exist!!!';
   } else if (req.query.msg === 'failauthenticate') {
     res.locals.msg = 'could not authenticate user';
-  } else if (req.query.msg === 'welcome') {
-    res.locals.msg = 'your account made successfuly';
+  } else if (req.query.msgok === 'welcome') {
+    res.locals.msgok = 'your account made successfuly';
   }else if(req.query.msg === 'failauthenticatetoken'){
     res.locals.msg = "no token provided can't access to this page";
+  }else if(req.query.msgok === 'successfullupdate'){
+    res.locals.msgok = "hghghghy";
   } else {
+    res.locals.msgok = '';
     res.locals.msg = '';
   }
   next();
@@ -80,7 +83,8 @@ router.post('/loginUser', function(req, res) {
       else{
         let token = jwt.sign({username: User.username, email: User.email}, secret,{expiresIn: '24h'});
         res.cookie('auth', token);
-        res.redirect(`/inventory/:${selectedUser.username}`);    
+        res.cookie('seller', selectedUser.username);
+        res.redirect(`/inventories/:${selectedUser.username}`);    
       }
     }
   });
@@ -91,11 +95,10 @@ router.post('/loginUser', function(req, res) {
 
 /***************check token after router redirect */
 router.use(function(req, res, next){
-  console.log('token******************');
   let token = req.headers.authorization || req.cookies.auth || req.body.token || req.body.query || req.headers['x-access-token'];
   if(token){
    jwt.verify(token, secret, function(err, decoded){
-      if(err) res.json({err:'token invalid'});
+      if(err) res.redirect('/users/login?msg=failauthenticatetoken');
       else{
         req.decoded = decoded;
         next();

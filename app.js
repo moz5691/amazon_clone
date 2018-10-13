@@ -8,7 +8,7 @@ const logger = require('morgan');
 const helmet = require('helmet');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const inventoryRouter = require('./routes/inventorys');
+const inventoryRouter = require('./routes/inventories');
 
 const app = express();
 
@@ -30,11 +30,11 @@ hbs.registerPartials(__dirname + '/views/partial');
 // routings here.  we can add more routings if needed.
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/inventory', inventoryRouter);
+app.use('/inventories', inventoryRouter);
 
 // Chan: will use app.js as start.
 app.set('port', process.env.PORT || 3000);
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log('server running on port', +app.get('port'));
 });
 
@@ -56,3 +56,8 @@ app.listen(app.get('port'), function() {
 // });
 
 // module.exports = app;
+
+// $('.page-item').on('click', function () {
+//   $('.disabled').removeClass('disabled');
+//   // $(this).addClass('disabled');
+// });
