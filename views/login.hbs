@@ -11,7 +11,8 @@
 			{{!-- Login form --}}
 			<form id="login-form" action="/users/loginUser" method="post" role="form">
 				<section class="form-group">
-					<input type="text" name="emaillogin" id="emaillogin" tabindex="1" class="form-control" placeholder="Email..." value="">
+					<input type="text" name="emaillogin" id="emaillogin" tabindex="1" class="form-control" placeholder="Email..."
+					 value="">
 				</section>
 				<section class="form-group">
 					<input type="password" name="passwordlogin" id="passwordlogin" data-toggle="tooltip" title="must contain at least (1 lowercase, 1 uppercase alphabetical character,1 numeric,and ! @ # $ - _) minimum 8 char or longer!!!"
@@ -20,7 +21,8 @@
 				<section class="form-group">
 					<div class="text-center d-flex justify-content-center">
 						<div class="col-sm-6 col-sm-offset-3">
-							<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-primary" value="Log In">
+							<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-primary"
+							 value="Log In">
 						</div>
 					</div>
 				</section>
@@ -35,16 +37,12 @@
 	</div>
 </div>
 
-<div class="alert mt-5 h-25" role="alert">
-	{{msg}}
-</div>
-
 {{#if msg}}
-<div class=" container-fluid alert alert-danger col-lg-4  ml-50">
+<div class="mt-4 container-fluid alert alert-danger col-lg-4  ml-50">
 	<p><strong>Erorr: </strong>{{msg}}</p>
 </div>
 {{/if}} {{#if msgok}}
-<div class=" container-fluid alert alert-success col-lg-4  ml-50">
+<div class="mt-4 container-fluid alert alert-success col-lg-4  ml-50">
 	<p><strong>congratulation: </strong>{{msgok}}</p>
 </div>
 {{/if}}

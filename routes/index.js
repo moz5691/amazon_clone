@@ -26,6 +26,12 @@ router.get('/login', function (req, res, next) {
 
 });
 
+/* Log out page, redirect to login page, clear cookie */
+router.get('/logout', (req, res, next) => {
+  res.clearCookie('auth');
+  res.redirect('login');
+});
+
 // /**************(Chan)************* GET login page rendering */
 // router.get('/login', (req, res, next) => {
 //   res.render('login');

@@ -1,70 +1,112 @@
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-</ul>
-
-<div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-        <h3></h3>
-        <p>Update your inventory product</p>
-        {{!-- **************** --}}
-        <div class='purchaseContainer'>
-            <div class='productImg'>
-                {{!-- <img src='/images/simpsons.png' /> --}}
-                <img src='{{product.itemImgPath}}' />
+<div></div>
+<div class="rounded m-5" style="background-color:antiquewhite">
+    <ul class="nav nav-tabs" style="background-color:  rgb(226, 199, 164)" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update"
+                aria-selected="true"><strong>Update</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="add-tab" data-toggle="tab" href="#add" role="tab" aria-controls="add" aria-selected="false"><strong>Add
+                    New</strong></a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active p-5" id="update" role="tabpanel" aria-labelledby="update-tab">
+            <label><strong>item Id: </strong>{{this._id}}</label>
+            <hr />
+            <div class="form-group">
+                <img class="img-fluid img-thumbnail zoom" style="max-width: 20%; min-width: 200px; height: auto;" src='{{this.itemImgPath}}' />
             </div>
-            <div class='productInfoBox'>
-                <div class='productInfo'>
-                    <header class='purchaseHeader'>{{product.itemName}}
-                        <h6 class='purchaseH6'>by {{product.itemSeller}}</h6>
-                    </header>
-                    <hr />
-                    <div>
-                        <h6>Price:
-                            <span style='font-size:20px; color:#D63D28;'>$ {{product.itemPrice}}</span>
-                        </h6>
+            <form class="form-group" method="post" enctype="multipart/form-data" action="/inventories/upload/{{this._id}}">
+                <input class=" input-lg input-search" type="file" name="file" style="background-color: white; max-width: 220px">
+                <input class="mt-2" type="submit" value="Submit">
+            </form>
+            {{!-- --}}
+            <form class="form-group" action="/inventories/update/product/{{this._id}}?_method=PUT" method="post">
+                <input type="hidden" value="{{this.itemImgPath}}" name="itemImgPath" />
+                <fieldset>
+                    <div class="form-group">
+                        <label><strong>Seller: </strong></label><input type="text" name="itemSeller" class="form-control"
+                            placeholder="{{this.itemSeller}}" />
                     </div>
-                    <div>
-                        <h4 class='purchaseH4' style='color:green;'>In Stock</h4>
-
+                    <div class="form-group">
+                        <label><strong>name: </strong></label><input type="text" name="itemName" class="form-control"
+                            placeholder="{{this.itemName}}" />
                     </div>
-                    <div>
-                        <h4 class='purchaseH4'>About the product</h4>
-                        <ul class='purList' style="list-style-type:disc">
-                            <li>{{product.itemDescription}}</li>
-                            <li>Test 2</li>
-                        </ul>
+                    <div class="form-group">
+                        <label><strong>department: </strong></label><input type="text" name="itemDepartment" class="form-control"
+                            placeholder="{{this.itemDepartment}}" />
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label><strong>About the product: </strong></label><input type="text" name="itemDescription"
+                            class="form-control" placeholder="{{this.itemDescription}}">
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Price: </strong></label><input type="text" name="itemPrice" class="form-control"
+                            placeholder="${{this.itemPrice}}">
+                    </div>
+                    <div class="form-group">
+                        <label><strong>count: </strong></label><input type="text" name="itemCount" class="form-control"
+                            placeholder="{{this.itemCount}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+            </form>
+            {{#if msgeupdate}}
+            <div class=" container-fluid alert alert-danger col-lg-4  ml-50">
+                <p><strong>Erorr: </strong>{{msgeupdate}}</p>
             </div>
-            <div class='purchaseSection'>
-                <div class='purchaseBox'>
-                    <div class='purBoxFit'>
-                        <span class='purchaseQty'>Qty
-                            <select id='purSelect'>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                            </select>
-                            <a href=''>cart:</a><span id='cartQty'>0</span>
-                            {{!-- <button id='cartBtn' type="button">cart:</button> <span id='cartQty'>0</span> --}}
-                        </span>
-                        <button id='incQtyBtn' type='button' data-id='{{this._id}}'>Add to Cart</button>
-                    </div>
-                </div>
+            {{/if}} {{#if msgeupdateok}}
+            <div class=" container-fluid alert alert-success col-lg-4  ml-50">
+                <p><strong>congratulation: </strong>{{msgeupdateok}}</p>
             </div>
-            <script src='javascripts/purchase.js'></script>
+            {{/if}}
+            {{#if msgaddok}}
+            <div class=" container-fluid alert alert-success col-lg-4  ml-50">
+                <p><strong>congratulation: </strong>{{msgaddok}}</p>
+            </div>
+            {{/if}}
         </div>
-
-
-        {{!-- *********** --}}
+        <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+            <div class="tab-pane fade show active p-5" id="update" role="tabpanel" aria-labelledby="update-tab">
+                <form class="form-group" action="/inventories/add/product" method="post">
+                    <div class="form-group">
+                        <img class="img-fluid img-thumbnail zoom" style="max-width: 20%; min-width: 200px; height: auto;"
+                            src='/images/default.png' />
+                    </div>
+                    <fieldset>
+                        <div class="form-group">
+                            <label><strong>Seller: </strong></label><input type="text" name="newitemSeller" class="form-control"
+                                placeholder="seller's username" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>name: </strong></label><input type="text" name="newitemName" class="form-control"
+                                placeholder="item's Name" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>department: </strong></label><input type="text" name="newitemDepartment"
+                                class="form-control" placeholder="item's Department" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>About the product: </strong></label><input type="text" name="newitemDescription"
+                                class="form-control" placeholder="item's Description">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Price: </strong></label><input type="text" name="newitemPrice" class="form-control"
+                                placeholder="Price">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>count: </strong></label><input type="text" name="newitemCount" class="form-control"
+                                placeholder="Count">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </fieldset>
+                </form>
+                {{#if msgadd}}
+                <div class=" container-fluid alert alert-danger col-lg-4  ml-50">
+                    <p><strong>Erorr: </strong>{{msgadd}}</p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
     </div>
-    <div id="menu1" class="tab-pane fade">
-        <h3>New Product</h3>
-        <p>Add new product to inventory</p>
-    </div>
-</div>

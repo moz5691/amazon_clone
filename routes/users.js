@@ -13,11 +13,14 @@ router.use((req, res, next) => {
     res.locals.msg = 'this email is already exist!!!';
   } else if (req.query.msg === 'failauthenticate') {
     res.locals.msg = 'could not authenticate user';
-  } else if (req.query.msg === 'welcome') {
-    res.locals.msg = 'your account made successfuly';
+  } else if (req.query.msgok === 'welcome') {
+    res.locals.msgok = 'your account made successfuly';
   }else if(req.query.msg === 'failauthenticatetoken'){
     res.locals.msg = "no token provided can't access to this page";
+  }else if(req.query.msgok === 'successfullupdate'){
+    res.locals.msgok = "hghghghy";
   } else {
+    res.locals.msgok = '';
     res.locals.msg = '';
   }
   next();
