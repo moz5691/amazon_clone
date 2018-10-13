@@ -172,50 +172,21 @@ router.get('/inventory/:page', function(req, res, next) {
 
 // -----search by department----//
 router.post('/inventory/search/department/', function(req, res) {
-  Inventory.find({ itemDepartment: req.body.departmentSelect }).then(function(
-    data
-  ) {
-    res.render('index', { inventory: data });
-  });
-});
-
-/**
- * User review part.   [chan]
- */
-
-router.get('/review/:id', (req, res) => {
-  Inventory.findOne({
-    _id: req.params.id
-  }).then(inventory => {
-    console.log(inventory);
-    res.render('review/user_review', { inventory: inventory });
-  });
-});
-
-router.put('/review/update/:id', (req, res) => {
-  console.log('user review update');
-  console.log(req.body);
-  // console.log(seller);
-  const review = {
-    //   reviewer: req.user.email,
-    reviewer: null,
-    rate: req.body.userRate,
-    content: req.body.userReview,
-    date: Date.now()
-  };
-  Inventory.findOneAndUpdate(
-    { _id: req.params.id },
-    { $push: { itemReview: review } },
-    { new: true },
-    (err, doc) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(doc);
-        res.redirect('/inventory');
-      }
-    }
-  );
+  const deptSelect = req.body.departmentSelect;
+  const searchQuery = req.body.searchQuery;
+  if (deptSelect === 'All') {
+    Inventory
+      // .find({ itemTag: searchQuery })
+      .find({})
+      .then(function(data) {
+        // res.render('index', { inventory: data });
+        res.json(data);
+      });
+  } else {
+    Inventory.find({ itemDepartment: deptSelect }).then(function(data) {
+      res.render('index', { inventory: data });
+    });
+  }
 });
 
 module.exports = router;
