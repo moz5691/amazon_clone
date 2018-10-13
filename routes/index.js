@@ -26,6 +26,12 @@ router.get('/login', function (req, res, next) {
 
 });
 
+/* Log out page, redirect to login page, clear cookie */
+router.get('/logout', (req, res, next) => {
+  res.clearCookie('auth');
+  res.redirect('login');
+});
+
 // /**************(Chan)************* GET login page rendering */
 // router.get('/login', (req, res, next) => {
 //   res.render('login');
@@ -141,9 +147,9 @@ router.get('/inventory/:page', function (req, res, next) {
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
-router.get('*', function (req, res) {
-  res.send('what??? do not have such a route, 404');
-});
+// router.get('*', function (req, res) {
+//   res.send('what??? do not have such a route, 404');
+// });
 
 
 module.exports = router;
