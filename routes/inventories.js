@@ -55,7 +55,7 @@ router.use((req, res, next) => {
 /**************(Maryam)*********** POST inventory page rendering */
 router.get('/:user', (req, res, next) => {
     Inventory.find({}).then(inventory => { 
-       res.render('inventory', {inventory: inventory});
+       res.render('inventory', {inventory: inventory, seller: req.cookies.seller});
      });
  });
 
@@ -65,7 +65,7 @@ router.get('/:user', (req, res, next) => {
     if(!product) res.redirect('/users/inventory?msg=removed');
     else{
       const selectedproduct = new Inventory(product);
-      res.render('inventory-edit', selectedproduct);    
+      res.render('inventory-edit', {selectedproduct: selectedproduct, seller: req.cookies.seller});    
       }
     });
   });
@@ -76,7 +76,7 @@ router.get('/:user', (req, res, next) => {
      if(!product) res.redirect('/users/inventory?msg=removed');
      else{
        const selectedproduct = new Inventory(product);
-       res.render('inventory-edit', selectedproduct);    
+       res.render('inventory-edit', {selectedproduct: selectedproduct, seller: req.cookies.seller });    
        }
      });
    });

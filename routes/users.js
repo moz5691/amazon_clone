@@ -83,6 +83,7 @@ router.post('/loginUser', function(req, res) {
       else{
         let token = jwt.sign({username: User.username, email: User.email}, secret,{expiresIn: '24h'});
         res.cookie('auth', token);
+        res.cookie('seller', selectedUser.username);
         res.redirect(`/inventories/:${selectedUser.username}`);    
       }
     }
