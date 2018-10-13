@@ -21,7 +21,9 @@ const inventory = [
     itemDescription: 'Funny comic',
     itemSeller: 'Fox',
     itemCount: 200,
-    itemImgPath: '/images/simpsons.png'
+    itemImgPath: '/images/simpsons.png',
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Dog and Cat',
@@ -30,7 +32,9 @@ const inventory = [
     itemDescription: 'Dog and cot lovers must have',
     itemSeller: 'Dog,cat and US',
     itemCount: 2000,
-    itemImgPath: '/images/dog_cat.png'
+    itemImgPath: '/images/dog_cat.png',
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Adidas running shoes',
@@ -40,7 +44,9 @@ const inventory = [
     itemSeller: 'Adidas',
     itemCount: 2000,
     itemImgPath: '/images/adidas.jpeg',
-    itemTag: ['sports', 'adidas', 'running']
+    itemTag: ['sports', 'adidas', 'running'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'We Are Anonymous',
@@ -50,7 +56,9 @@ const inventory = [
     itemSeller: 'Random House',
     itemCount: 200000,
     itemImgPath: '/images/anonymous.png',
-    itemTag: ['book', 'hecker', 'computer']
+    itemTag: ['book', 'hecker', 'computer'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Cheddar cheese biscuit',
@@ -61,7 +69,9 @@ const inventory = [
     itemSeller: 'Farm & Flavor',
     itemCount: 200,
     itemImgPath: '/images/cheese-bis-1.jpeg',
-    itemTag: ['food', 'cheddar', 'biscuit']
+    itemTag: ['food', 'cheddar', 'biscuit'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Chromebook',
@@ -72,7 +82,9 @@ const inventory = [
     itemSeller: 'Google',
     itemCount: 2000,
     itemImgPath: '/images/chromebook-1.jpeg',
-    itemTag: ['computer', 'chrome', 'google']
+    itemTag: ['computer', 'chrome', 'google'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: '100 Dice',
@@ -82,7 +94,9 @@ const inventory = [
     itemSeller: 'Toy for the world',
     itemCount: 20000,
     itemImgPath: '/images/dice-toy-1.jpeg',
-    itemTag: ['toy', 'dice', 'play']
+    itemTag: ['toy', 'dice', 'play'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Euphoria Board Game',
@@ -92,7 +106,9 @@ const inventory = [
     itemSeller: 'Toys World',
     itemCount: 2000,
     itemImgPath: '/images/euphoria-game-1.jpeg',
-    itemTag: ['board game', 'toy', 'euphoria']
+    itemTag: ['board game', 'toy', 'euphoria'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Acoustic Guitar Set',
@@ -102,7 +118,9 @@ const inventory = [
     itemSeller: 'Music of my life',
     itemCount: 200,
     itemImgPath: '/images/guitar-1.jpeg',
-    itemTag: ['guitar', 'music', 'acoustic']
+    itemTag: ['guitar', 'music', 'acoustic'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Full Cover Headphones',
@@ -112,7 +130,9 @@ const inventory = [
     itemSeller: 'Best Music',
     itemCount: 20,
     itemImgPath: '/images/headphones-1.jpeg',
-    itemTag: ['music', 'headphones', 'noise']
+    itemTag: ['music', 'headphones', 'noise'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Streamline Bicycle Helmet',
@@ -123,7 +143,9 @@ const inventory = [
     itemSeller: 'Sports Center',
     itemCount: 200,
     itemImgPath: '/images/helmet-1.jpeg',
-    itemTag: ['sports', 'bicycle', 'helmet']
+    itemTag: ['sports', 'bicycle', 'helmet'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'KeyPos Bike Helment',
@@ -133,7 +155,9 @@ const inventory = [
     itemSeller: 'Auto Center',
     itemCount: 200,
     itemImgPath: '/images/helmet-2.jpeg',
-    itemTag: ['sports', 'motor bike', 'helmet']
+    itemTag: ['sports', 'motor bike', 'helmet'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Incredibles 2',
@@ -143,7 +167,9 @@ const inventory = [
     itemSeller: 'Disney/Pixar',
     itemCount: 2000,
     itemImgPath: '/images/incredibles-2.jpeg',
-    itemTag: ['movie', 'incredibles', 'disney']
+    itemTag: ['movie', 'incredibles', 'disney'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Led Zeppelin',
@@ -153,7 +179,9 @@ const inventory = [
     itemSeller: 'Amazon',
     itemCount: 2000,
     itemImgPath: '/images/led-z-1.jpeg',
-    itemTag: ['music', 'led zeppelin', 'stair way to heaven']
+    itemTag: ['music', 'led zeppelin', 'stair way to heaven'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Mario Badge',
@@ -163,7 +191,9 @@ const inventory = [
     itemSeller: 'Nintendo',
     itemCount: 2000,
     itemImgPath: '/images/mario-1.jpeg',
-    itemTag: ['mario', 'nintendo', 'badge']
+    itemTag: ['mario', 'nintendo', 'badge'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Xiaomi Mi8',
@@ -173,7 +203,9 @@ const inventory = [
     itemSeller: 'Xiaomi',
     itemCount: 200,
     itemImgPath: '/images/phone-1.jpeg',
-    itemTag: ['xiaomi', 'mi8', 'phone']
+    itemTag: ['xiaomi', 'mi8', 'phone'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Google Pixel',
@@ -183,7 +215,9 @@ const inventory = [
     itemSeller: 'Google',
     itemCount: 2000,
     itemImgPath: '/images/phone-2.jpeg',
-    itemTag: ['google', 'android', 'phone']
+    itemTag: ['google', 'android', 'phone'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'US map',
@@ -193,7 +227,9 @@ const inventory = [
     itemSeller: 'Amazon',
     itemCount: 1000,
     itemImgPath: '/images/us-map-1.jpeg',
-    itemTag: ['map', 'us', 'america']
+    itemTag: ['map', 'us', 'america'],
+    itemInCart: false,
+    itemSold: 0
   }),
   new Inventory({
     itemName: 'Sonoma Springs Chardonnay Wine',
@@ -203,7 +239,9 @@ const inventory = [
     itemSeller: 'Amazon',
     itemCount: 100,
     itemImgPath: '/images/wine-1.jpeg',
-    itemTag: ['wine', 'white', 'chardonnay']
+    itemTag: ['wine', 'white', 'chardonnay'],
+    itemInCart: false,
+    itemSold: 0
   })
 ];
 

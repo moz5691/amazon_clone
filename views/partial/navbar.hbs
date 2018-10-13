@@ -5,7 +5,8 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <form class="form-inline my-2 my-lg-0 mr-auto" action="/inventory/search/department/?_method=POST&departmentSelect=departmentSelect" method="POST">
+  <form class="form-inline my-2 my-lg-0 mr-auto" action="/inventory/search/department/?_method=POST&departmentSelect=departmentSelect"
+    method="POST">
     <select class="form-control" id="departmentSelect" name="departmentSelect">
       <option value="All">All Departments</option>
       <option value="Book">Books</option>
@@ -26,7 +27,9 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+
         <a class="nav-link" href="/inventory/1">Products</a>
+
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -34,14 +37,14 @@
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/login">Action</a>
-          <a class="dropdown-item" href="/inventories/{{seller}}">Seller Inventory</a>
+          <a class="dropdown-item" href="/login">Login</a>
+          <a class="dropdown-item" href="/inventories/{{seller}}">Seller Account</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/logout">Logout</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link disabled" href="#">{{seller}} login</a>
       </li>
     </ul>
 
