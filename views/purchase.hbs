@@ -8,15 +8,19 @@
 
 <body>
     <div class='purchaseContainer'>
-        <div class='productImg'>
+        <div class='productImg purDesktop purCenter'>
             <img src='{{product.itemImgPath}}'/>
         </div>
         <div class='productInfoBox'>
             <div class='productInfo'>
                 <header class='purchaseHeader'>{{product.itemName}}
                     <h6 class='purchaseH6'>by {{product.itemSeller}}</h6>
-                </header>
                 <hr/>
+                </header>
+                
+                <div class='productImg purMobile purCenter'>
+                    <img src='{{product.itemImgPath}}'/>
+                </div>
                 <div>
                     <h5 class='purchaseH5'>Price:
                         <span style='font-size:20px; color:#D63D28;'>$ {{product.itemPrice}}</span>
