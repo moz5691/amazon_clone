@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="/stylesheets/cart.css">
     <title>Shopping Cart</title>
 </head>
+
 <body>
+    {{!-- <form action="/shoppingCart" method="GET"> --}}
+    <form>
     <div class='cartContainer'>
         <div class='cartDisplay'>
             <div id='cartTop'>
@@ -12,59 +15,74 @@
                 <div class='cartBlank'></div>
                 <h6 class='cartH6 cartTopBox2'>Price</h6>
                 <h6 class='cartH6 cartTopBox3'>Quantity</h6>
-
+                <hr class='topHR'/>
             </div>
-
+            {{#each inventory}} {{#if this.itemInCart}}
             <div id='cartMiddle'>
-                <!--use handlebar render products-->
-                <div id='cartProductImg'>
-                    <img src='/images/simpsons.png' />
-                </div>
+                <div class='cartMiddleBox'>
+                    <!--use handlebar render products-->
+                    <div id='cartProductImg'>
+                        <img src='{{this.itemImgPath}}' />
+                    </div>
 
-                <div id='cartProductInfo'>
-                    <h5 class='cartH5'>product name</h4>
-                        <h6 class='cartH6'>In Stock</h6>
-                        <button type="submit" class='cartH6'>Delete</button>
-                </div>
+                    <div id='cartProductInfo'>
+                        <h5 class='cartH5'>{{this.itemName}}</h4>
+                            {{#if this.itemCount}}
+                            <h6 class='cartH6' id='{{this._id}}stock' style='color:green'></h6>
+                            {{/if}}
+                            <button type="submit" class='cartH6 cartDelete' data-id=`{{this._id}}`>Delete</button>
+                    </div>
 
-                <div id='cartProductPrice'>
-                    <h5 class='cartH5'>$23.56</h5>
-                </div>
+                    <div id='cartProductPrice'>
+                        <h5 class='cartH5'>{{this.itemPrice}}</h5>
+                    </div>
 
-                <div id='cartProductQty'>
-                    <h5 class='cartH5'>12 pcs</h5>
-                    <span class='cartQtyChange'>
-                        <button id='cartDecBtn' type='button' data-id='{{this._id}}'>Minus</button>
-                        <select id='purSelect'>
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
-                            <option value='6'>6</option>
-                        </select>
-                        <button id='cartIncBtn' type='button' data-id='{{this._id}}'>Add</button>
-                    </span>
-                </div>
+                    <div id='cartProductQty'>
+                        <h5 class='cartH5 cartQty' id='{{this._id}}' data-id=`{{this._id}}`></h5>
+                        <span class='cartQtyChange'>
+                            
+                                <button id='cartDecBtn' type='submit' data-id='{{this._id}}'>Minus</button>
+                                <select id='cartSelect'>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                    <option value='6'>6</option>
+                                </select>
+                                <button id='cartIncBtn' type='submit' data-id='{{this._id}}'>Add</button>
+                            
+                        </span>
+                    </div>
 
+                </div>
+                <hr/>
             </div>
+
+            {{/if}} {{/each}}
             <div id='cartBottom'>
                 <div class='cartHeader'>
-                    Subtotal:$
-                    <span>23.55</span>
+                    Subtotal: $
+                    <span class='cartSubtotal'></span>
                 </div>
             </div>
         </div>
         <div class='cartCheckout'>
             <div id='chekoutShow'>
                 <div class='cartHeader'>
-                    Subtotal:
-                    <span>$23.55</span>
+                    Subtotal: $
+                    <span class='cartSubtotal'></span>
                 </div>
-                <button type="button">Place the order</button>
+                
+                <button type="submit" id='cartOrderBtn'>Place the order</button>
+                
             </div>
             <div class='cartBlank'></div>
         </div>
     </div>
+    </form>
+    <script src='javascripts/cart.js'></script>
+
 </body>
+
 </html>
