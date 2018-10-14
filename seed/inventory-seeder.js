@@ -43,7 +43,7 @@ const inventory = [
     itemDescription: 'Adidas running shoes, best comfort for long running',
     itemSeller: 'Adidas',
     itemCount: 2000,
-    itemImgPath: '/images/adidas.jpeg',
+    itemImgPath: '/images/adidas.jpg',
     itemTag: ['sports', 'adidas', 'running'],
     itemInCart: false,
     itemSold: 0

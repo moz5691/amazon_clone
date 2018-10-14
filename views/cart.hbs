@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-    {{!-- <link rel="stylesheet" href="/stylesheets/cart.css"> --}}
     <title>Shopping Cart</title>
 </head>
 
 <body>
+    {{!-- <form action="/shoppingCart" method="GET"> --}}
+    <form>
     <div class='cartContainer'>
         <div class='cartDisplay'>
             <div id='cartTop'>
@@ -39,7 +40,7 @@
                     <div id='cartProductQty'>
                         <h5 class='cartH5 cartQty' id='{{this._id}}' data-id=`{{this._id}}`></h5>
                         <span class='cartQtyChange'>
-                            <form>
+                            
                                 <button id='cartDecBtn' type='submit' data-id='{{this._id}}'>Minus</button>
                                 <select id='cartSelect'>
                                     <option value='1'>1</option>
@@ -50,7 +51,7 @@
                                     <option value='6'>6</option>
                                 </select>
                                 <button id='cartIncBtn' type='submit' data-id='{{this._id}}'>Add</button>
-                            </form>
+                            
                         </span>
                     </div>
 
@@ -72,12 +73,14 @@
                     Subtotal: $
                     <span class='cartSubtotal'></span>
                 </div>
-                <button type="button" id='cartOrderBtn'>Place the order</button>
+                
+                <button type="submit" id='cartOrderBtn'>Place the order</button>
+                
             </div>
             <div class='cartBlank'></div>
         </div>
     </div>
-
+    </form>
     <script src='javascripts/cart.js'></script>
 
 </body>
