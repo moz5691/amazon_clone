@@ -204,9 +204,8 @@ router.get('/review/:id', (req, res) => {
 router.put('/review/update/:id', (req, res) => {
   console.log('user review update');
   console.log(req.body);
-  console.log(req.user);
   const review = {
-    reviewer: null, //req.user.email,
+    reviewer: seller,
     rate: req.body.userRate,
     content: req.body.userReview,
     date: Date.now()
