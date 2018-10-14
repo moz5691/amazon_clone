@@ -10,7 +10,7 @@ router.use((req, res, next) => {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'This is Amazon clone site, welcome!!!' });
+  res.render('home', { title: 'This is Amazon clone site, welcome!!!' });
 });
 
 // get inentory and display all
