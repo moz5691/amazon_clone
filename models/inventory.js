@@ -29,14 +29,36 @@ const InventorySchema = new Schema({
     type: String,
     required: false
   },
-  itemInCart:{
-    type:Boolean,
+  itemReview: [
+    {
+      reviewer: String,
+      rate: Number,
+      content: String,
+      date: Date
+    }
+  ],
+  itemTag: [
+    {
+      type: String,
+      required: false
+    }
+  ],
+  itemInCart: {
+    type: Boolean,
     required: true
   },
-  itemSold:{
+  itemSold: {
     type: Number,
-    required:true
-  }
+    required: true
+  },
+  itemReview: [
+    {
+      reviewer: String,
+      rate: Number,
+      content: String,
+      date: Date
+    }
+  ]
 });
 
 const Inventory = mongoose.model('inventory', InventorySchema);
