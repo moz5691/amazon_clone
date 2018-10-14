@@ -41,6 +41,14 @@ router.get('/logout', (req, res, next) => {
 //   res.render('register');
 // });
 
+/////////////////to get all inventory in normal js:Ming///////////////
+router.get('/database', (req, res) => {
+  Inventory.find({}).then(inventory => {
+    res.json(inventory);
+  });
+});
+
+////////////////////////////////////////////////////////////////////
 ///////////////purchase page:  Ming////////////////////
 router.get('/purchase/:id', function(req, res) {
   console.log('GET function');

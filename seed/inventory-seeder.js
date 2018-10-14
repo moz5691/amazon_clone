@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 mongoose
   .connect(
     //'mongodb://amazon:amazon123@ds121183.mlab.com:21183/amazon'
-    'mongodb://localhost/amazon'
+    'mongodb://localhost/amazon1'
   )
   .then(() => console.log('Mongodb connected...'))
   .catch(err => console.log(err));
@@ -43,7 +43,7 @@ const inventory = [
     itemDescription: 'Adidas running shoes, best comfort for long running',
     itemSeller: 'Adidas',
     itemCount: 2000,
-    itemImgPath: '/images/adidas.jpeg',
+    itemImgPath: '/images/adidas.jpg',
     itemTag: ['sports', 'adidas', 'running'],
     itemInCart: false,
     itemSold: 0
