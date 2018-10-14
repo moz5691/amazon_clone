@@ -360,18 +360,6 @@ const inventory = [
     itemTag: ['food', 'fruit', 'banana','organic','fresh','healthy'],
     itemInCart: false,
     itemSold: 0
-  }),
-  new Inventory({
-    itemName: '',
-    itemDepartment: '',
-    itemPrice: ,
-    itemDescription: '',
-    itemSeller: 'Amazon',
-    itemCount: ,
-    itemImgPath: '',
-    itemTag: ['', '', ''],
-    itemInCart: false,
-    itemSold: 0
   })
 ];
 
