@@ -104,7 +104,7 @@
 
 .cartContainer{
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   height: 98%;
   width: 95vw;
@@ -117,7 +117,7 @@
   grid-row: span 1;
   height: 90%;
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 1fr 1fr;
+  grid-template-rows: 120px 1fr;
 }
 .cartCheckout{
   display: grid;
@@ -131,13 +131,13 @@
   display: grid;
   grid-row: span 1;
   grid-column: span 1;
-  grid-template-columns: 65% 10% 1fr;
-  grid-template-rows: 30px 20px 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 20px; 
 }
 .topHR {
   display: grid;
   grid-row: span 1;
-  grid-column: span 3;
+  grid-column: span 1;
 }
 #cartMiddle{
   display: grid;
@@ -146,19 +146,25 @@
   margin:10px;
   
 }
-
-
 .cartMiddleBox{
   display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 20% 45% 10% 1fr; 
+  grid-template-rows: 1fr 80px;
+  grid-template-columns: 1fr 2fr; 
 }
-
-#cartBottom{
+#cartProductQty {
+  display: grid;
+  grid-row: span 1;
+  grid-column: span 2;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+}
+/* .cartMobileQty{
   display: grid;
   grid-row: span 1;
   grid-column: span 1;
-}
+} */
+
+
 #cartProductImg img {
   width: 95%;
 }
@@ -171,7 +177,7 @@
 .cartH5{
   font-size: 20px;
 }
-.cartTopBox1{
+/* .cartTopBox1{
   display: grid;
   grid-column: span 3;
   grid-row: span 1;
@@ -190,7 +196,7 @@
   display: grid;
   grid-column: span 1;
   grid-row: span 1;
-}
+} */
 /* hr { 
   display: block;
   margin-top: 0.6em;
@@ -203,6 +209,22 @@
   width: 400px;
   height: 1px;
 } */
+#cartOrderBtn {
+  height: 28px;
+  width: 98%;
+  font-size: 16px;
+  background:linear-gradient(180deg, rgba(247,193,93,1) 0%, rgba(244,179,60,1) 29%, rgba(247,157,30,1) 100%);;
+  border:none;
+  border-radius: 2px;
+  cursor: pointer;
+
+}
+.cartMobile{
+  display: grid;
+}
+.cartDesktop{
+  display: none;
+}
 
 
 
@@ -280,6 +302,107 @@
   }
   /****************************************************/
 
+  /********Shopping Cart Page: Ming********************/
+  .cartContainer{
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 1fr;
+    height: 98%;
+    width: 95vw;
+    margin: 10px;
+  }
+  
+  .cartDisplay {
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+    height: 90%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 1fr 1fr;
+  }
+  .cartCheckout{
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 1fr;
+  }
+  
+  #cartTop{
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+    grid-template-columns: 65% 10% 1fr;
+    grid-template-rows: 30px 20px 10px;
+  }
+  .topHR {
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 3;
+  }
+  #cartMiddle{
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+    margin:10px;
+    
+  }
+  
+  
+  .cartMiddleBox{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 20% 45% 10% 1fr; 
+  }
+  #cartProductQty {
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr;
+    
+  }
+
+  
+  #cartBottom{
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+  .cartTopBox1{
+    display: grid;
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+  .cartTopBox2{
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .cartTopBox3{
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .cartBlank{
+    display: grid;
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+
+
+  .cartDesktop {
+    display: inline;  
+  }
+  .cartMobile{
+    display: none;
+  }
+  .cartDesktopGrid {
+    display: grid;
+  }
+  
+  /****************************************************/
 }
 
 
