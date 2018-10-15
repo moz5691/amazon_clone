@@ -23,7 +23,7 @@
                         <div class='cartBlank cartDesktop'></div>
                         <h6 class='cartH6 cartTopBox2 cartDesktop'>Price</h6>
                         <h6 class='cartH6 cartTopBox3 cartDesktop'>Quantity</h6>
-                        <hr class='topHR' />
+                        {{!-- <hr class='topHR' /> --}}
                     </div>
                     {{#each inventory}} {{#if this.itemInCart}}
                     <div id='cartMiddle'>
@@ -51,7 +51,7 @@
                                 <h5><span class='cartMobile'>Qty:</span><span class='cartH5 cartQty' id='{{this._id}}' data-id=`{{this._id}}`></span></h5>
 
                                 <span class='cartQtyChange'>
-                                    <button id='cartDecBtn' type='submit' data-id='{{this._id}}'>Minus</button>
+                                    <button id='cartDecBtn' type='submit' data-id='{{this._id}}'><i class="fas fa-minus"></i></button>
                                     <select id='cartSelect'>
                                         <option value='1'>1</option>
                                         <option value='2'>2</option>
@@ -60,14 +60,14 @@
                                         <option value='5'>5</option>
                                         <option value='6'>6</option>
                                     </select>
-                                    <button id='cartIncBtn' type='submit' data-id='{{this._id}}'>Add</button>
+                                    <button id='cartIncBtn' type='submit' data-id='{{this._id}}'><i class="fas fa-plus"></i></button>
 
                                 </span>
                                 
                             </div>
 
                         </div>
-                        <hr/>
+                        {{!-- <hr/> --}}
                     </div>
 
                     {{/if}} {{/each}}
