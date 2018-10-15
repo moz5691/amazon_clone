@@ -7,8 +7,10 @@ const mongoose = require('mongoose');
 
 mongoose
   .connect(
+    'mongodb://amazon-2:amazon-2@ds131763.mlab.com:31763/amazon-2',
+    {useNewUrlParser: true}
     //'mongodb://amazon:amazon123@ds121183.mlab.com:21183/amazon'
-    'mongodb://localhost/amazon1'
+    // 'mongodb://localhost/amazon1'
   )
   .then(() => console.log('Mongodb connected...'))
   .catch(err => console.log(err));
@@ -22,6 +24,7 @@ const inventory = [
     itemSeller: 'Fox',
     itemCount: 200,
     itemImgPath: '/images/simpsons.png',
+    itemTag: ['movie', 'cartoon', 'simpsons','dvd'],
     itemInCart: false,
     itemSold: 0
   }),
@@ -33,6 +36,7 @@ const inventory = [
     itemSeller: 'Dog,cat and US',
     itemCount: 2000,
     itemImgPath: '/images/dog_cat.png',
+    itemTag: ['toy', 'cat', 'dog'],
     itemInCart: false,
     itemSold: 0
   }),
@@ -64,12 +68,11 @@ const inventory = [
     itemName: 'Cheddar cheese biscuit',
     itemDepartment: 'Food',
     itemPrice: 7,
-    itemDescription:
-      'Chedar cheese topped biscuit with incredible blackberry dipping',
+    itemDescription: 'Chedar cheese topped biscuit with incredible blackberry dipping',
     itemSeller: 'Farm & Flavor',
     itemCount: 200,
     itemImgPath: '/images/cheese-bis-1.jpeg',
-    itemTag: ['food', 'cheddar', 'biscuit'],
+    itemTag: ['food', 'cheddar', 'biscuit','snack'],
     itemInCart: false,
     itemSold: 0
   }),
@@ -82,7 +85,7 @@ const inventory = [
     itemSeller: 'Google',
     itemCount: 2000,
     itemImgPath: '/images/chromebook-1.jpeg',
-    itemTag: ['computer', 'chrome', 'google'],
+    itemTag: ['computer', 'chrome', 'google','laptop'],
     itemInCart: false,
     itemSold: 0
   }),
@@ -138,8 +141,7 @@ const inventory = [
     itemName: 'Streamline Bicycle Helmet',
     itemDepartment: 'Sports',
     itemPrice: 299,
-    itemDescription:
-      'The Helmet from the future, the most comfortable and light weight helmet',
+    itemDescription: 'The Helmet from the future, the most comfortable and light weight helmet',
     itemSeller: 'Sports Center',
     itemCount: 200,
     itemImgPath: '/images/helmet-1.jpeg',
@@ -242,8 +244,129 @@ const inventory = [
     itemTag: ['wine', 'white', 'chardonnay'],
     itemInCart: false,
     itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'HERSHEYS KISSES Halloween Spooky Milk Chocolates, Perfect for Halloween Decorations, 36 Ounce Bulk Candy',
+    itemDepartment: 'Food',
+    itemPrice: 9.4,
+    itemDescription: 'Trick-or-treaters love KISSES Milk Chocolates.',
+    itemSeller: 'Amazon',
+    itemCount: 150,
+    itemImgPath: '/images/hersheys_spooky_kisses.jpg',
+    itemTag: ['candy', 'sweet', 'chocolate','hersheys','halloween','food'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Quaker Instant Oatmeal Variety Pack, Breakfast Cereal, 48 Count',
+    itemDepartment: 'Food',
+    itemPrice: 8.63,
+    itemDescription: 'For energy to help take on your morning try a wholesome...',
+    itemSeller: 'Amazon',
+    itemCount: 1000,
+    itemImgPath: '/images/quaker_instant_oatmeal.jpg',
+    itemTag: ['oatmeal', 'breakfast', 'cereal','food'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Jack Link’s Beef Jerky Variety Bag Original, Teriyaki 9ct 1.25oz Single-serve Bags',
+    itemDepartment: 'Food',
+    itemPrice: 14.24,
+    itemDescription: 'About the product. Nine 1.25-ounce bags of beef jerky snack packs, ..',
+    itemSeller: 'Amazon',
+    itemCount: 99,
+    itemImgPath: '/images/jack_links_beef_jerky.jpg',
+    itemTag: ['meat','beef', 'jerky', 'food'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Jennie-O, Lean Ground Turkey, 16 oz',
+    itemDepartment: 'Food',
+    itemPrice: 4.69,
+    itemDescription: 'JENNIE-O All Natural Lean Ground Turkey is a nutritious choice to cook..',
+    itemSeller: 'Amazon',
+    itemCount: 50,
+    itemImgPath: '/images/Jennie_ground_turkey.jpg',
+    itemTag: ['food', 'turkey', 'meat','fresh'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Prego Ready Meals, Creamy Three Cheese Alfredo Rotini, 9 oz (Pack of 6)',
+    itemDepartment: 'Food',
+    itemPrice: 11.06,
+    itemDescription: 'With flavorful ingredients you can see and taste—and no added preservatives or ...',
+    itemSeller: 'Amazon',
+    itemCount: 30,
+    itemImgPath: '/images/prego_ready_meals.jpg',
+    itemTag: ['food', 'alfredo', 'italian','lunch','packaged'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Barilla Italian-Style Entrees, Tomato & Basil Penne, 9 Ounce (Pack of 6)',
+    itemDepartment: 'Food',
+    itemPrice: 11.4,
+    itemDescription: 'Flavor: Tomato and Basil Penne For more than 135 years, Barilla has been committed to ..',
+    itemSeller: 'Amazon',
+    itemCount: 120,
+    itemImgPath: '/images/Barilla_pasta.jpg',
+    itemTag: ['food', 'italian', 'lunch','dinner','packaged'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'DiGiorno Frozen Pizza Pepperoni, Original Rising Crust, 27.5 oz (Frozen)',
+    itemDepartment: 'Food',
+    itemPrice: 5.49,
+    itemDescription: 'The DIGIORNO Rising Crust Pepperoni pizza is made with only the very best: ..',
+    itemSeller: 'Amazon',
+    itemCount: 120,
+    itemImgPath: '/images/digiorno_pizza.jpg',
+    itemTag: ['food', 'pizza', 'lunch','dinner','packaged'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Tyson, Applewood Smoked Bacon, 1 lb',
+    itemDepartment: 'Food',
+    itemPrice: 5.66,
+    itemDescription: 'Everything tastes better with bacon! Tyson Applewood Smoked Bacon is cured and smoked ..',
+    itemSeller: 'Amazon',
+    itemCount: 120,
+    itemImgPath: '/images/tyson_bacon.jpg',
+    itemTag: ['food', 'bacon', 'meat','breakfast'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Whole Foods Market, Organic Sweet Baby Lettuces, 5 oz',
+    itemDepartment: 'Food',
+    itemPrice: 3.49,
+    itemDescription: 'Organic sweet baby lettuces',
+    itemSeller: 'Amazon',
+    itemCount: 49,
+    itemImgPath: '/images/whole_foods_lettuce.jpg',
+    itemTag: ['food', 'vegetable', 'veggie','lettuce','salad'],
+    itemInCart: false,
+    itemSold: 0
+  }),
+  new Inventory({
+    itemName: 'Organic Bananas, 1 bunch (min. 5 ct.)',
+    itemDepartment: 'Food',
+    itemPrice: 1.99,
+    itemDescription: 'Characterized by their bright yellow color and sweet taste, bananas are the ..',
+    itemSeller: 'Amazon',
+    itemCount: 30,
+    itemImgPath: '/images/banana.jpg',
+    itemTag: ['food', 'fruit', 'banana','organic','fresh','healthy'],
+    itemInCart: false,
+    itemSold: 0
   })
 ];
+
 
 let done = 0;
 for (let i = 0; i < inventory.length; i++) {
