@@ -197,54 +197,8 @@
 .inventory-seller-table td{
   overflow: hidden;  text-overflow: ellipsis; max-height: 100px;
 }
+/****************Tri***********************/
 
-
-
-
-#homepage_slider video { 
-  min-height: 100% !important;
-  min-width: 100% !important;
-height: auto !important;
-  width: auto !important;
-overflow: hidden;
+#departmentSelect:hover{
+  cursor: pointer;
 }
-
-#homepage_slider img {
-width: 100%;
-max-width: 100%;
-height: auto;
-vertical-align: middle;
-border: 0;
-}
-
-.carousel-inner>.item>img {
-display: block;
-line-height: 1;
-}
-
-/* button to display if user choses to not autoplay the video: */
-#slider-play-button button { 
-display: inline-block;
-border: 0.06666em solid #fff;
-font-size: 2rem;
-background: rgba(255,255,255,0.23);
-color: #fff;
-cursor: pointer;
-transition: .3s background;
-line-height: 1.3em;
-height: 1.5em;
-width: 2.5em;
-border-radius: 0.3em;
-position: absolute;
-opacity: .7;
-right: 1em;
-top: 20%;
-}
-.play-video-button:before {
-font-family: FontAwesome;
-content: "\f04b";
-}
-.pause-video-button:before {
-font-family: FontAwesome;
-content: "\f04c";
-}  

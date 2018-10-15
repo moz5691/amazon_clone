@@ -1,12 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand pull-left" href="/"><img id="amazon-logo" src="/images/Amazon-icon.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <form class="form-inline my-2 my-lg-0 mr-auto" action="/inventory/search/department/?_method=POST&departmentSelect=departmentSelect"
-    method="POST">
+  <form class="form-inline my-2 my-lg-0 mr-auto" method="POST" action="/inventory/search/department" method="POST">
     <select class="form-control" id="departmentSelect" name="departmentSelect">
       <option value="All">All Departments</option>
       <option value="Book">Books</option>
@@ -15,7 +14,7 @@
       <option value="Toy">Toys</option>
       <option value="Sports">Sports</option>
       <option value="Electronics">Electronics</option>
-      <option value="Clothing">Clothing</option>
+      <option style="border-bottom: 1px solid black" value="Clothing">Clothing</option>
     </select>
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchQuery">
 
@@ -32,8 +31,8 @@
 
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
