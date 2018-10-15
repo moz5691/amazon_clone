@@ -184,11 +184,11 @@ router.post('/inventory/search/department/', function(req, res) {
   const searchQuery = req.body.searchQuery;
   if (deptSelect === 'All') {
     Inventory
-      // .find({ itemTag: searchQuery })
-      .find({})
+      .find({ itemTag: searchQuery })
+      // .find({})
       .then(function(data) {
-        // res.render('index', { inventory: data });
-        res.json(data);
+        res.render('index', { inventory: data });
+        // res.json(data);
       });
   } else {
     Inventory.find({ itemDepartment: deptSelect }).then(function(data) {
