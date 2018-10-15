@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 });
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('home', { title: 'This is Amazon clone site, welcome!!!' });
 });
 
@@ -20,7 +20,7 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
-router.get('/login', function (req, res, next) {
+router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
@@ -50,14 +50,14 @@ router.get('/database', (req, res) => {
 
 ////////////////////////////////////////////////////////////////////
 ///////////////purchase page:  Ming////////////////////
-router.get('/purchase/:id', function (req, res) {
+router.get('/purchase/:id', function(req, res) {
   console.log('GET function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
     .then(product => {
       res.render('purchase', { product: product });
     })
-    .catch(function (err) {
+    .catch(function(err) {
       res.json(err);
     });
 });
@@ -70,27 +70,27 @@ router.get('/purchase/:id', function (req, res) {
 //   );
 // });
 
-router.get('/shoppingCart', function (req, res) {
+router.get('/shoppingCart', function(req, res) {
   console.log('GET function: shoppingCart');
   Inventory.find({}).then(inventory => {
     res.render('cart', { inventory: inventory });
   });
 });
 
-router.put('/cartUpdate/:id', function (req, res) {
+router.put('/cartUpdate/:id', function(req, res) {
   console.log('PUT function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
-    .then(function () {
+    .then(function() {
       Inventory.updateOne({ _id: req.params.id }, req.body)
-        .then(function (data) {
+        .then(function(data) {
           res.json(data);
         })
-        .catch(function (err) {
+        .catch(function(err) {
           res.json(err);
         });
     })
-    .catch(function (err) {
+    .catch(function(err) {
       res.json(err);
     });
 });
@@ -133,10 +133,10 @@ router.delete('/inventory/:id', (req, res) => {
 });
 
 //-----search by itemName-----Tri-------//
-router.post('/inventory/search', function (req, res, next) {
+router.post('/inventory/search', function(req, res, next) {
   const searchQuery = req.body.searchQuery;
   // const searchQuery = 'Simpsons';
-  Inventory.find({ itemName: searchQuery }, function (err, inventory) {
+  Inventory.find({ itemName: searchQuery }, function(err, inventory) {
     if (err) {
       return res.status(200).send(err);
     } else {
@@ -148,15 +148,15 @@ router.post('/inventory/search', function (req, res, next) {
 
 /* [pending] */
 //-----pagination feature----Tri-----//
-router.get('/inventory/:page', function (req, res, next) {
+router.get('/inventory/:page', function(req, res, next) {
   const perPage = 10;
   const page = req.params.page || 1;
 
   Inventory.find({})
     .skip(perPage * page - perPage)
     .limit(perPage)
-    .exec(function (err, products) {
-      Inventory.count().exec(function (err, count) {
+    .exec(function(err, products) {
+      Inventory.count().exec(function(err, count) {
         if (err) {
           return err;
         } else {
@@ -179,45 +179,37 @@ router.get('/inventory/:page', function (req, res, next) {
 });
 
 // -----search by department----//
-router.post('/inventory/search/department/', function (req, res) {
+router.post('/inventory/search/department/', function(req, res) {
   const deptSelect = req.body.departmentSelect;
   const searchQuery = req.body.searchQuery;
   if (deptSelect === 'All') {
     if (searchQuery.length > 0) {
-      Inventory
-        .find({ itemTag: searchQuery })
-        .then(function (data) {
-          res.render('index', { inventory: data });
-        })
+      Inventory.find({ itemTag: searchQuery }).then(function(data) {
+        res.render('index', { inventory: data });
+      });
+    } else {
+      Inventory.find({}).then(function(data) {
+        res.render('index', { inventory: data });
+      });
     }
-    else {
-      Inventory
-        .find({})
-        .then(function (data) {
-          res.render('index', { inventory: data });
-        });
-    }
-  }
-  else {
+  } else {
     if (searchQuery.length > 0) {
-      Inventory
-        .find({ itemDepartment: deptSelect, itemTag: searchQuery })
-        .then(function (data) {
+      Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(
+        function(data) {
           res.render('index', { inventory: data });
-        })
-    }
-    else {
-      Inventory
-        .find({ itemDepartment: deptSelect })
-        .then(function (data) {
-          res.render('index', { inventory: data });
-        });
+        }
+      );
+    } else {
+      Inventory.find({ itemDepartment: deptSelect }).then(function(data) {
+        res.render('index', { inventory: data });
+      });
     }
 
-    Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(function (data) {
-      res.render('index', { inventory: data });
-
-    });
+    Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(
+      function(data) {
+        res.render('index', { inventory: data });
+      }
+    );
   }
 });
 
@@ -237,7 +229,7 @@ router.put('/review/update/:id', (req, res) => {
   console.log('user review update');
   console.log(req.body);
   const review = {
-    reviewer: seller,
+    reviewer: req.cookies.seller, //seller
     rate: req.body.userRate,
     content: req.body.userReview,
     date: Date.now()
