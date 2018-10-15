@@ -9,8 +9,13 @@ router.use((req, res, next) => {
 });
 
 /* GET home page. */
+<<<<<<< HEAD
 router.get('/', function(req, res, next) {
   res.render('home', { title: 'This is Amazon clone site, welcome!!!', reviewer: req.cookies.reviewer });
+=======
+router.get('/', function (req, res, next) {
+  res.render('home', { title: 'This is Amazon clone site, welcome!!!' });
+>>>>>>> 82f8a80016572c8179252d148b5493eaa26a6656
 });
 
 // get inentory and display all
@@ -20,8 +25,13 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
+<<<<<<< HEAD
 router.get('/login', function(req, res, next) {
   res.render('login',{reviewer: req.cookies.reviewer});
+=======
+router.get('/login', function (req, res, next) {
+  res.render('login');
+>>>>>>> 82f8a80016572c8179252d148b5493eaa26a6656
 });
 
 /* Log out page, redirect to login page, clear cookie */
@@ -51,14 +61,14 @@ router.get('/database', (req, res) => {
 
 ////////////////////////////////////////////////////////////////////
 ///////////////purchase page:  Ming////////////////////
-router.get('/purchase/:id', function(req, res) {
+router.get('/purchase/:id', function (req, res) {
   console.log('GET function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
     .then(product => {
       res.render('purchase', { product: product, reviewer: req.cookies.reviewer });
     })
-    .catch(function(err) {
+    .catch(function (err) {
       res.json(err);
     });
 });
@@ -71,27 +81,27 @@ router.get('/purchase/:id', function(req, res) {
 //   );
 // });
 
-router.get('/shoppingCart', function(req, res) {
+router.get('/shoppingCart', function (req, res) {
   console.log('GET function: shoppingCart');
   Inventory.find({}).then(inventory => {
     res.render('cart', { inventory: inventory, reviewer: req.cookies.reviewer });
   });
 });
 
-router.put('/cartUpdate/:id', function(req, res) {
+router.put('/cartUpdate/:id', function (req, res) {
   console.log('PUT function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
-    .then(function() {
+    .then(function () {
       Inventory.updateOne({ _id: req.params.id }, req.body)
-        .then(function(data) {
+        .then(function (data) {
           res.json(data);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           res.json(err);
         });
     })
-    .catch(function(err) {
+    .catch(function (err) {
       res.json(err);
     });
 });
@@ -134,10 +144,10 @@ router.delete('/inventory/:id', (req, res) => {
 });
 
 //-----search by itemName-----Tri-------//
-router.post('/inventory/search', function(req, res, next) {
+router.post('/inventory/search', function (req, res, next) {
   const searchQuery = req.body.searchQuery;
   // const searchQuery = 'Simpsons';
-  Inventory.find({ itemName: searchQuery }, function(err, inventory) {
+  Inventory.find({ itemName: searchQuery }, function (err, inventory) {
     if (err) {
       return res.status(200).send(err);
     } else {
@@ -149,15 +159,15 @@ router.post('/inventory/search', function(req, res, next) {
 
 /* [pending] */
 //-----pagination feature----Tri-----//
-router.get('/inventory/:page', function(req, res, next) {
+router.get('/inventory/:page', function (req, res, next) {
   const perPage = 10;
   const page = req.params.page || 1;
 
   Inventory.find({})
     .skip(perPage * page - perPage)
     .limit(perPage)
-    .exec(function(err, products) {
-      Inventory.count().exec(function(err, count) {
+    .exec(function (err, products) {
+      Inventory.count().exec(function (err, count) {
         if (err) {
           return err;
         } else {
@@ -182,22 +192,43 @@ router.get('/inventory/:page', function(req, res, next) {
 });
 
 // -----search by department----//
-router.post('/inventory/search/department/', function(req, res) {
+router.post('/inventory/search/department/', function (req, res) {
   const deptSelect = req.body.departmentSelect;
   const searchQuery = req.body.searchQuery;
   if (deptSelect === 'All') {
-    Inventory
-      // .find({ itemTag: searchQuery })
-      .find({})
-      .then(function(data) {
+    if (searchQuery.length > 0) {
+      Inventory
+        .find({ itemTag: searchQuery })
+        .then(function (data) {
+          res.render('index', { inventory: data });
+        })
+    }
+    else {
+      Inventory
+        .find({})
+        .then(function (data) {
+          res.render('index', { inventory: data });
+        });
+    }
+  }
+  else {
+    if (searchQuery.length > 0) {
+      Inventory
+        .find({ itemDepartment: deptSelect, itemTag: searchQuery })
+        .then(function (data) {
+          res.render('index', { inventory: data });
+        })
+    }
+    else {
+      Inventory
+        .find({ itemDepartment: deptSelect })
+        .then(function (data) {
+          res.render('index', { inventory: data });
+        });
+    }
 
-        res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
-
-      });
-  } else {
-    Inventory.find({ itemDepartment: deptSelect }).then(function(data) {
-
-        res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
+    Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(function (data) {
+      res.render('index', { inventory: data });
 
     });
   }
