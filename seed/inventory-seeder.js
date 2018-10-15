@@ -7,8 +7,10 @@ const mongoose = require('mongoose');
 
 mongoose
   .connect(
+    'mongodb://amazon-2:amazon-2@ds131763.mlab.com:31763/amazon-2',
+    {useNewUrlParser: true}
     //'mongodb://amazon:amazon123@ds121183.mlab.com:21183/amazon'
-    'mongodb://localhost/amazon1'
+    // 'mongodb://localhost/amazon1'
   )
   .then(() => console.log('Mongodb connected...'))
   .catch(err => console.log(err));
@@ -22,6 +24,7 @@ const inventory = [
     itemSeller: 'Fox',
     itemCount: 200,
     itemImgPath: '/images/simpsons.png',
+    itemTag: ['movie', 'cartoon', 'simpsons','dvd'],
     itemInCart: false,
     itemSold: 0
   }),
@@ -33,6 +36,7 @@ const inventory = [
     itemSeller: 'Dog,cat and US',
     itemCount: 2000,
     itemImgPath: '/images/dog_cat.png',
+    itemTag: ['toy', 'cat', 'dog'],
     itemInCart: false,
     itemSold: 0
   }),
