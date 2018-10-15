@@ -12,7 +12,6 @@ const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const inventoryRouter = require('./routes/inventories');
-const Inventory = require('./../models/inventory');
 
 const app = express();
 
@@ -59,9 +58,6 @@ app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
   console.log('server running on port', +app.get('port'));
 });
-
-//-------enable index on itemName and itemDescription for search---Tri----//
-db.stores.createIndex( { itemName: "text", description: "text" } )
 
 
 // Chan: the following is to use bin/www as start.
