@@ -59,6 +59,11 @@ router.get('/:user', (req, res, next) => {
      });
  });
 
+ /**************(Maryam)*********** POST inventory page rendering */
+router.get('/', (req, res, next) => {
+  (req.cookies.seller)? res.redirect(`/inventories/${req.cookies.seller}`):res.render('error',{noRoute: true});
+});
+
  /************(maryam)************Post inventoer for update product */
  router.post('/update/:id', (req, res, next) => {
    Inventory.findOne({_id : req.params.id}).then(product => {
@@ -170,9 +175,12 @@ router.get('/:user', (req, res, next) => {
     .catch(function(err) {
       res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
     });
+});
 
-   
-    });
+    //The 404 Route (ALWAYS Keep this as the last route)
+router.get('*', function (req, res) {
+  res.render('error',{noRoute: true});//{message: 'what??? do not have such a route', error: {status : 404}}
+});
 
 
 module.exports = router;

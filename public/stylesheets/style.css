@@ -246,6 +246,7 @@
 
 
 
+
 @media only screen and (min-width:600px){
   /*******************Purchase Page Desktop: Ming**********************/
   .purchaseContainer {
@@ -406,4 +407,10 @@
 }
 
 
+
+
+
+#departmentSelect:hover{
+  cursor: pointer;
+}
 
