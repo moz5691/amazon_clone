@@ -191,6 +191,7 @@ router.post('/inventory/search/department/', function (req, res) {
   else {
     if (searchQuery.length > 0) {
       Inventory
+        // .find( { $text: { $search: searchQuery } } )
         .find({ itemDepartment: deptSelect, itemTag: searchQuery })
         .then(function (data) {
           res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
