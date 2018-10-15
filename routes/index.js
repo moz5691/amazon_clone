@@ -10,24 +10,25 @@ router.use((req, res, next) => {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'This is Amazon clone site, welcome!!!' });
+  res.render('home', { title: 'This is Amazon clone site, welcome!!!', reviewer: req.cookies.reviewer });
 });
 
 // get inentory and display all
 router.get('/inventory', (req, res, next) => {
   Inventory.find({}).then(inventory => {
-    res.render('index', { inventory: inventory });
+    res.render('index', { inventory: inventory, reviewer: req.cookies.reviewer });
   });
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login',{reviewer: req.cookies.reviewer});
 });
 
 /* Log out page, redirect to login page, clear cookie */
 router.get('/logout', (req, res, next) => {
   res.clearCookie('auth');
-  res.clearCookie('seller');
+  // res.clearCookie('seller');
+  res.clearCookie('reviewer');
   res.redirect('login');
 });
 
@@ -55,7 +56,7 @@ router.get('/purchase/:id', function(req, res) {
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
     .then(product => {
-      res.render('purchase', { product: product });
+      res.render('purchase', { product: product, reviewer: req.cookies.reviewer });
     })
     .catch(function(err) {
       res.json(err);
@@ -73,7 +74,7 @@ router.get('/purchase/:id', function(req, res) {
 router.get('/shoppingCart', function(req, res) {
   console.log('GET function: shoppingCart');
   Inventory.find({}).then(inventory => {
-    res.render('cart', { inventory: inventory });
+    res.render('cart', { inventory: inventory, reviewer: req.cookies.reviewer });
   });
 });
 
@@ -141,7 +142,7 @@ router.post('/inventory/search', function(req, res, next) {
       return res.status(200).send(err);
     } else {
       // res.json(inventory);
-      res.render('index', { inventory: inventory });
+      res.render('index', { inventory: inventory, reviewer: req.cookies.reviewer });
     }
   });
 });
@@ -163,12 +164,14 @@ router.get('/inventory/:page', function(req, res, next) {
           const pages = Math.ceil(count / perPage);
           if (pages > 0) {
             res.render('index', {
+              reviewer: req.cookies.reviewer,
               inventory: products,
               current: page,
               pages: Math.ceil(count / perPage)
             });
           } else {
             res.render('index', {
+              reviewer: req.cookies.reviewer,
               inventory: products,
               current: page
             });
@@ -188,13 +191,13 @@ router.post('/inventory/search/department/', function(req, res) {
       .find({})
       .then(function(data) {
 
-        res.render('index', { inventory: data });
+        res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
 
       });
   } else {
     Inventory.find({ itemDepartment: deptSelect }).then(function(data) {
 
-        res.render('index', { inventory: data });
+        res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
 
     });
   }
@@ -208,7 +211,7 @@ router.get('/review/:id', (req, res) => {
     _id: req.params.id
   }).then(inventory => {
     console.log(inventory);
-    res.render('review/user_review', { inventory: inventory }); //, seller: req.cookies.seller
+    res.render('review/user_review', { inventory: inventory, reviewer: req.cookies.reviewer }); //, reviewer: req.cookies.reviewer
   });
 });
 
@@ -217,7 +220,7 @@ router.put('/review/update/:id', (req, res) => {
   console.log(req.body);
   console.log(req.user);
   const review = {
-    reviewer: null, //req.user.email,
+    reviewer: req.cookies.reviewer, //req.user.email,
     rate: req.body.userRate,
     content: req.body.userReview,
     date: Date.now()
