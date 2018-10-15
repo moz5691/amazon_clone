@@ -37,14 +37,14 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/login">Login</a>
-          <a class="dropdown-item" href="/inventories/{{seller}}">Seller Account</a>
+          <a class="dropdown-item" href="/inventories/{{reviewer}}">Seller Account</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/logout">Logout</a>
         </div>
       </li>
       <li class="nav-item">
-        {{#if seller}}
-        <a class="nav-link disabled" href="#">{{seller}} login</a>
+        {{#if reviewer}}
+        <p class="text-light ml-4">Hello, {{reviewer}}</p>
         {{/if}}
       </li>
     </ul>
