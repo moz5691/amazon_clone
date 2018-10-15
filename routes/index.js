@@ -9,13 +9,8 @@ router.use((req, res, next) => {
 });
 
 /* GET home page. */
-<<<<<<< HEAD
-router.get('/', function(req, res, next) {
-  res.render('home', { title: 'This is Amazon clone site, welcome!!!', reviewer: req.cookies.reviewer });
-=======
 router.get('/', function (req, res, next) {
-  res.render('home', { title: 'This is Amazon clone site, welcome!!!' });
->>>>>>> 82f8a80016572c8179252d148b5493eaa26a6656
+  res.render('home', { title: 'This is Amazon clone site, welcome!!!' , reviewer: req.cookies.reviewer});
 });
 
 // get inentory and display all
@@ -25,13 +20,8 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
-<<<<<<< HEAD
-router.get('/login', function(req, res, next) {
-  res.render('login',{reviewer: req.cookies.reviewer});
-=======
 router.get('/login', function (req, res, next) {
-  res.render('login');
->>>>>>> 82f8a80016572c8179252d148b5493eaa26a6656
+  res.render('login',{reviewer: req.cookies.reviewer});
 });
 
 /* Log out page, redirect to login page, clear cookie */
@@ -200,14 +190,14 @@ router.post('/inventory/search/department/', function (req, res) {
       Inventory
         .find({ itemTag: searchQuery })
         .then(function (data) {
-          res.render('index', { inventory: data });
+          res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
         })
     }
     else {
       Inventory
         .find({})
         .then(function (data) {
-          res.render('index', { inventory: data });
+          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
         });
     }
   }
@@ -216,19 +206,19 @@ router.post('/inventory/search/department/', function (req, res) {
       Inventory
         .find({ itemDepartment: deptSelect, itemTag: searchQuery })
         .then(function (data) {
-          res.render('index', { inventory: data });
+          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
         })
     }
     else {
       Inventory
         .find({ itemDepartment: deptSelect })
         .then(function (data) {
-          res.render('index', { inventory: data });
+          res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
         });
     }
 
     Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(function (data) {
-      res.render('index', { inventory: data });
+      res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
 
     });
   }
