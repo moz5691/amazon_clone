@@ -17,8 +17,6 @@ router.use((req, res, next) => {
     res.locals.msgok = 'your account made successfuly';
   }else if(req.query.msg === 'failauthenticatetoken'){
     res.locals.msg = "no token provided can't access to this page";
-  }else if(req.query.msgok === 'successfullupdate'){
-    res.locals.msgok = "hghghghy";
   } else {
     res.locals.msgok = '';
     res.locals.msg = '';
