@@ -216,6 +216,7 @@ router.post('/inventory/search/department/', function (req, res) {
 
     Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(function (data) {
       res.render('index', { inventory: data });
+
     });
   }
 });
@@ -228,7 +229,7 @@ router.get('/review/:id', (req, res) => {
     _id: req.params.id
   }).then(inventory => {
     console.log(inventory);
-    res.render('review/user_review', { inventory: inventory });
+    res.render('review/user_review', { inventory: inventory }); //, seller: req.cookies.seller
   });
 });
 
