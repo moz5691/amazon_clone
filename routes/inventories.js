@@ -55,13 +55,13 @@ router.use((req, res, next) => {
 /**************(Maryam)*********** POST inventory page rendering */
 router.get('/:user', (req, res, next) => {
     Inventory.find({}).then(inventory => { 
-       res.render('inventory', {inventory: inventory, seller: req.cookies.seller});
+       res.render('inventory', {inventory: inventory, reviewer: req.cookies.reviewer});
      });
  });
 
  /**************(Maryam)*********** POST inventory page rendering */
 router.get('/', (req, res, next) => {
-  (req.cookies.seller)? res.redirect(`/inventories/${req.cookies.seller}`):res.render('error',{noRoute: true});
+  (req.cookies.reviewer)? res.redirect(`/inventories/${req.cookies.reviewer}`):res.render('error',{noRoute: true});
 });
 
  /************(maryam)************Post inventoer for update product */
@@ -70,7 +70,7 @@ router.get('/', (req, res, next) => {
     if(!product) res.redirect('/users/inventory?msg=removed');
     else{
       const selectedproduct = new Inventory(product);
-      res.render('inventory-edit', {selectedproduct: selectedproduct, seller: req.cookies.seller});    
+      res.render('inventory-edit', {selectedproduct: selectedproduct, reviewer: req.cookies.reviewer});    
       }
     });
   });
@@ -81,7 +81,7 @@ router.get('/', (req, res, next) => {
      if(!product) res.redirect('/users/inventory?msg=removed');
      else{
        const selectedproduct = new Inventory(product);
-       res.render('inventory-edit', {selectedproduct: selectedproduct, seller: req.cookies.seller });    
+       res.render('inventory-edit', {selectedproduct: selectedproduct, reviewer: req.cookies.reviewer });    
        }
      });
    });
