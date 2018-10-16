@@ -11,7 +11,7 @@ const runDataList = function () {
 }
 /**
  * to render the value related to data base on the page
- * @param {json Array} InventoryList all the data in mongoose database
+ * @param {Array} InventoryList all the json data in mongoose database
  */
 const cartRenderFunc = function (InventoryList) {
     let cartSubtotal = 0;
@@ -113,7 +113,7 @@ const cartOrderFunc = function () {
 }
 /**
  * to update the data base and clear session storage
- * @param {json Array} dataList all the json data in data base  
+ * @param {Array} dataList all the json data in data base  
  */
 const cartDBUpdate = function (dataList) {
     dataList.forEach(e => {
