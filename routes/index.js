@@ -174,8 +174,8 @@ router.post('/inventory/search/department/', function (req, res) {
   if (deptSelect === 'All') {
     if (searchQuery.length > 0) {
       Inventory
-        // .find( { $text: { $search: searchQuery } } )
-        .find({ $or: [{ itemTag: searchQuery }, { itemName: searchQuery }] })
+        .find( { $text: { $search: searchQuery } } )
+        // .find({ $or: [{ itemTag: searchQuery }, { itemName: searchQuery }] })
         .then(function (data) {
           res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
         })
