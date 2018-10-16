@@ -1,17 +1,16 @@
-// const Inventory = require('./../models/inventory');
+/**
+ * to increae the car quantity and update session storage
+ * @param {Event} e event to prevent default refresh
+ */
 
 const incFunc = function(e){
-    console.log('in incFunc');
     e.preventDefault();
     const productID=$(this).attr('data-id');
-
     const incStep = parseFloat($('#purSelect').val());
-    // let qty = parseFloat($('#cartQty').text());
     let tempCart = parseFloat(sessionStorage.getItem(`${productID}`)) || 0;
     tempCart += incStep;
     sessionStorage.setItem(`${productID}`,tempCart);
     $('#cartQty').text(`${sessionStorage.getItem(`${productID}`)}`);
-    console.log($('#cartQty').text());
     let inCart = false;
     if ($('#cartQty').text()!=='0'){
         inCart=true;
@@ -31,6 +30,4 @@ const incFunc = function(e){
 
 }
 
-
-console.log('in pruchase.js');
 $(document).on('click','#incQtyBtn',incFunc);

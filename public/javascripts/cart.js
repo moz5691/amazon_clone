@@ -1,4 +1,7 @@
-
+/**
+ * to get all the data in database
+ * and call render function
+ */
 const runDataList = function () {
     $.ajax({ url: "/database", method: "GET" }).then(
         function (e) {
@@ -6,7 +9,10 @@ const runDataList = function () {
         }
     );
 }
-
+/**
+ * to render the value related to data base on the page
+ * @param {json Array} InventoryList all the data in mongoose database
+ */
 const cartRenderFunc = function (InventoryList) {
     let cartSubtotal = 0;
     InventoryList.forEach(e => {
@@ -14,7 +20,6 @@ const cartRenderFunc = function (InventoryList) {
         $(`#${e._id}`).text(`${renderQty}`);
         cartSubtotal += renderQty * e.itemPrice;
         if (e.itemCount < renderQty) {
-            console.log(renderQty);
             cartSubtotal -= (renderQty - e.itemCount) * e.itemPrice;
             sessionStorage.setItem(`${e._id}`, e.itemCount);
             renderQty = e.itemCount;
@@ -36,15 +41,16 @@ const cartRenderFunc = function (InventoryList) {
 }
 runDataList();
 
+/**
+ * tp increse quantity in cart (session storage)
+ */
+
 const cartIncFunc = function () {
-    console.log('in cartIncFunc');
-    //e.preventDefault();
     const productID = $(this).attr('data-id');
     const incStep = parseFloat($('#cartSelect').val());
     let tempCart = parseFloat(sessionStorage.getItem(`${productID}`)) || 0;
     tempCart += incStep;
     sessionStorage.setItem(`${productID}`, tempCart);
-    console.log($('.cartQty').text());
     let inCart = false;
     if (sessionStorage.getItem(`${productID}`) !== '0') {
         inCart = true;
@@ -64,19 +70,15 @@ const cartIncFunc = function () {
 }
 $(document).on('click', '#cartIncBtn', cartIncFunc);
 
-
+/**
+ * to decrease quantity in cart (session storage)
+ */
 const cartDecFunc = function () {
-    console.log('in cartDecFunc');
-    //e.preventDefault();
     const productID = $(this).attr('data-id');
-
     const decStep = parseFloat($('#cartSelect').val());
     let tempCart = parseFloat(sessionStorage.getItem(`${productID}`)) || 0;
     tempCart -= decStep;
     sessionStorage.setItem(`${productID}`, tempCart);
-    //const renderQty = sessionStorage.getItem(`${productID}`);
-    //$('.cartQty').text(`${renderQty}`);
-    console.log($('.cartQty').text());
     let inCart = false;
     if (sessionStorage.getItem(`${productID}`) !== '0') {
         inCart = true;
@@ -96,7 +98,10 @@ const cartDecFunc = function () {
 }
 $(document).on('click', '#cartDecBtn', cartDecFunc);
 
-
+/**
+ * to get all the data in database
+ * and call cartDBupdate function
+ */
 const cartOrderFunc = function () {
     $.ajax({ url: "/database", method: "GET" }).then(
         function (e) {
@@ -106,7 +111,10 @@ const cartOrderFunc = function () {
 
     );
 }
-
+/**
+ * to update the data base and clear session storage
+ * @param {json Array} dataList all the json data in data base  
+ */
 const cartDBUpdate = function (dataList) {
     dataList.forEach(e => {
         if (e.itemInCart === true) {
@@ -132,13 +140,8 @@ const cartDBUpdate = function (dataList) {
         }
     }
     );
-    alert('you have successfully place the order');
-
-
-
+    alert('you have successfully placed the order');
 }
-
-
 $(document).on('click', '#cartOrderBtn', cartOrderFunc);
 
 

@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <title>Shopping Cart</title>
+    <title>AmazonClone.com Shopping Cart</title>
 </head>
 
 <body>
@@ -23,12 +20,11 @@
                         <div class='cartBlank cartDesktop'></div>
                         <h6 class='cartH6 cartTopBox2 cartDesktop'>Price</h6>
                         <h6 class='cartH6 cartTopBox3 cartDesktop'>Quantity</h6>
-                        {{!-- <hr class='topHR' /> --}}
+                        
                     </div>
                     {{#each inventory}} {{#if this.itemInCart}}
                     <div id='cartMiddle'>
                         <div class='cartMiddleBox'>
-                            <!--use handlebar render products-->
                             <div id='cartProductImg'>
                                 <img src='{{this.itemImgPath}}' />
                             </div>
@@ -67,7 +63,6 @@
                             </div>
 
                         </div>
-                        {{!-- <hr/> --}}
                     </div>
 
                     {{/if}} {{/each}}
@@ -96,4 +91,3 @@
 
 </body>
 
-</html>
