@@ -19,29 +19,29 @@ Then, run app
 node app.js
 ```
 
-## Following is the folder structure.
+### Following is the folder structure.
 
-├── app.js --> start file
-├── bin ---> won't use for now.
+├── app.js 
+├── bin 
 │ └── www
 ├── db
-│ └── mongoose.js --> db start point
+│ └── mongoose.js 
 ├── models
-│ └── inventory.js --> inventory db model
-│ └── user.js --> user db model (buyer or seller)
+│ └── inventory.js
+│ └── user.js 
 ├── package.json
 ├── public
 │ ├── images  
 │ ├── javascripts
 │ └── stylesheets
-│ ''''└── style.css
+│     └── style.css
 ├── routes
 │ ├── index.js
 │ └── users.js
 │ └── inventories.js
 └── views
-│ └── partial--navbar.hbs
-│ └── review--user_review.hbs
+│ └── partial──navbar.hbs
+│ └── review──user_review.hbs
 │ └── cart.hbs
 │ └── home.hbs
 │ └── index.hbs
