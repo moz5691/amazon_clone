@@ -133,20 +133,6 @@ router.delete('/inventory/:id', (req, res) => {
   });
 });
 
-//-----search by itemName-----Tri-------//
-router.post('/inventory/search', function (req, res, next) {
-  const searchQuery = req.body.searchQuery;
-  // const searchQuery = 'Simpsons';
-  Inventory.find({ itemName: searchQuery }, function (err, inventory) {
-    if (err) {
-      return res.status(200).send(err);
-    } else {
-      // res.json(inventory);
-      res.render('index', { inventory: inventory, reviewer: req.cookies.reviewer });
-    }
-  });
-});
-
 /* [pending] */
 //-----pagination feature----Tri-----//
 router.get('/inventory/:page', function (req, res, next) {
@@ -181,14 +167,15 @@ router.get('/inventory/:page', function (req, res, next) {
     });
 });
 
-// -----search by department----//
+// -----product search feature---Tri--//
 router.post('/inventory/search/department/', function (req, res) {
   const deptSelect = req.body.departmentSelect;
-  const searchQuery = req.body.searchQuery;
+  const searchQuery = req.body.searchQuery.toLowerCase().trim();
   if (deptSelect === 'All') {
     if (searchQuery.length > 0) {
       Inventory
-        .find({ itemTag: searchQuery })
+        .find( { $text: { $search: searchQuery } } )
+        // .find({ $or: [{ itemTag: searchQuery }, { itemName: searchQuery }] })
         .then(function (data) {
           res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
         })
@@ -204,7 +191,8 @@ router.post('/inventory/search/department/', function (req, res) {
   else {
     if (searchQuery.length > 0) {
       Inventory
-        .find({ itemDepartment: deptSelect, itemTag: searchQuery })
+        .find( { itemDepartment: deptSelect, $text: { $search: searchQuery } } )
+        // .find({ itemDepartment: deptSelect, itemTag: searchQuery })
         .then(function (data) {
           res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
         })
