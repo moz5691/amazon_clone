@@ -1,35 +1,38 @@
 <div class="text-center d-flex justify-content-center">
 	<div class="col-md-6 col-md-offset-3">
-		<div style="background-color:#f2f2f2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 15px"
+		<div style="background-image: linear-gradient(to bottom right,rgb(83, 83, 83), rgb(202, 201, 201), rgb(240, 239, 239)); box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 15px"
 		 class="panel border rounded-25 mt-5 pl-4 pr-4">
 			{{!-- header of login--}}
 			<div class="row p-1 panel-heading">
 				<section class="col">
-					<label class="font-weight-bold">Login</label>
+					<i class="fas fa-user fa-5x col text-muted"></i>
+					<label class="font-weight-bold col">Login</label>
 				</section>
 				<hr>
 			</div>
 			{{!-- Login form --}}
 			<form id="login-form" action="/users/loginUser" method="post" role="form">
-				<section class="form-group">
-					<input type="text" name="emaillogin" id="emaillogin" tabindex="1" class="form-control" placeholder="Email..."
+				<section class="form-groupr mb-4 d-flex">
+					<i class="fa fa-envelope icon fa-2x text-muted m-1"></i>
+					<input type="text" name="emaillogin" id="emaillogin" tabindex="1" class="form-control " placeholder="Email..."
 					 value="">
 				</section>
-				<section class="form-group">
+				<section class="form-group d-flex">
+					<i class="fa fa-key icon fa-2x text-muted m-1"></i>
 					<input type="password" name="passwordlogin" id="passwordlogin" data-toggle="tooltip" title="must contain at least (1 lowercase, 1 uppercase alphabetical character,1 numeric,and ! @ # $ - _) minimum 8 char or longer!!!"
 					 tabindex="2" class="form-control" placeholder="Password">
 				</section>
 				<section class="form-group">
 					<div class="text-center d-flex justify-content-center">
 						<div class="col-sm-6 col-sm-offset-3">
-							<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-primary"
+							<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-secondary"
 							 value="Log In">
 						</div>
 					</div>
 				</section>
 
 				<section class="form-group text-center d-flex justify-content-center">
-					<a href="/users/register" tabindex="5">Register new client</a>
+					<a href="/users/register" class="text-dark" tabindex="5"><strong>Register new client</strong></a>
 				</section>
 			</form>
 
