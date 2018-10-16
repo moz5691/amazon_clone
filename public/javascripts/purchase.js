@@ -31,3 +31,5 @@ const incFunc = function(e){
 }
 
 $(document).on('click','#incQtyBtn',incFunc);
+
+

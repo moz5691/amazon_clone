@@ -42,7 +42,7 @@ const cartRenderFunc = function (InventoryList) {
 runDataList();
 
 /**
- * tp increse quantity in cart (session storage)
+ * to increse quantity in cart (session storage)
  */
 
 const cartIncFunc = function () {
