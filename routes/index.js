@@ -145,6 +145,7 @@ router.delete('/inventory/:id', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 //-----search by itemName-----Tri-------//
 router.post('/inventory/search', function(req, res, next) {
   const searchQuery = req.body.searchQuery;
@@ -162,6 +163,8 @@ router.post('/inventory/search', function(req, res, next) {
   });
 });
 
+=======
+>>>>>>> 9adea1718611c566c4b83c6b8c7bdaea595a8a08
 /* [pending] */
 //-----pagination feature----Tri-----//
 router.get('/inventory/:page', function(req, res, next) {
@@ -196,16 +199,36 @@ router.get('/inventory/:page', function(req, res, next) {
     });
 });
 
+<<<<<<< HEAD
 // -----search by department----//
 router.post('/inventory/search/department/', function(req, res) {
+=======
+// -----product search feature---Tri--//
+router.post('/inventory/search/department/', function (req, res) {
+>>>>>>> 9adea1718611c566c4b83c6b8c7bdaea595a8a08
   const deptSelect = req.body.departmentSelect;
-  const searchQuery = req.body.searchQuery;
+  const searchQuery = req.body.searchQuery.toLowerCase().trim();
   if (deptSelect === 'All') {
     if (searchQuery.length > 0) {
+<<<<<<< HEAD
       Inventory.find({ itemTag: searchQuery }).then(function(data) {
         res.render('index', {
           inventory: data,
           reviewer: req.cookies.reviewer
+=======
+      Inventory
+        .find( { $text: { $search: searchQuery } } )
+        // .find({ $or: [{ itemTag: searchQuery }, { itemName: searchQuery }] })
+        .then(function (data) {
+          res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
+        })
+    }
+    else {
+      Inventory
+        .find({})
+        .then(function (data) {
+          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
+>>>>>>> 9adea1718611c566c4b83c6b8c7bdaea595a8a08
         });
       });
     } else {
@@ -218,6 +241,7 @@ router.post('/inventory/search/department/', function(req, res) {
     }
   } else {
     if (searchQuery.length > 0) {
+<<<<<<< HEAD
       Inventory.find({ itemDepartment: deptSelect, itemTag: searchQuery }).then(
         function(data) {
           res.render('index', {
@@ -231,6 +255,20 @@ router.post('/inventory/search/department/', function(req, res) {
         res.render('index', {
           inventory: data,
           reviewer: req.cookies.reviewer
+=======
+      Inventory
+        .find( { itemDepartment: deptSelect, $text: { $search: searchQuery } } )
+        // .find({ itemDepartment: deptSelect, itemTag: searchQuery })
+        .then(function (data) {
+          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
+        })
+    }
+    else {
+      Inventory
+        .find({ itemDepartment: deptSelect })
+        .then(function (data) {
+          res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
+>>>>>>> 9adea1718611c566c4b83c6b8c7bdaea595a8a08
         });
       });
     }
