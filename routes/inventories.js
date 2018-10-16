@@ -179,6 +179,7 @@ router.get('/', (req, res, next) => {
 
     //The 404 Route (ALWAYS Keep this as the last route)
 router.get('*', function (req, res) {
+  console.log('888888888888888888888');
   res.render('error',{noRoute: true});//{message: 'what??? do not have such a route', error: {status : 404}}
 });
 

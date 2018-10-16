@@ -1,7 +1,7 @@
 <div class=" row w-100">
     <div style="overflow-x:auto;">
         <table class="inventory-seller-table" style="border-collapse: collapse; border-spacing: 0; width: 100%; border: 1px solid #ddd;">
-            <tr>
+            <tr class="text-center pl-5">
                 <th><strong>image</strong></th>
                 <th><strong>item Id</strong></th>
                 <th><strong>department</strong></th>
@@ -9,10 +9,10 @@
                 <th><strong>About</strong></th>
                 <th><strong>Price</strong></th>
                 <th><strong>count</strong></th>
-                <th><strong>update</strong></th>
+                <th><strong></strong></th>
             </tr>
             {{#each inventory}}
-            <tr>
+            <tr class="font-weight-normal">
                 <td><img style="max-width: 150px;" src="{{this.itemImgPath}}" /></td>
                 <td>{{this._id}}</td>
                 <td>{{this.itemDepartment}}</td>

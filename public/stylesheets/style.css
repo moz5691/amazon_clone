@@ -1,3 +1,4 @@
+
 .item-image {
   display: block;
   height: 200px;
@@ -229,12 +230,12 @@
 
 
 
-/*************************************/
+/**Maryam***********************************/
 
 /**/
 .inventory-seller-table tr:nth-child(even){background-color: #f2f2f2}
 .inventory-seller-table th, .inventory-seller-table td {
-  text-align: left;
+  text-align: center;
   padding: 8px;
 }
 
@@ -242,13 +243,34 @@
   overflow: hidden;  text-overflow: ellipsis; max-height: 100px;
 }
 
+.card{
+  overflow: hidden;
+}
+.card-header{
+  background-color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+}
 
+.card button{
+  font-size: 12px;
+}
+
+.card-footer{
+  background-color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 2%;
+}
 
 
 
 
 @media only screen and (min-width:600px){
   /*******************Purchase Page Desktop: Ming**********************/
+
   .purchaseContainer {
     display: grid;
     height: 90%;
@@ -407,10 +429,8 @@
 }
 
 
-
-
-
 #departmentSelect:hover{
   cursor: pointer;
 }
+
 

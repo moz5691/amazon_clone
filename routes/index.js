@@ -285,4 +285,31 @@ router.put('/review/update/:id', (req, res) => {
   );
 });
 
+/*********get search whit link************** */
+router.get('/special/:choosen', function(req, res) {
+  var choosen = String(req.params.choosen);
+   let myparams = JSON.parse(choosen);
+  Inventory.find({ itemDepartment: myparams.ref }).then(function(data, err) {
+    if(err) res.render('error',{noRoute: true, reviewer: req.cookies.reviewer});
+      else if(myparams.category){
+        let dataArray = [];
+        for (let i = 0; i < data.length; i++) {
+          ((data[i].itemName).toLowerCase().includes((myparams.category).toLowerCase()))?
+          dataArray.push(data[i]):
+          ((data[i].itemDepartment).toLowerCase().includes((myparams.category).toLowerCase()))?
+          dataArray.push(data[i]):
+          ((data[i].itemDescription).toLowerCase().includes((myparams.category).toLowerCase()))?
+          dataArray.push(data[i]):
+          ((data[i].itemSeller).toLowerCase().includes((myparams.category).toLowerCase()))?
+          dataArray.push(data[i]):0;
+          
+        }
+        res.render('index', { inventory: dataArray, reviewer: req.cookies.reviewer });
+        }
+      else{
+      res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
+      }
+  });
+});
+
 module.exports = router;
