@@ -1,38 +1,45 @@
 # AMAZON CLONE PAGE
 
-This is Amazon clone site.  
+This is Amazon clone site.
 
 ## Getting Started
 
 ### Prerequisites
-node.js and node package manager (npm) shall be installed.  
+
+node.js and node package manager (npm) shall be installed.
 
 ### Installing
+
 After clone to your local repo.
 
 ```javascripts
 npm install
 ```
+
 Then, run app
 
 ```
 node app.js
 ```
 
+### Product image
+
+![Upload Photo](public/doc-image/product1.png)
 
 ### Following is the folder structure.
+
 ```bash
-├── app.js 
-├── bin 
+├── app.js
+├── bin
 │ └── www
 ├── db
-│ └── mongoose.js 
+│ └── mongoose.js
 ├── models
 │ └── inventory.js
-│ └── user.js 
+│ └── user.js
 ├── package.json
 ├── public
-│ ├── images  
+│ ├── images
 │ ├── javascripts
 │ └── stylesheets
 │     └── style.css
@@ -62,43 +69,37 @@ node app.js
 
 ## Features implemented
 
-* **Secure login** - login by using Passport.JS local strategy
-* **Item search** - by item name, by item tag in department
-* **Item purchase** - add item(s) to cart, change qty after in cart.
-* **Item review** - review item(s) and grade
-
+- **Secure login** - login by using Passport.JS local strategy
+- **Item search** - by item name, by item tag in department
+- **Item purchase** - add item(s) to cart, change qty after in cart.
+- **Item review** - review item(s) and grade
 
 ## Running the tests
 
-Automated test is not implement here.  Future improvment 
-
+Automated test is not implement here. Future improvment
 
 ## Deployment
 
-Use Heroku to deploy,  
+Use Heroku to deploy,
 
-## Built the following major node packages, 
+## Built the following major node packages,
 
-* [Node.js](https://nodejs.org/) - Node.js 
-* [Express.js](https://expressjs.com) - Web framework for node.js
-* [Handlebars.js](https://handlebarsjs.com) - Node.js web framework
-* [Mongoose.js](https://mongoosejs.com) - Object modeling for node.js
-* [Passport.js](http://www.passportjs.org) - Authentication for node.js
-*  Mlab database (https://mlab.com) - mongodb deployment.
-
+- [Node.js](https://nodejs.org/) - Node.js
+- [Express.js](https://expressjs.com) - Web framework for node.js
+- [Handlebars.js](https://handlebarsjs.com) - Node.js web framework
+- [Mongoose.js](https://mongoosejs.com) - Object modeling for node.js
+- [Passport.js](http://www.passportjs.org) - Authentication for node.js
+- Mlab database (https://mlab.com) - mongodb deployment.
 
 ## Versioning
 
-
 ## Authors
 
-* **Maryam** **Ming** **Tri** **Chan**- *Initial work* 
-https://github.com/kmaryam27
-https://github.com/tnguyen303
-https://github.com/sandy8111112004
-https://github.com/moz5691
-
-
+- **Maryam** **Ming** **Tri** **Chan**- _Initial work_
+  https://github.com/kmaryam27
+  https://github.com/tnguyen303
+  https://github.com/sandy8111112004
+  https://github.com/moz5691
 
 ## License
 
@@ -106,11 +107,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* CJ Jordan and Hannah Patellis, our bootcamp teachers.
-* Arturo Salmeron, our TA
+- CJ Jordan and Hannah Patellis, our bootcamp teachers.
+- Arturo Salmeron, our TA
 
 ## Note
 
-This project includes images from Amazon sites.  All copywright of images from Amazon site belongs to Amazon.  
-
-
+This project includes images from Amazon sites. All copywright of images from Amazon site belongs to Amazon.
