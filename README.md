@@ -20,7 +20,7 @@ node app.js
 ```
 
 ## Following is the folder structure.
-
+```bash
 ├── app.js --> start file
 ├── bin ---> won't use for now.
 │ └── www
@@ -57,7 +57,7 @@ node app.js
 └── package.json
 └── Procfile
 └── README
-
+```
 
 ## Features implemented
 
