@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <base href="/">
-    <title>Amazon Purchase</title>
+    <title>AmazonClone.com Purchase Page</title>
 </head>
 
 <body>
@@ -26,10 +23,16 @@
                         <span style='font-size:20px; color:#D63D28;'>$ {{product.itemPrice}}</span>
                     </h5>
                 </div>
+                {{#if product.itemCount}}
                 <div>
                     <h4 class='purchaseH4' style='color:green;'>In Stock</h4>
-
                 </div>
+                {{/if}}
+                {{#unless product.itemCount}}
+                <div>
+                    <h4 class='purchaseH4' style='color:red;'>Not in Stock</h4>
+                </div>
+                {{/unless}}
                 <div>
                     <h4 class='purchaseH4'>About the product</h4>
                     <div class='purList' style="list-style-type:disc">
@@ -51,7 +54,7 @@
                             <option value='5'>5</option>
                             <option value='6'>6</option>
                         </select>
-                        <a href='/shoppingCart' >cart:</a><span id='cartQty'>0</span>
+                        <a href='/shoppingCart' >cart:</a><span id='cartQty' >0</span>
                     </span>
                     <button id='incQtyBtn' type='button' data-id='{{product._id}}'>Add to Cart</button>
                 </div>
@@ -60,5 +63,3 @@
         <script src='javascripts/purchase.js'></script>
     </div>
 </body>
-
-</html> 

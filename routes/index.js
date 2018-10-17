@@ -55,16 +55,24 @@ router.get('/logout', (req, res, next) => {
 //   res.render('register');
 // });
 
-/////////////////to get all inventory in normal js:Ming///////////////
+
+/**
+ * to get all inventory data
+ * @author Ming
+ */
 router.get('/database', (req, res) => {
   Inventory.find({}).then(inventory => {
     res.json(inventory);
   });
 });
 
-////////////////////////////////////////////////////////////////////
-///////////////purchase page:  Ming////////////////////
-router.get('/purchase/:id', function(req, res) {
+
+
+/**
+ * to render purchase page
+ * @author Ming
+ */
+router.get('/purchase/:id', function (req, res) {
   console.log('GET function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
@@ -78,16 +86,14 @@ router.get('/purchase/:id', function(req, res) {
       res.json(err);
     });
 });
-//////////////////////////////////////////////////////
 
-//////////////cart page: Ming/////////////////////////
-// router.put('/initialCart',function(req,res){
-//   Inventory.update({},{itemInCart:false}).then(
-//   res.json(Inventory)
-//   );
-// });
 
-router.get('/shoppingCart', function(req, res) {
+
+/**
+ * to render cart page
+ * @author Ming
+ */
+router.get('/shoppingCart', function (req, res) {
   console.log('GET function: shoppingCart');
   Inventory.find({}).then(inventory => {
     res.render('cart', {
@@ -97,7 +103,12 @@ router.get('/shoppingCart', function(req, res) {
   });
 });
 
-router.put('/cartUpdate/:id', function(req, res) {
+
+/**
+ * a update by id link for cart page
+ * @author Ming 
+ */
+router.put('/cartUpdate/:id', function (req, res) {
   console.log('PUT function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
@@ -115,7 +126,7 @@ router.put('/cartUpdate/:id', function(req, res) {
     });
 });
 
-//////////////////////////////////////////////////////
+
 
 // update inventory count
 router.put('/inventory/:id', (req, res, next) => {
