@@ -1,7 +1,4 @@
-{{!-- <p>user review </p>
-<p>{{user}}</p>
-<p>{{inventory.itemReview}}</p> --}}
-
+{{!-- User review page --}}
 <div class="row mt-5">
   <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 align-items-center " style="border:1px solid white">
     <img class="align-self-center item-image" src={{inventory.itemImgPath}}>
@@ -13,8 +10,6 @@
       <li class="list-unstyled">Description: {{inventory.itemDescription}}</li>
       <li class="list-unstyled">Seller: {{inventory.itemSeller}}</li>
       <li class="list-unstyled">Price: ${{inventory.itemPrice}}</li>
-      {{!-- <li class="list-unstyled">In stock: {{inventory.itemCount}}</li> --}}
-      {{!-- <li class="list-unstyled">SKU: {{inventory.id}}</li> --}}
     </ul>
   </div>
   <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" style="border:1px solid white">
@@ -39,16 +34,18 @@
   <hr>
 </div>
 <div class="row mt-5">
-  {{#each inventory.itemReview}}
-  <div class="card p-3" style="width: 30rem">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"> Reviewed by: {{this.reviewer}}</li>
-      <li class="list-group-item">Rate: {{this.rate}}</li>
-      <li class="list-group-item">Comment: {{this.content}}</li>
-      <li class="list-group-item">{{this.date}}</li>
-    </ul>
+  <div class="container">
+    {{#each inventory.itemReview}}
+    <div class="card p-3" style="width: 30rem">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"> Reviewed by: <strong>{{this.reviewer}}</strong></li>
+        <li class="list-group-item">Rate: <strong>{{this.rate}}</strong></li>
+        <li class="list-group-item">Comment: <strong>{{this.content}}</strong></li>
+        <li class="list-group-item">{{this.date}}</li>
+      </ul>
+    </div>
+    <br />
+    <hr>
+    {{/each}}
   </div>
-  <br />
-  <hr>
-  {{/each}}
 </div>
