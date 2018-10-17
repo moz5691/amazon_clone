@@ -13,6 +13,7 @@ router.use((req, res, next) => {
 
 /**
  * render home page
+ * @param {*} none
  */
 router.get('/', (req, res, next) => {
   res.render('home', {
@@ -23,6 +24,7 @@ router.get('/', (req, res, next) => {
 
 /**
  * render index page with all inventory
+ * @param {*} none
  */
 router.get('/inventory', (req, res, next) => {
   Inventory.find({}).then(inventory => {
@@ -45,17 +47,6 @@ router.get('/logout', (req, res, next) => {
   res.redirect('login');
 });
 
-// /**************(Chan)************* GET login page rendering */
-// router.get('/login', (req, res, next) => {
-//   res.render('login');
-// });
-
-// /**************(Maryam)*********** GET register page rendering */
-// router.get('/register', (req, res , next) => {
-//   res.render('register');
-// });
-
-
 /**
  * to get all inventory data
  * @author Ming
@@ -66,13 +57,11 @@ router.get('/database', (req, res) => {
   });
 });
 
-
-
 /**
  * to render purchase page
  * @author Ming
  */
-router.get('/purchase/:id', function (req, res) {
+router.get('/purchase/:id', function(req, res) {
   console.log('GET function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
@@ -87,13 +76,11 @@ router.get('/purchase/:id', function (req, res) {
     });
 });
 
-
-
 /**
  * to render cart page
  * @author Ming
  */
-router.get('/shoppingCart', function (req, res) {
+router.get('/shoppingCart', function(req, res) {
   console.log('GET function: shoppingCart');
   Inventory.find({}).then(inventory => {
     res.render('cart', {
@@ -103,12 +90,11 @@ router.get('/shoppingCart', function (req, res) {
   });
 });
 
-
 /**
  * a update by id link for cart page
- * @author Ming 
+ * @author Ming
  */
-router.put('/cartUpdate/:id', function (req, res) {
+router.put('/cartUpdate/:id', function(req, res) {
   console.log('PUT function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
@@ -126,9 +112,10 @@ router.put('/cartUpdate/:id', function (req, res) {
     });
 });
 
-
-
-// update inventory count
+/**
+ * update inventory count
+ * @param {*}
+ */
 router.put('/inventory/:id', (req, res, next) => {
   Inventory.findOne({
     _id: req.params.id
@@ -163,8 +150,10 @@ router.delete('/inventory/:id', (req, res) => {
   });
 });
 
-/* [pending] */
-//-----pagination feature----Tri-----//
+/**
+ * pagination
+ * @param {*}
+ */
 router.get('/inventory/:page', function(req, res, next) {
   const perPage = 10;
   const page = req.params.page || 1;
@@ -199,7 +188,10 @@ router.get('/inventory/:page', function(req, res, next) {
     });
 });
 
-// -----product search feature---Tri--//
+/**
+ * product search
+ * @param {*}
+ */
 router.post('/inventory/search', function(req, res) {
   const deptSelect = req.body.departmentSelect;
   const searchQuery = req.body.searchQuery.toLowerCase().trim();
@@ -243,7 +235,7 @@ router.post('/inventory/search', function(req, res) {
 
 /**
  * Take user id and render user_review page.
- * @param {string} user_id
+ * @param {string} _id
  */
 router.get('/review/:id', (req, res) => {
   Inventory.findOne({
@@ -259,7 +251,7 @@ router.get('/review/:id', (req, res) => {
 
 /**
  * Update inventory with user review
- * @param {string} user_id
+ * @param {string} _id
  */
 router.put('/review/update/:id', (req, res) => {
   console.log('user review update');
