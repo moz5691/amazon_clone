@@ -61,10 +61,10 @@ node app.js
 
 ## Features implemented
 
-### Secure login - login by using Passport.JS local strategy
-### Item search - by item name, by item tag in department
-### Item purchase - add item(s) to cart, change qty after in cart.
-### Item review - review item(s) and grade
+* **Secure login** - login by using Passport.JS local strategy
+* **Item search** - by item name, by item tag in department
+* **Item purchase** - add item(s) to cart, change qty after in cart.
+* **Item review** - review item(s) and grade
 
 
 ## Running the tests
@@ -108,6 +108,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * CJ Jordan and Hannah Patellis, our bootcamp teachers.
 * Arturo Salmeron, our TA
 
+## Note
 
+This project includes images from Amazon sites.  All copywright of images from Amazon site belongs to Amazon.  
 
 
