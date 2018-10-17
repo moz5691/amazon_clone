@@ -5,21 +5,28 @@
   </div>
   <div class="col-sm-4 col-md-3 col-lg-5 col-xl-5" style="border:1px solid white">
     <ul class="list-group">
-      <li class="list-unstyled">Name: {{this.itemName}}</li>
-      <li class="list-unstyled">Department: {{this.itemDepartment}}</li>
-      <li class="list-unstyled">Description: {{this.itemDescription}}</li>
-      <li class="list-unstyled">Seller: {{this.itemSeller}}</li>
-      <li class="list-unstyled">Price: ${{this.itemPrice}}</li>
-      <li class="list-unstyled">In stock: {{this.itemCount}}</li>
+      <a href='/purchase/{{this._id}}'>
+      <li class="list-unstyled" style="font-size: 24px;">{{this.itemName}}</li>
+      </a>
+      <li class="list-unstyled" style="font-size:14px; color:#666666">by {{this.itemSeller}}</li>
+      <li class="list-unstyled" style="color:black">$ <span style="font-size:26px; font-weight:400;">{{this.itemPrice}} </span></li>
+      {{#if this.itemCount}}
+      <li class="list-unstyled" style='color:green'>In stock</li>
+      <li class="list-unstyled"  style="font-size:14px; color:#666666">Get it by <span style="color:black; font-weight:bold;">Tomorrow!</span></li>
+      <li class="list-unstyled"  style="font-size:14px; color:#666666">FREE Shipning on eligible orders </li>
+      {{/if}}
+      {{#unless this.itemCount}}
+      <li class="list-unstyled" style='color:red'>Not in Stock</li>
+      {{/unless}}
     </ul>
   </div>
   <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2" style="border:1px solid white">
-    <a href='/purchase/{{this._id}}'>
+    {{!-- <a href='/purchase/{{this._id}}'>
       <button id="buyBtn" class="btn btn-outline-primary ml-5 {{this.show}}" type="button">Buy</button>
-    </a>
+    </a> --}}
     <a href="/review/{{this.id}}" id="reviewBtn" class="btn btn-outline-primary ml-5">Review</a>
   </div>
-  <hr />
+  <hr/>
 </div>
 {{/each}}
 

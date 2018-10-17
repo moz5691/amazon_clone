@@ -141,6 +141,7 @@ const cartDBUpdate = function (dataList) {
     }
     );
     alert('you have successfully placed the order');
+    location.reload();
 }
 $(document).on('click', '#cartOrderBtn', cartOrderFunc);
 

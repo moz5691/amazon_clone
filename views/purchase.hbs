@@ -23,10 +23,16 @@
                         <span style='font-size:20px; color:#D63D28;'>$ {{product.itemPrice}}</span>
                     </h5>
                 </div>
+                {{#if product.itemCount}}
                 <div>
                     <h4 class='purchaseH4' style='color:green;'>In Stock</h4>
-
                 </div>
+                {{/if}}
+                {{#unless product.itemCount}}
+                <div>
+                    <h4 class='purchaseH4' style='color:red;'>Not in Stock</h4>
+                </div>
+                {{/unless}}
                 <div>
                     <h4 class='purchaseH4'>About the product</h4>
                     <div class='purList' style="list-style-type:disc">
