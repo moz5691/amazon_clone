@@ -139,6 +139,9 @@ router.get('/inventory/:page', function (req, res, next) {
   const perPage = 10;
   const page = req.params.page || 1;
 
+  if(page==="prev"){
+    
+  }
   Inventory.find({})
     .skip(perPage * page - perPage)
     .limit(perPage)
@@ -168,14 +171,13 @@ router.get('/inventory/:page', function (req, res, next) {
 });
 
 // -----product search feature---Tri--//
-router.post('/inventory/search/department/', function (req, res) {
+router.post('/inventory/search', function (req, res) {
   const deptSelect = req.body.departmentSelect;
   const searchQuery = req.body.searchQuery.toLowerCase().trim();
   if (deptSelect === 'All') {
     if (searchQuery.length > 0) {
       Inventory
         .find( { $text: { $search: searchQuery } } )
-        // .find({ $or: [{ itemTag: searchQuery }, { itemName: searchQuery }] })
         .then(function (data) {
           res.render('index', { inventory: data , reviewer: req.cookies.reviewer});
         })
@@ -192,7 +194,6 @@ router.post('/inventory/search/department/', function (req, res) {
     if (searchQuery.length > 0) {
       Inventory
         .find( { itemDepartment: deptSelect, $text: { $search: searchQuery } } )
-        // .find({ itemDepartment: deptSelect, itemTag: searchQuery })
         .then(function (data) {
           res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
         })
