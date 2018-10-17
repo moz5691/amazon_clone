@@ -2,21 +2,28 @@ const express = require('express');
 const router = express.Router();
 const Inventory = require('./../models/inventory');
 
-// Chan: test middleware works????
+/**
+ * middleware to print date/time on console.
+ * @param {*} none
+ */
 router.use((req, res, next) => {
   console.log('Time', Date.now());
   next();
 });
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
+/**
+ * render home page
+ */
+router.get('/', (req, res, next) => {
   res.render('home', {
     title: 'This is Amazon clone site, welcome!!!',
     reviewer: req.cookies.reviewer
   });
 });
 
-// get inentory and display all
+/**
+ * render index page with all inventory
+ */
 router.get('/inventory', (req, res, next) => {
   Inventory.find({}).then(inventory => {
     res.render('index', {
@@ -26,7 +33,7 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
-router.get('/login', function (req, res, next) {
+router.get('/login', function(req, res, next) {
   res.render('login', { reviewer: req.cookies.reviewer });
 });
 
@@ -60,6 +67,7 @@ router.get('/database', (req, res) => {
 });
 
 
+
 /**
  * to render purchase page
  * @author Ming
@@ -74,10 +82,11 @@ router.get('/purchase/:id', function (req, res) {
         reviewer: req.cookies.reviewer
       });
     })
-    .catch(function (err) {
+    .catch(function(err) {
       res.json(err);
     });
 });
+
 
 
 /**
@@ -94,6 +103,7 @@ router.get('/shoppingCart', function (req, res) {
   });
 });
 
+
 /**
  * a update by id link for cart page
  * @author Ming 
@@ -102,16 +112,16 @@ router.put('/cartUpdate/:id', function (req, res) {
   console.log('PUT function');
   console.log(req.params.id);
   Inventory.findOne({ _id: req.params.id })
-    .then(function () {
+    .then(function() {
       Inventory.updateOne({ _id: req.params.id }, req.body)
-        .then(function (data) {
+        .then(function(data) {
           res.json(data);
         })
-        .catch(function (err) {
+        .catch(function(err) {
           res.json(err);
         });
     })
-    .catch(function (err) {
+    .catch(function(err) {
       res.json(err);
     });
 });
@@ -155,18 +165,17 @@ router.delete('/inventory/:id', (req, res) => {
 
 /* [pending] */
 //-----pagination feature----Tri-----//
-router.get('/inventory/:page', function (req, res, next) {
+router.get('/inventory/:page', function(req, res, next) {
   const perPage = 10;
   const page = req.params.page || 1;
 
-  if (page === "prev") {
-
+  if (page === 'prev') {
   }
   Inventory.find({})
     .skip(perPage * page - perPage)
     .limit(perPage)
-    .exec(function (err, products) {
-      Inventory.count().exec(function (err, count) {
+    .exec(function(err, products) {
+      Inventory.count().exec(function(err, count) {
         if (err) {
           return err;
         } else {
@@ -191,45 +200,50 @@ router.get('/inventory/:page', function (req, res, next) {
 });
 
 // -----product search feature---Tri--//
-router.post('/inventory/search', function (req, res) {
+router.post('/inventory/search', function(req, res) {
   const deptSelect = req.body.departmentSelect;
   const searchQuery = req.body.searchQuery.toLowerCase().trim();
   if (deptSelect === 'All') {
     if (searchQuery.length > 0) {
-      Inventory
-        .find({ $text: { $search: searchQuery } })
-        .then(function (data) {
-          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
-        })
-    }
-    else {
-      Inventory
-        .find({})
-        .then(function (data) {
-          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
+      Inventory.find({ $text: { $search: searchQuery } }).then(function(data) {
+        res.render('index', {
+          inventory: data,
+          reviewer: req.cookies.reviewer
         });
-    };
-  }
-  else {
+      });
+    } else {
+      Inventory.find({}).then(function(data) {
+        res.render('index', {
+          inventory: data,
+          reviewer: req.cookies.reviewer
+        });
+      });
+    }
+  } else {
     if (searchQuery.length > 0) {
-      Inventory
-        .find({ itemDepartment: deptSelect, $text: { $search: searchQuery } })
-        .then(function (data) {
-          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
-        })
-    }
-    else {
-      Inventory
-        .find({ itemDepartment: deptSelect })
-        .then(function (data) {
-          res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
+      Inventory.find({
+        itemDepartment: deptSelect,
+        $text: { $search: searchQuery }
+      }).then(function(data) {
+        res.render('index', {
+          inventory: data,
+          reviewer: req.cookies.reviewer
         });
-    };
+      });
+    } else {
+      Inventory.find({ itemDepartment: deptSelect }).then(function(data) {
+        res.render('index', {
+          inventory: data,
+          reviewer: req.cookies.reviewer
+        });
+      });
+    }
   }
 });
 
 /**
- * user review part --chan , need to find user id.
+ * Take user id and render user_review page.
+ * @param {string} user_id
  */
 router.get('/review/:id', (req, res) => {
   Inventory.findOne({
@@ -239,15 +253,19 @@ router.get('/review/:id', (req, res) => {
     res.render('review/user_review', {
       inventory: inventory,
       reviewer: req.cookies.reviewer
-    }); //, reviewer: req.cookies.reviewer
+    });
   });
 });
 
+/**
+ * Update inventory with user review
+ * @param {string} user_id
+ */
 router.put('/review/update/:id', (req, res) => {
   console.log('user review update');
   console.log(req.body);
   const review = {
-    reviewer: req.cookies.reviewer, //req.user.email,
+    reviewer: req.cookies.reviewer,
     rate: req.body.userRate,
     content: req.body.userReview,
     date: Date.now()
@@ -268,27 +286,36 @@ router.put('/review/update/:id', (req, res) => {
 });
 
 /*********get search whit link************** */
-router.get('/special/:choosen', function (req, res) {
+router.get('/special/:choosen', function(req, res) {
   var choosen = String(req.params.choosen);
   let myparams = JSON.parse(choosen);
-  Inventory.find({ itemDepartment: myparams.ref }).then(function (data, err) {
-    if (err) res.render('error', { noRoute: true, reviewer: req.cookies.reviewer });
+  Inventory.find({ itemDepartment: myparams.ref }).then(function(data, err) {
+    if (err)
+      res.render('error', { noRoute: true, reviewer: req.cookies.reviewer });
     else if (myparams.category) {
       let dataArray = [];
       for (let i = 0; i < data.length; i++) {
-        ((data[i].itemName).toLowerCase().includes((myparams.category).toLowerCase())) ?
-          dataArray.push(data[i]) :
-          ((data[i].itemDepartment).toLowerCase().includes((myparams.category).toLowerCase())) ?
-            dataArray.push(data[i]) :
-            ((data[i].itemDescription).toLowerCase().includes((myparams.category).toLowerCase())) ?
-              dataArray.push(data[i]) :
-              ((data[i].itemSeller).toLowerCase().includes((myparams.category).toLowerCase())) ?
-                dataArray.push(data[i]) : 0;
-
+        data[i].itemName.toLowerCase().includes(myparams.category.toLowerCase())
+          ? dataArray.push(data[i])
+          : data[i].itemDepartment
+              .toLowerCase()
+              .includes(myparams.category.toLowerCase())
+            ? dataArray.push(data[i])
+            : data[i].itemDescription
+                .toLowerCase()
+                .includes(myparams.category.toLowerCase())
+              ? dataArray.push(data[i])
+              : data[i].itemSeller
+                  .toLowerCase()
+                  .includes(myparams.category.toLowerCase())
+                ? dataArray.push(data[i])
+                : 0;
       }
-      res.render('index', { inventory: dataArray, reviewer: req.cookies.reviewer });
-    }
-    else {
+      res.render('index', {
+        inventory: dataArray,
+        reviewer: req.cookies.reviewer
+      });
+    } else {
       res.render('index', { inventory: data, reviewer: req.cookies.reviewer });
     }
   });
