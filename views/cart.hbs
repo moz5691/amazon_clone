@@ -35,6 +35,9 @@
                                     {{#if this.itemCount}}
                                     <h6 class='cartH6' id='{{this._id}}stock' style='color:green'></h6>
                                     {{/if}}
+                                    {{#unless this.itemCount}}
+                                    <h6 class='cartH6' id='{{this._id}}stock' style='color:red'></h6>
+                                    {{/unless}}
                                     {{!-- <button type="submit" class='cartH6 cartDelete' data-id=`{{this._id}}`>Delete</button> --}}
                             </div>
 
