@@ -119,7 +119,7 @@ router.post('/loginUser', (req, res) => {
           );
           res.cookie('auth', token);
           res.cookie('reviewer', selectedUser.username);
-          res.redirect(`/inventories/:${selectedUser.username}`);
+          res.redirect(`/inventories/${selectedUser.username}`);
         }
       }
     });
