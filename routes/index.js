@@ -35,14 +35,21 @@ router.get('/inventory', (req, res, next) => {
   });
 });
 
+/**
+ * @author Maryam
+ * @description login page Url
+ */
 router.get('/login', function(req, res, next) {
   res.render('login', { reviewer: req.cookies.reviewer });
 });
 
-/* Log out page, redirect to login page, clear cookie */
+
+/**
+ * @author Maryam
+ * @description Log out page, redirect to login page, clear cookie
+ */
 router.get('/logout', (req, res, next) => {
   res.clearCookie('auth');
-  // res.clearCookie('seller');
   res.clearCookie('reviewer');
   res.redirect('login');
 });
@@ -277,7 +284,11 @@ router.put('/review/update/:id', (req, res) => {
   );
 });
 
-/*********get search whit link************** */
+/**
+ * @author Maryam
+ * @description get search whit link for homepage
+ * @returns Array of inventory selected lists
+ */
 router.get('/special/:choosen', function(req, res) {
   var choosen = String(req.params.choosen);
   let myparams = JSON.parse(choosen);

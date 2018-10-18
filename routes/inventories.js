@@ -1,3 +1,6 @@
+/**
+ * @author Maryam
+ */
 const express = require('express');
 const router = express.Router();
 const Inventory = require('./../models/inventory');
@@ -6,13 +9,15 @@ const methodOverride = require('method-override');
 const secret = 'harrypotter';
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
-
+// const fs = require('fs');
+/**
+ * @description For override Method and use put and delete method directly from .hbs files to server
+ */
 router.use(methodOverride('_method'));
 
 /**
- * check token after router redirect
- * @param {*}
+ * @description Middleware to check auth(token) after router to this page redirect if client didn't login doesn't let him to see inventory and edit inventory pages
+ * @property {String} auth
  */
 router.use((req, res, next) => {
   let token =
@@ -35,7 +40,15 @@ router.use((req, res, next) => {
 });
 
 /**
- * middleware for showing fail message
+ * @description Middleware taks string with special meaning and returns fail or success message to login and register page
+ * @param {String} inventorymsg
+ * @param {String} msgeupdate
+ * @param {String} msgeupdateok
+ * @param {String} msgadd
+ * @returns {String} inventorymsg
+ * @returns {String} msgeupdate
+ * @returns {String} msgeupdateok
+ * @returns {String} msgadd
  */
 router.use((req, res, next) => {
   if (req.query.inventorymsg === 'removed')
@@ -61,31 +74,23 @@ router.use((req, res, next) => {
 });
 
 /**
- * POST inventory page rendering
- * @param {*}
+ * @description Open inventory.hbs page with Post method with user inventory information
+ * @description should for real user and program chose only users set in req.params.user but now we just show all with team decition
  */
 router.get('/:user', (req, res, next) => {
-  Inventory.find({}).then(inventory => {
-    res.render('inventory', {
-      inventory: inventory,
-      reviewer: req.cookies.reviewer
-    });
-  });
-});
+  if(req.cookies.reviewer === (req.params.user)){
+    Inventory.find({}).then(inventory => { 
+       res.render('inventory', 
+        {inventory: inventory, 
+        reviewer: req.cookies.reviewer});
+     });
+    }else res.render('error',{noRoute: true, reviewer: req.cookies.reviewer});
+ });
 
 /**
- * inventory page rendering
- * @param {*}
- */
-router.get('/', (req, res, next) => {
-  req.cookies.reviewer
-    ? res.redirect(`/inventories/${req.cookies.reviewer}`)
-    : res.render('error', { noRoute: true });
-});
-
-/**
- * inventory update with product id
- * @param {*}
+ * @description Post inventoery for update product
+ * @param {String} id
+ * @returns selectedproduct
  */
 router.post('/update/:id', (req, res, next) => {
   Inventory.findOne({ _id: req.params.id }).then(product => {
@@ -101,8 +106,9 @@ router.post('/update/:id', (req, res, next) => {
 });
 
 /**
- * find inventory and render inventory edit page
- * @param {*}
+ * @description get inventoery for update product for type on url
+ * @param {String} id
+ * @returns selectedproduct
  */
 router.get('/update/:id', (req, res, next) => {
   Inventory.findOne({ _id: req.params.id }).then(product => {
@@ -118,8 +124,9 @@ router.get('/update/:id', (req, res, next) => {
 });
 
 /**
- * product update via inventory id
- * @param {*}
+ * @description Put inventoery for update product
+ * @param {String} id
+ * @returns product
  */
 router.put('/update/product/:id', (req, res, next) => {
   Inventory.findOne({ _id: req.params.id }).then(product => {
@@ -145,14 +152,15 @@ router.put('/update/product/:id', (req, res, next) => {
 });
 
 /**
- * add new product
- * @param {*}
+ * @description post inventoery for add product (not compelete because of time)
+ * @param {String} id
+ * @returns product
  */
 router.post('/add/product', (req, res, next) => {
   let product = new Inventory();
   req.body.newitemName !== ''
     ? (product.itemName = req.body.newitemName)
-    : console.log('/*/*/*/*/*'); //???????????????need address Ming
+    : console.log('/*/*/*/*/*'); 
   req.body.newitemDepartment !== ''
     ? (product.itemDepartment = req.body.newitemDepartment)
     : res.redirect(`/inventory/?msgadd=fail`);
@@ -175,10 +183,15 @@ router.post('/add/product', (req, res, next) => {
       res.redirect(`/inventories/update/${dbInventory._id}?msgaddok=success`);
     })
     .catch(function(err) {
-      res.redirect(`/inventory/?msgadd=fail`); //?????????????????????
+      res.redirect(`/inventory/?msgadd=fail`);
     });
 });
 
+/**
+ * @description function to check images if some thing wrong happened
+ * @param {*} err 
+ * @param {*} res 
+ */
 const handleError = (err, res) => {
   res
     .status(500)
@@ -186,67 +199,99 @@ const handleError = (err, res) => {
     .end('Oops! Something went wrong!');
 };
 
-/**
- * product image upload
- * @param {*}
- */
-/*
-const upload = multer({ dest: '../public/images' });
-router.post('/upload/:id', upload.single('file'), (req, res, next) => {
-  let tempPath;
-  req.file.path
-    ? (tempPath = req.file.path)
-    : (tempPath = '../public/images/default.png');
-  let targetPath;
-  req.params.id
-    ? (targetPath = path.join(
-        __dirname,
-        `../public/images/${req.params.id}.png`
-      ))
-    : (targetPath = path.join(__dirname, '../public/images/default.png'));
-  Inventory.findOneAndUpdate(
-    { _id: req.params.id },
-    {
-      $set: {
-        itemImgPath: `/images/${req.params.id}.png`
+ /**
+   * @description upload new image for update product 
+   * @param {String} id
+   */
+
+
+
+  const targetPath = path.join(__dirname, '../public/images/');
+const storage = multer.diskStorage({
+  destination: targetPath,
+  filename: function(req,file,cb){
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage: storage
+}).single('myImage');
+
+
+router.post('/upload/:id', (req, res, next) => {
+  upload(req, res, (err) => {
+    if(err) res.render('inventory-edit');
+    else {
+      if(req.file == undefined)  res.render('inventory-edit');//no file selected;
+      else{
+        Inventory.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+              $set: {
+                itemImgPath: `/images/${req.file.filename}`
+              }
+            }
+          )
+            .then(function(selectedproduct) {
+              res.redirect(`/inventories/update/${req.params.id}`);
+            });
       }
     }
-  )
-    .then(function(selectedproduct) {
-      if (path.extname(req.file.originalname).toLowerCase() === '.png') {
-        fs.rename(tempPath, targetPath, err => {
-          if (err) return handleError(err, res);
+  });
+  // let tempPath;
+  // req.file.path
+  //   ? (tempPath = req.file.path)
+  //   : (tempPath = '../public/images/default.png');
+  // let targetPath;
+  // req.params.id
+  //   ? (targetPath = path.join(
+  //       __dirname,
+  //       `../public/images/${req.params.id}.png`
+  //     ))
+  //   : (targetPath = path.join(__dirname, '../public/images/default.png'));
+  // Inventory.findOneAndUpdate(
+  //   { _id: req.params.id },
+  //   {
+  //     $set: {
+  //       itemImgPath: `/images/${req.params.id}.png`
+  //     }
+  //   }
+  // )
+  //   .then(function(selectedproduct) {
+  //     if (path.extname(req.file.originalname).toLowerCase() === '.png') {
+  //       fs.rename(tempPath, targetPath, err => {
+  //         if (err) return handleError(err, res);
 
-          res
-            .status(200)
-            .contentType('text/plain')
-            // .end("File uploaded!");
-            .redirect(`/inventories/update/${req.params.id}`);
-        });
-      } else {
-        fs.unlink(tempPath, err => {
-          if (err) return handleError(err, res);
+  //         res
+  //           .status(200)
+  //           .contentType('text/plain')
+  //           // .end("File uploaded!");
+  //           .redirect(`/inventories/update/${req.params.id}`);
+  //       });
+  //     } else {
+  //       fs.unlink(tempPath, err => {
+  //         if (err) return handleError(err, res);
 
-          res
-            .status(403)
-            .contentType('text/plain')
-            .end('Only .png files are allowed!');
-        });
-      }
-    })
-    .catch(function(err) {
-      res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
-    });
+  //         res
+  //           .status(403)
+  //           .contentType('text/plain')
+  //           .end('Only .png files are allowed!');
+  //       });
+  //     }
+  //   })
+  //   .catch(function(err) {
+  //     res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
+  //   });
 });
-*/
+
 
 /**
- * handle any routing error, The 404 Route (ALWAYS Keep this as the last route)
- * @param {*}
- */
+ * @description The 404 Route (ALWAYS Keep this as the last route)
+*/
 router.get('*', (req, res) => {
-  console.log('888888888888888888888');
-  res.render('error', { noRoute: true }); //{message: 'what??? do not have such a route', error: {status : 404}}
+  res.render('error', { noRoute: true, 
+    reviewer : req.cookies.reviewer}); 
 });
 
 module.exports = router;
