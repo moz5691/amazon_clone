@@ -190,6 +190,7 @@ const handleError = (err, res) => {
  * product image upload
  * @param {*}
  */
+/*
 const upload = multer({ dest: '../public/images' });
 router.post('/upload/:id', upload.single('file'), (req, res, next) => {
   let tempPath;
@@ -237,6 +238,7 @@ router.post('/upload/:id', upload.single('file'), (req, res, next) => {
       res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
     });
 });
+*/
 
 /**
  * handle any routing error, The 404 Route (ALWAYS Keep this as the last route)
