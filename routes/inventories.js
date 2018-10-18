@@ -85,7 +85,7 @@ router.get('/:user', (req, res, next) => {
         {inventory: inventory, 
         reviewer: req.cookies.reviewer});
      });
-    }else res.render('error',{noRoute: true});
+    }else res.render('error',{noRoute: true, reviewer: req.cookies.reviewer});
  });
 
 /**
@@ -258,7 +258,8 @@ router.post('/upload/:id', upload.single('file'), (req, res, next) => {
  * @description The 404 Route (ALWAYS Keep this as the last route)
  */
 router.get('*', (req, res) => {
-  res.render('error', { noRoute: true }); 
+  res.render('error', { noRoute: true, 
+    reviewer : req.cookies.reviewer}); 
 });
 
 module.exports = router;
