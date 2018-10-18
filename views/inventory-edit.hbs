@@ -1,12 +1,13 @@
 <div class="rounded m-5" style="background-color:#f2f2f2">
     <ul class="nav nav-tabs" style="background-color:  #dbdada" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update"
-                aria-selected="true"><strong>Update</strong></a>
+            <a class="nav-link active" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update" aria-selected="true"><strong>Update</strong></a>
         </li>
-        {{!-- <li class="nav-item">
+        {{!--
+        <li class="nav-item">
             <a class="nav-link" id="add-tab" data-toggle="tab" href="#add" role="tab" aria-controls="add" aria-selected="false"><strong>Add
-                    New</strong></a>
+                    New
+                </strong></a>
         </li> --}}
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -14,10 +15,11 @@
             <label><strong>item Id: </strong>{{selectedproduct._id}}</label>
             <hr />
             <div class="form-group">
-                <img class="img-fluid img-thumbnail zoom" style="max-width: 20%; min-width: 200px; height: auto;" src='{{selectedproduct.itemImgPath}}' />
+                <img class="img-fluid img-thumbnail zoom" style="max-width: 20%; min-width: 200px; height: auto;" src='{{selectedproduct.itemImgPath}}'
+                />
             </div>
             <form class="form-group" method="post" enctype="multipart/form-data" action="/inventories/upload/{{selectedproduct._id}}">
-                <input class=" input-lg input-search" type="file" name="file" style="background-color: white; max-width: 220px">
+                <input class=" input-lg input-search" type="file" name="myImage" style="background-color: white; max-width: 220px">
                 <input class="mt-2" type="submit" value="Submit">
             </form>
             {{!-- --}}
@@ -29,24 +31,22 @@
                             placeholder="{{selectedproduct.itemSeller}}" />
                     </div>
                     <div class="form-group">
-                        <label><strong>name: </strong></label><input type="text" name="itemName" class="form-control"
-                            placeholder="{{selectedproduct.itemName}}" />
+                        <label><strong>name: </strong></label><input type="text" name="itemName" class="form-control" placeholder="{{selectedproduct.itemName}}"
+                        />
                     </div>
                     <div class="form-group">
                         <label><strong>department: </strong></label><input type="text" name="itemDepartment" class="form-control"
                             placeholder="{{selectedproduct.itemDepartment}}" />
                     </div>
                     <div class="form-group">
-                        <label><strong>About the product: </strong></label><input type="text" name="itemDescription"
-                            class="form-control" placeholder="{{selectedproduct.itemDescription}}">
+                        <label><strong>About the product: </strong></label><input type="text" name="itemDescription" class="form-control"
+                            placeholder="{{selectedproduct.itemDescription}}">
                     </div>
                     <div class="form-group">
-                        <label><strong>Price: </strong></label><input type="text" name="itemPrice" class="form-control"
-                            placeholder="${{selectedproduct.itemPrice}}">
+                        <label><strong>Price: </strong></label><input type="text" name="itemPrice" class="form-control" placeholder="${{selectedproduct.itemPrice}}">
                     </div>
                     <div class="form-group">
-                        <label><strong>count: </strong></label><input type="text" name="itemCount" class="form-control"
-                            placeholder="{{selectedproduct.itemCount}}">
+                        <label><strong>count: </strong></label><input type="text" name="itemCount" class="form-control" placeholder="{{selectedproduct.itemCount}}">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </fieldset>
@@ -59,8 +59,7 @@
             <div class=" container-fluid alert alert-success col-lg-4  ml-50">
                 <p><strong>congratulation: </strong>{{msgeupdateok}}</p>
             </div>
-            {{/if}}
-            {{#if msgaddok}}
+            {{/if}} {{#if msgaddok}}
             <div class=" container-fluid alert alert-success col-lg-4  ml-50">
                 <p><strong>congratulation: </strong>{{msgaddok}}</p>
             </div>
@@ -70,8 +69,8 @@
             <div class="tab-pane fade show active p-5" id="update" role="tabpanel" aria-labelledby="update-tab">
                 <form class="form-group" action="/inventories/add/product" method="post">
                     <div class="form-group">
-                        <img class="img-fluid img-thumbnail zoom" style="max-width: 20%; min-width: 200px; height: auto;"
-                            src='/images/default.png' />
+                        <img class="img-fluid img-thumbnail zoom" style="max-width: 20%; min-width: 200px; height: auto;" src='/images/default.png'
+                        />
                     </div>
                     <fieldset>
                         <div class="form-group">
@@ -83,8 +82,8 @@
                                 placeholder="item's Name" />
                         </div>
                         <div class="form-group">
-                            <label><strong>department: </strong></label><input type="text" name="newitemDepartment"
-                                class="form-control" placeholder="item's Department" />
+                            <label><strong>department: </strong></label><input type="text" name="newitemDepartment" class="form-control"
+                                placeholder="item's Department" />
                         </div>
                         <div class="form-group">
                             <label><strong>About the product: </strong></label><input type="text" name="newitemDescription"

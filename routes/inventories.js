@@ -9,8 +9,7 @@ const methodOverride = require('method-override');
 const secret = 'harrypotter';
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
-
+// const fs = require('fs');
 /**
  * @description For override Method and use put and delete method directly from .hbs files to server
  */
@@ -204,59 +203,92 @@ const handleError = (err, res) => {
    * @description upload new image for update product 
    * @param {String} id
    */
-/*
-const upload = multer({ dest: '../public/images' });
-router.post('/upload/:id', upload.single('file'), (req, res, next) => {
-  let tempPath;
-  req.file.path
-    ? (tempPath = req.file.path)
-    : (tempPath = '../public/images/default.png');
-  let targetPath;
-  req.params.id
-    ? (targetPath = path.join(
-        __dirname,
-        `../public/images/${req.params.id}.png`
-      ))
-    : (targetPath = path.join(__dirname, '../public/images/default.png'));
-  Inventory.findOneAndUpdate(
-    { _id: req.params.id },
-    {
-      $set: {
-        itemImgPath: `/images/${req.params.id}.png`
+
+
+
+  const targetPath = path.join(__dirname, '../public/images/');
+const storage = multer.diskStorage({
+  destination: targetPath,
+  filename: function(req,file,cb){
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage: storage
+}).single('myImage');
+
+
+router.post('/upload/:id', (req, res, next) => {
+  upload(req, res, (err) => {
+    if(err) res.render('inventory-edit');
+    else {
+      if(req.file == undefined)  res.render('inventory-edit');//no file selected;
+      else{
+        Inventory.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+              $set: {
+                itemImgPath: `/images/${req.file.filename}`
+              }
+            }
+          )
+            .then(function(selectedproduct) {
+              res.redirect(`/inventories/update/${req.params.id}`);
+            });
       }
     }
-  )
-    .then(function(selectedproduct) {
-      if (path.extname(req.file.originalname).toLowerCase() === '.png') {
-        fs.rename(tempPath, targetPath, err => {
-          if (err) return handleError(err, res);
+  });
+  // let tempPath;
+  // req.file.path
+  //   ? (tempPath = req.file.path)
+  //   : (tempPath = '../public/images/default.png');
+  // let targetPath;
+  // req.params.id
+  //   ? (targetPath = path.join(
+  //       __dirname,
+  //       `../public/images/${req.params.id}.png`
+  //     ))
+  //   : (targetPath = path.join(__dirname, '../public/images/default.png'));
+  // Inventory.findOneAndUpdate(
+  //   { _id: req.params.id },
+  //   {
+  //     $set: {
+  //       itemImgPath: `/images/${req.params.id}.png`
+  //     }
+  //   }
+  // )
+  //   .then(function(selectedproduct) {
+  //     if (path.extname(req.file.originalname).toLowerCase() === '.png') {
+  //       fs.rename(tempPath, targetPath, err => {
+  //         if (err) return handleError(err, res);
 
-          res
-            .status(200)
-            .contentType('text/plain')
-            // .end("File uploaded!");
-            .redirect(`/inventories/update/${req.params.id}`);
-        });
-      } else {
-        fs.unlink(tempPath, err => {
-          if (err) return handleError(err, res);
+  //         res
+  //           .status(200)
+  //           .contentType('text/plain')
+  //           // .end("File uploaded!");
+  //           .redirect(`/inventories/update/${req.params.id}`);
+  //       });
+  //     } else {
+  //       fs.unlink(tempPath, err => {
+  //         if (err) return handleError(err, res);
 
-          res
-            .status(403)
-            .contentType('text/plain')
-            .end('Only .png files are allowed!');
-        });
-      }
-    })
-    .catch(function(err) {
-      res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
-    });
+  //         res
+  //           .status(403)
+  //           .contentType('text/plain')
+  //           .end('Only .png files are allowed!');
+  //       });
+  //     }
+  //   })
+  //   .catch(function(err) {
+  //     res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
+  //   });
 });
-*/
+
 
 /**
  * @description The 404 Route (ALWAYS Keep this as the last route)
- */
+*/
 router.get('*', (req, res) => {
   res.render('error', { noRoute: true, 
     reviewer : req.cookies.reviewer}); 
