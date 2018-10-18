@@ -191,7 +191,7 @@ const handleError = (err, res) => {
  * @param {*}
  */
 const upload = multer({ dest: '../public/images' });
-router.post('/upload/:id', upload.single('file'), (req, res) => {
+router.post('/upload/:id', upload.single('file'), (req, res, next) => {
   let tempPath;
   req.file.path
     ? (tempPath = req.file.path)
