@@ -103,23 +103,26 @@
       <div class="card">
         <div class="card-body text-left">
           <a class="navbar-brand pull-left" href='/special/{"ref":"Toy","category":""}'>
-            {{!-- <a class="navbar-brand pull-left" href='/special/{"ref":"Toys","category":"Mario"}'> --}}
-              <img class="mw-100 mh-100" src="/images/home/toy.jpg">
-            </a>
-            <p>toys and more for kids</p>
+            <img class="mw-100 mh-100" src="/images/home/toy.jpg">
+          </a>
+          <p>toys and more for kids</p>
         </div>
       </div>
     </div>
   </div>
-  {{!-- second row************* --}}
-  <div class="card-deck">
-    <div class="col mt-3" style="overflow-y: hidden">
-      <a class="navbar-brand pull-left" href='/special/{"ref":"Movie","category":"Incredibles"}'>
-        <img class="mw-100 " src="/images/home/moviebg.jpg">
-      </a>
+  {{!-- second row --}}
+  <div class="card-group ">
+    {{!-- Intoduce Movie --}}
+    <div class="card mt-4 mr-2" style="flex-grow: 2.15; background-color: gainsboro; border: none">
+      <div class="card-block">
+        <a class="card-thumb" href='/special/{"ref":"Movie","category":"Incredibles"}'>
+          <div style="flex-grow: 2.15; background-image: url('/images/home/moviebg.jpg');  height: 400px; min-height: 200px; background-size: cover; background-repeat: no-repeat"></div>
+        </a>
+      </div>
     </div>
-    <div class="card" style="background-color: gainsboro; border: none">
-      <div class="card-body text-center row">
+    {{!-- food --}}
+    <div class="card mr-3 ml-3" style="background-color: gainsboro; border: none">
+      <div class="card-block">
         <span class="col">
           <div class="card-thumb" style="background-color: white">
             <div class="card-header">
@@ -136,6 +139,11 @@
             </div>
           </div>
         </span>
+      </div>
+    </div>
+    {{!-- headphone --}}
+    <div class="card ml-3 mr-2" style="background-color: gainsboro; border: none">
+      <div class="card-block">
         <span class="col">
           <div class="card-thumb" style="background-color: white">
             <div class="card-header">
