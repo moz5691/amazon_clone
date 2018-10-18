@@ -73,6 +73,7 @@ node app.js
 - **Item search** - by item name, by item tag in department
 - **Item purchase** - add item(s) to cart, change qty after in cart.
 - **Item review** - review item(s) and grade
+- **Item edit** -- edit item(s), qty, name, description, etc..
 
 ## Running the tests
 
@@ -95,15 +96,14 @@ Use Heroku to deploy, https://amazon--hubblepuff.herokuapp.com/
 
 ## Authors
 
-- **Maryam** **Ming** **Tri** **Chan**- _Initial work_
-  https://github.com/kmaryam27
-  https://github.com/tnguyen303
-  https://github.com/sandy8111112004
-  https://github.com/moz5691
+- **Maryam Keshavarz** https://github.com/kmaryam27
+- **Ming Shiuan Tsai** https://github.com/sandy8111112004
+- **Tri Nguyen** https://github.com/tnguyen303
+- **Chan Ho Ahn** https://github.com/moz5691
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
