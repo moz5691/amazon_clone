@@ -21,7 +21,8 @@
     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searchQuery" style="margin:0;">
 
     <button class="btn searchBtn" type="submit"><i class="fas fa-search"></i></button>
-    {{!-- <button  class=" mr-sm-2 btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit"><i class="far fa-search"></i></button> --}}
+    {{!-- <button class=" mr-sm-2 btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit"><i class="far fa-search"></i></button>
+    --}}
   </form>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -39,7 +40,8 @@
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/login">Login</a>
+
+          <a class="dropdown-item" href="/login"> {{#unless reviewer}}Login{{/unless}}</a>
           <a class="dropdown-item" href="/inventories/{{reviewer}}">Seller Account</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/logout">Logout</a>
