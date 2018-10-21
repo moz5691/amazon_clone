@@ -47,11 +47,16 @@
           <a class="dropdown-item" href="/logout">Logout</a>
         </div>
       </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='/shoppingCart' >Shopping Cart</a>
+      </li>
       <li class="nav-item">
         {{#if reviewer}}
-        <p class="text-light ml-4">Hello, {{reviewer}}</p>
+        <a href="/inventories/{{reviewer}}"  class="nav-link" style='color: white;'>Hello, {{reviewer}}</a>
         {{/if}}
+
       </li>
+      
     </ul>
 
   </div>

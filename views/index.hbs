@@ -1,5 +1,5 @@
 {{#each inventory}}
-<div class="row mt-5">
+<div class="row mt-5 mobileIndexMR">
   <div class="col-sm-4 col-md-6 col-lg-5 col-xl-5 align-items-center" style="border:1px solid white">
     <img class="align-self-center item-image" src={{this.itemImgPath}}>
   </div>
@@ -24,9 +24,9 @@
     {{!-- <a href='/purchase/{{this._id}}'>
       <button id="buyBtn" class="btn btn-outline-primary ml-5 {{this.show}}" type="button">Buy</button>
     </a> --}}
-    <a href="/review/{{this.id}}" id="reviewBtn" class="btn btn-outline-primary ml-5">Review</a>
+    <a href="/review/{{this.id}}" id="reviewBtn" class="btn btn-outline-primary ">Review</a>
   </div>
-  <hr/>
+  <hr class='HRindex'/>
 </div>
 {{/each}}
 

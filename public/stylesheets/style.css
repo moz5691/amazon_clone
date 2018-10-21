@@ -1,7 +1,18 @@
 .searchBtn {
   background:linear-gradient(180deg, rgba(247,193,93,1) 0%, rgba(244,179,60,1) 29%, rgba(247,157,30,1) 100%);
-
 }
+.HRindex {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 90%;               
+  background-color:#b2babb;
+  height: 1px;
+}
+.mobileIndexMR {
+  margin-left: 10px;
+}
+
 .item-image {
   display: block;
   height: 200px;
@@ -166,11 +177,7 @@
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 2fr;
 }
-/* .cartMobileQty{
-  display: grid;
-  grid-row: span 1;
-  grid-column: span 1;
-} */
+
 
 #cartProductImg img {
   width: 95%;
@@ -251,7 +258,9 @@
 
 @media only screen and (min-width:600px){
   /*******************Purchase Page Desktop: Ming**********************/
-
+  .mobileIndexMR {
+    margin-left: auto;
+  }
   .purchaseContainer {
     display: grid;
     height: 90%;
