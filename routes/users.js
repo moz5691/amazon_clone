@@ -10,22 +10,38 @@ const secret = 'harrypotter';
 /**
  * @description Middleware taks string with special meaning and returns fail or success message to login and register page
  * @param {String} msg
+ * @param {String} msgok
  * @returns {String} msg
+ * @returns {String} msgok
  */
 router.use((req, res, next) => {
-  if (req.query.msg === 'fail') {
-    res.locals.msg = 'Username or Password is not matched!';
-  } else if (req.query.msg === 'failemail') {
-    res.locals.msg = 'this email is already exist!!!';
-  } else if (req.query.msg === 'failauthenticate') {
-    res.locals.msg = 'could not authenticate user';
-  } else if (req.query.msgok === 'welcome') {
-    res.locals.msgok = 'your account made successfuly';
-  } else if (req.query.msg === 'failauthenticatetoken') {
-    res.locals.msg = "no token provided can't access to this page";
-  } else {
-    res.locals.msgok = '';
-    res.locals.msg = '';
+  switch (req.query.msg) {
+    case 'fail':
+      res.locals.msg = 'Username or Password is not matched!';
+      break;
+    case 'failemail':
+      res.locals.msg = 'this email is already exist!!!';
+      break;
+    case 'failauthenticate':
+      res.locals.msg = 'could not authenticate user';
+      break;
+    case 'failauthenticatetoken':
+      res.locals.msg = "no token provided can't access to this page";
+      break;
+  
+    default:
+      res.locals.msg = '';
+      break;
+  }
+
+  switch (req.query.msgok) {
+    case 'welcome':
+      res.locals.msgok = 'your account made successfuly';
+      break;
+  
+    default:
+      res.locals.msgok = '';
+      break;
   }
   next();
 });
@@ -75,7 +91,8 @@ router.post('/newUser', (req, res) => {
 });
 
 /**
- * @description render login.hbs page with get method
+ * @description render login.hbs page with get method 
+ * @description uses this /login inside of this class to prevent mess in index.js class and usin msg middleware
  */
 router.get('/login', (req, res, next) => {
   res.render('login');
