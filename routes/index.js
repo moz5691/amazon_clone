@@ -297,23 +297,24 @@ router.get('/special/:choosen', function(req, res) {
       res.render('error', { noRoute: true, reviewer: req.cookies.reviewer });
     else if (myparams.category) {
       let dataArray = [];
-      for (let i = 0; i < data.length; i++) {
-        data[i].itemName.toLowerCase().includes(myparams.category.toLowerCase())
-          ? dataArray.push(data[i])
-          : data[i].itemDepartment
+      data.forEach(e => {
+        e.itemName.toLowerCase().includes(myparams.category.toLowerCase())
+          ? dataArray.push(e)
+          : e.itemDepartment
               .toLowerCase()
               .includes(myparams.category.toLowerCase())
-            ? dataArray.push(data[i])
-            : data[i].itemDescription
+            ? dataArray.push(e)
+            : e.itemDescription
                 .toLowerCase()
                 .includes(myparams.category.toLowerCase())
-              ? dataArray.push(data[i])
-              : data[i].itemSeller
+              ? dataArray.push(e)
+              : e.itemSeller
                   .toLowerCase()
                   .includes(myparams.category.toLowerCase())
-                ? dataArray.push(data[i])
+                ? dataArray.push(e)
                 : 0;
-      }
+      });
+      
       res.render('index', {
         inventory: dataArray,
         reviewer: req.cookies.reviewer
