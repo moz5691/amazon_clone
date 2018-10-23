@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const Schema = mongoose.Schema;
+/**
+ * @description I commented validator of username and password only to be easy for check
+ */
 const UserSchema = new Schema({
   username: {
     type: String,
     unique: true,
-   // match: [/^[a-z0-9]{5,30}$/, "Please enter a valid username"],///^[a-zA-Z][a-zA-Z0-9.\-_$@!]{5,30}$/
+   // match: [/^[a-zA-Z][a-zA-Z0-9.\-_$@!]{5,30}$/, "Please enter a valid username"],
     required: true
   },
   email:{
@@ -17,7 +20,7 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-   // match: [/^[a-z0-9]{5,30}$/, "Please enter a valid password"],//[/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, "Please enter a valid password"],
+   // match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, "Please enter a valid password"],
     required: "password is Required"
   }
 });

@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const secret = 'harrypotter';
 const multer = require('multer');
 const path = require('path');
-// const fs = require('fs');
+const targetPath = path.join(__dirname, '../public/images/');
 /**
  * @description For override Method and use put and delete method directly from .hbs files to server
  */
@@ -51,25 +51,34 @@ router.use((req, res, next) => {
  * @returns {String} msgadd
  */
 router.use((req, res, next) => {
-  if (req.query.inventorymsg === 'removed')
-    res.locals.inventorymsg =
-      'there is no information about this item please cotact to amazon support service.';
-  else if (req.query.msgeupdate === 'fail')
-    res.locals.msgeupdate =
-      'could not update this perchase please contact to Amazon support service';
-  else if (req.query.msgeupdateok === 'success')
-    res.locals.msgeupdateok = 'updated successfully';
-  else if (req.query.msgadd === 'fail')
-    res.locals.msgadd = 'some input are wrong please fill all place correctly';
-  else if (req.query.msgaddok === 'success')
-    res.locals.msgadd = 'new product added you can edit it';
-  else {
-    res.locals.msgeupdate = '';
-    res.locals.msgeupdateok = '';
-    res.locals.inventorymsg = '';
-    res.locals.msgadd = '';
-    res.locals.msgaddok = '';
+  switch (true) {
+    case (req.query.inventorymsg ==='removed'):
+      res.locals.inventorymsg =
+        'there is no information about this item please cotact to amazon support service.';
+      break;
+    case (req.query.msgeupdate === 'fail'):
+      res.locals.msgeupdate =
+        'could not update this perchase please contact to Amazon support service';
+      break;
+    case (req.query.msgeupdateok === 'success'):
+      res.locals.msgeupdateok = 'updated successfully';
+      break;
+    case (req.query.msgadd === 'fail'):
+      res.locals.msgadd = 'some input are wrong please fill all place correctly';
+      break;
+    case (req.query.msgaddok === 'success'):
+      res.locals.msgadd = 'new product added you can edit it';
+    break;
+  
+    default:
+      res.locals.inventorymsg = '';
+      req.query.msgeupdate = '';
+      res.locals.msgeupdateok = '';
+      res.locals.msgadd = '';
+      res.locals.msgaddok = '';
+      break;
   }
+
   next();
 });
 
@@ -187,26 +196,11 @@ router.post('/add/product', (req, res, next) => {
     });
 });
 
-/**
- * @description function to check images if some thing wrong happened
- * @param {*} err 
- * @param {*} res 
- */
-const handleError = (err, res) => {
-  res
-    .status(500)
-    .contentType('text/plain')
-    .end('Oops! Something went wrong!');
-};
+
 
  /**
-   * @description upload new image for update product 
-   * @param {String} id
-   */
-
-
-
-  const targetPath = path.join(__dirname, '../public/images/');
+ *@description useing multer storage because of upload on heroku
+ */ 
 const storage = multer.diskStorage({
   destination: targetPath,
   filename: function(req,file,cb){
@@ -218,7 +212,10 @@ const upload = multer({
   storage: storage
 }).single('myImage');
 
-
+/**
+  * @description upload new image for update product 
+  * @param {String} id
+*/
 router.post('/upload/:id', (req, res, next) => {
   upload(req, res, (err) => {
     if(err) res.render('inventory-edit');
@@ -233,56 +230,12 @@ router.post('/upload/:id', (req, res, next) => {
               }
             }
           )
-            .then(function(selectedproduct) {
-              res.redirect(`/inventories/update/${req.params.id}`);
-            });
+          .then(function(selectedproduct) {
+            res.redirect(`/inventories/update/${req.params.id}`);
+        });
       }
     }
   });
-  // let tempPath;
-  // req.file.path
-  //   ? (tempPath = req.file.path)
-  //   : (tempPath = '../public/images/default.png');
-  // let targetPath;
-  // req.params.id
-  //   ? (targetPath = path.join(
-  //       __dirname,
-  //       `../public/images/${req.params.id}.png`
-  //     ))
-  //   : (targetPath = path.join(__dirname, '../public/images/default.png'));
-  // Inventory.findOneAndUpdate(
-  //   { _id: req.params.id },
-  //   {
-  //     $set: {
-  //       itemImgPath: `/images/${req.params.id}.png`
-  //     }
-  //   }
-  // )
-  //   .then(function(selectedproduct) {
-  //     if (path.extname(req.file.originalname).toLowerCase() === '.png') {
-  //       fs.rename(tempPath, targetPath, err => {
-  //         if (err) return handleError(err, res);
-
-  //         res
-  //           .status(200)
-  //           .contentType('text/plain')
-  //           // .end("File uploaded!");
-  //           .redirect(`/inventories/update/${req.params.id}`);
-  //       });
-  //     } else {
-  //       fs.unlink(tempPath, err => {
-  //         if (err) return handleError(err, res);
-
-  //         res
-  //           .status(403)
-  //           .contentType('text/plain')
-  //           .end('Only .png files are allowed!');
-  //       });
-  //     }
-  //   })
-  //   .catch(function(err) {
-  //     res.redirect(`/inventories/update/${req.params.id}?msgeupdate=fail`);
-  //   });
 });
 
 
