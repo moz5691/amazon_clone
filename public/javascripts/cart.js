@@ -143,25 +143,4 @@ const cartDBUpdate = function(dataList) {
 };
 $(document).on('click', '#cartOrderBtn', cartOrderFunc);
 
-/*
-const cartDelFunc = function(){
-    const productID = $(this).attr('data-id');
-    const updateEntry={
-        itemInCart: false
-    };
 
-    $.ajax({ url: `/cartUpdate/${productID}`, method: 'PUT', data: updateEntry }).then(
-        function (data) {
-            if (data) {
-                console.log('product is removed from cart successfully');
-
-            } else {
-                console.log("There's some problem in put methord ")
-            }
-        }
-    );
-
-}
-
-$(document).on('click','.cartDelete',cartDelFunc);
-*/
