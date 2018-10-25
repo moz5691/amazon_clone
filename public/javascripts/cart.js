@@ -43,7 +43,7 @@ runDataList();
 
 const cartIncFunc = function() {
   const productID = $(this).attr('data-id');
-  const incStep = parseFloat($('#cartSelect').val());
+  const incStep = parseFloat($(`#cartSelect${productID}`).val());
   let tempCart = parseFloat(sessionStorage.getItem(`${productID}`)) || 0;
   tempCart += incStep;
   sessionStorage.setItem(`${productID}`, tempCart);
@@ -74,9 +74,12 @@ $(document).on('click', '#cartIncBtn', cartIncFunc);
  */
 const cartDecFunc = function() {
   const productID = $(this).attr('data-id');
-  const decStep = parseFloat($('#cartSelect').val());
+  const decStep = parseFloat($(`#cartSelect${productID}`).val());
   let tempCart = parseFloat(sessionStorage.getItem(`${productID}`)) || 0;
   tempCart -= decStep;
+  if (tempCart<=0){
+    tempCart = 0;
+  }
   sessionStorage.setItem(`${productID}`, tempCart);
   let inCart = false;
   if (sessionStorage.getItem(`${productID}`) !== '0') {
@@ -96,6 +99,7 @@ const cartDecFunc = function() {
       console.log("There's some problem in put methord ");
     }
   });
+  location.reload();
 };
 $(document).on('click', '#cartDecBtn', cartDecFunc);
 
