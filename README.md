@@ -2,6 +2,8 @@
 
 This is Amazon clone site.
 
+<a href="https://drive.google.com/file/d/164fkjzPPeEIA5m1xvJlovhRdrDr3v8Z2/view"><img alt="Amazon-clone" style="width:900px;height:auto;" src="https://github.com/moz5691/amazon_clone/blob/41812e4cff0c626e1dbc00cb25f8f5773f44c901/AmazonClone.com.gif"/></a>
+
 ## Getting Started
 
 ### Prerequisites
